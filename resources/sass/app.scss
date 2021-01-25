@@ -1,0 +1,8 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+@import '~vue-awesome-notifications/dist/styles/style.css';
+.product-table { overflow-x: scroll; }
+th, td { min-width: 200px; }

@@ -1,0 +1,188 @@
+<template>
+    <div>
+        <div class="p-4 bg-green-400 text-center  w-full" v-if="success">
+            {{ success}}
+        </div>
+        <div class="w-full">
+            <p>Ordering Person</p>
+            <select name="ordering_person" id="ordering_person" v-model="ordering_person" @change="setUser()">
+                <option v-for="(user, index) in users" :key="user.id"  :value="index" >{{user.fullname}}</option>
+            </select>
+            <select name="supplier" id="supplier" v-model="supplier" @change="setProducts()">
+                <option v-for="(supplier, index) in suppliers" :key="supplier.supplier_id" :value="index">{{supplier.name}} </option>
+            </select>
+
+            <div class="py-5">
+                <button class="bg-blue-300 mr-5 px-4 p-2 " @click="addIndividual()">Create Individual Order </button>
+                <button class="bg-blue-300 mx-5 px-4 p-2"><a href="/summary/individual">Show Summary</a> </button>
+                <button class="bg-blue-300 mx-5 px-4 p-2" @click="clear()">Clear </button>
+            </div>
+        </div>
+
+        <div class="p-6 bg-white border-b border-gray-200 product-table" v-if="products">
+            <table class="table-auto w-full text-left overflow-hidden overflow-x-auto">
+                <thead>
+                <tr>
+                    <th class="w-auto ">Supplier ID</th>
+                    <th class="w-auto ">Product #</th>
+                    <th class="w-auto ">Product Description</th>
+                    <th class="w-auto ">Unit/Packiging</th>
+                    <th class="w-auto ">Gross Price Package</th>
+                    <th class="w-auto ">Applicable Rebate</th>
+                    <th class="w-auto ">Net Price Package</th>
+                    <th class="w-auto ">Price Unit</th>
+                    <th class="w-auto ">Product Group</th>
+                    <th class="w-auto ">Supplier Name</th>
+                    <th class="w-auto ">Order Packages</th>
+                    <th class="w-auto ">Total Units ordered</th>
+                    <th class="w-auto px-2 ">Total Price</th>
+                    <th class="w-auto ">Department</th>
+                    <th class="w-auto ">Site</th>
+                    <th class="w-auto ">Entry Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-if="noProducts">No Products found</tr>
+                <tr v-for="(product, index) in products" >
+                    <td>{{product.supplier_id}}</td>
+                    <td>{{product.product_id}}</td>
+                    <td>{{product.desc}}</td>
+                    <td>{{product.unit}}</td>
+                    <td>{{product.price}}</td>
+                    <td>{{ Math.round((product.rabatt ) * 100)}}%
+                    </td>
+                    <td>{{(product.price * product.rabatt).toFixed(2) }}€</td>
+                    <td>{{((product.price * product.rabatt)/product.unit).toFixed(2) }}€</td>
+                    <td>{{product.group}}</td>
+                    <td>{{product.supplier_name}}</td>
+                    <td><input type="number"  :name="'input_name_id['  + product.id  + ']'"
+                               v-model="order[index]" /></td>
+                    <td>{{order[index]}}</td>
+                    <td class="px-2" v-if="order[index]">{{(order[index] * (product.price * product.rabatt)).toFixed(2) }}€</td>
+                    <td v-if="!order[index]"> 0 €</td>
+                    <td>{{currentUser.department}}</td>
+                    <td>{{ currentUser.site}}</td>
+                    <td>{{ today() }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul>
+            <li v-for="user in users">
+
+            </li>
+        </ul>
+    </div>
+</template>
+
+<script>
+    export default {
+        props: ['userID'],
+        name: "OrderIndividualComponent",
+        data: function () {
+            return {
+                success: '',
+                input_name_id: [],
+                order: {
+
+                },
+                user: [],
+                users: [],
+                currentUser: [],
+                ordering_person: null,
+                suppliers: [],
+                supplier: '',
+                products: [],
+                noProducts: false,
+            }
+        },
+        methods: {
+            clear(){
+            let app = this;
+              app.currentUser = [];
+              app.ordering_person = null;
+              app.input_name_id = [];
+              app.supplier = null;
+              app.products = [];
+              app.order  = {};
+
+            },
+            getUser(){
+                let app = this;
+                axios.get('/api/user/'+this.userID)
+                    .then(response => (app.user = response.data.user[0]))
+            },
+            getUsers(){
+                let app = this;
+                axios.get('/api/users/')
+                    .then(response => (app.users = response.data.users))
+            },
+            getSuppliers(){
+                let app = this;
+                axios.get('/api/suppliers')
+                    .then(response => (app.suppliers = response.data.suppliers))
+            },
+            async addIndividual(){
+                let app = this;
+                let individualorder = [];
+                Object.keys(app.order).forEach(key => {
+                    let x = {'product' : app.products[key], 'quantity' : app.order[key], 'user': app.currentUser, 'supplier' : app.supplier+1};
+                    individualorder.push(x);
+
+                });
+
+                axios.post('/api/addIndividual', {
+                    individualorder: individualorder
+                })
+                    .then(response => (app.success = response.data.success))
+                    .then(this.clear());
+
+                    await this.sleep(4000);
+                    app.success = '';
+
+
+            },
+            sleep(ms){
+                return new Promise((resolve => {
+                    setTimeout(resolve, ms);
+                }))
+            },
+            setProducts(){
+                let app = this;
+                app.order  = {};
+                app.noProducts = false;
+                app.products = app.suppliers[app.supplier].products;
+                if(app.suppliers[app.supplier].products.length <= 0){
+                    app.noProducts = true;
+                }
+            },
+            setUser(){
+                let app = this;
+                console.log(app.ordering_person);
+                app.currentUser = app.users[app.ordering_person];
+            },
+            today(){
+                let today = new Date();
+                let dd = String(today.getDate()).padStart(2, '0');
+                let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                let yyyy = today.getFullYear();
+
+                today = mm + '.' + dd + '.' + yyyy;
+                return today
+            }
+        },
+        mounted(){
+            this.getUser();
+            this.getUsers();
+            this.getSuppliers();
+        }
+    }
+</script>
+
+<style scoped>
+    .product-table { overflow-x: scroll; }
+    th, td { min-width: auto; }
+    tbody tr:nth-of-type(odd) {
+        background-color: rgba(0, 0, 0, .09);
+    }
+</style>
