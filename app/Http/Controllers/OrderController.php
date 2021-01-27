@@ -65,6 +65,7 @@ class OrderController extends Controller
             $product_id = $request->individualorder[$key]['product']['id'];
             $user_id = $request->individualorder[$key]['user']['id'];
             $supplier = $request->individualorder[$key]['supplier'];
+
             IndividualOrder::create(['product_id' => $product_id, 'quantity' => $quantity,  'user_id' => $user_id, 'supplier' => $supplier, 'identifier' => $identifier]);
             OutstandingDelivery::create(['user_id' => $user_id, 'product_id' => $product_id, 'supplier_id' => $supplier, 'type' => 'individual', 'complete' => false, 'partial' => false, 'quantity' => $quantity]);
         }

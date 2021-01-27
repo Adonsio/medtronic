@@ -9,9 +9,12 @@ use Mehradsadeghi\FilterQueryString\FilterQueryString;
 class OutstandingDelivery extends Model
 {
     use HasFactory, FilterQueryString;
-
-    protected $filters = ['in', 'ordering_person'];
+    protected $with = ['partial'];
+    protected $filters = ['in'];
     protected $fillable = ['user_id', 'product_id', 'supplier_id', 'type', 'reciving_person', 'complete', 'partial', 'c_date', 'p_date'];
+    protected $casts = [
+        'p_date' => 'array',
+    ];
 
     public function User(){
         return $this->belongsTo(User::class);
@@ -25,7 +28,10 @@ class OutstandingDelivery extends Model
         return $this->hasOne(Supplier::class);
     }
 
-    public function ordering_person($query, $value){
-        return $this->user()->where('fullname', $value)->first();
+    public function Partial(){
+        return $this->hasMany(Partial::class, 'delivery_id', 'id');
     }
+
+
+
 }

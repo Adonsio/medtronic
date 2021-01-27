@@ -25,4 +25,9 @@ class FileController extends Controller
 
         return back()->with(['success' => 'Your File was uploaded successfully!']);
     }
+
+    public function download($id){
+        $file = File::where('id', $id)->first();
+        return response()->download(storage_path('/app/public/'.$file->path));
+    }
 }

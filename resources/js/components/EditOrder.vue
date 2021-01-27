@@ -1,9 +1,11 @@
 <template>
     <div>
         <div class="p-5 my-5 shadow bg-gray-50 w-auto rounded-xl">
-            <p class="font-bold">Supplier Name: :</p>
+            <p class="font-bold">Supplier Name: {{ suppliername ? suppliername : 'loading..'}}</p>
             <p class="pl-5"># Products: {{ summary.quantity }}  </p>
-            <p class="pl-5">Total Purchase: {{ summary.total }} </p>
+            <p class="pl-5" v-if="sum > transport">Total Price: {{sum}} €</p>
+            <p class="pl-5 " v-else>Total Price: <span class="text-red-500 font-bold">{{sum}}</span> €</p>
+            <p class="pl-5" >Transport: {{ transport }} €</p>
             <p class="pl-5">Ordering Person: <span class="bg-blue-200 rounded-full py-1 px-3 m-2" v-for="user in user_ids">{{user.fullname}}  /  {{ user.department}}</span> </p>
         </div>
         <button :class="showClass  + ' text-white rounded-full py-1 px-3 my-2 font-bold'" @click="showOrder()"> <span v-if="!show">Edit Order</span> <span v-if="show">Abort</span> </button>
@@ -79,7 +81,7 @@
     import {ref, watchEffect} from 'vue';
     export default {
         name: "EditOrder",
-        props: ['supplier'],
+        props: ['supplier', 'sum'],
         data: function () {
             return {
                 'showClass': 'bg-blue-500',
@@ -93,7 +95,9 @@
                 'ordering_quantity': [],
                 'user_list': [],
                 'summary': [],
-                'user_ids': []
+                'user_ids': [],
+                'suppliername': '',
+                'transport': 1200,
             }
         },
         methods: {
@@ -111,10 +115,14 @@
                 this.ordering_quantity[index] = $event.target.value;
 
             },
-            async getOrders(){
+            getOrders(){
                 let app = this;
-                await axios.get(`/api/orders/${app.supplier}`)
-                    .then(response => (app.orders = response.data.orders, app.summary = response.data.summary, app.user_ids = response.data.user_ids));
+                    axios.get(`/api/orders/${app.supplier}`)
+                    .then(response => (
+                        app.orders = response.data.orders,
+                            app.summary = response.data.summary,
+                            app.user_ids = response.data.user_ids,
+                            app.suppliername = response.data.orders[0]['products'][0]['supplier_name']))
 
             },
             clear(){
@@ -228,7 +236,8 @@
                     app.ordering_person[i] = app.orders[i].user_id;
                 }
 
-            }
+            },
+
         },
         mounted(){
             this.getOrders();

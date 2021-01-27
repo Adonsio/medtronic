@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BulkOrder;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,6 +18,17 @@ class SummaryController extends Controller
                 )
                 ->groupBy('supplier')
                 ->get();
+        foreach ($summaries as $summary){
+            $summary->totalSum = 0;
+        }
+        foreach ($summaries as $summary){
+            $product = Product::where('id', $summary->product_id)->first();
+            $price = $product->price;
+            $rabatt = $product->rabatt;
+
+            $summary->totalSum += number_format($summary->quantity *  ((float)$price*(float)$rabatt), 2, '.', '');
+        }
+
         return view('summary.bulk', compact('summaries'));
     }
 
@@ -26,7 +38,7 @@ class SummaryController extends Controller
                 DB::raw('count(*) as products'),
                 DB::raw('sum(quantity) total ')
             )
-            ->where('id',)
+            ->where('id')
             ->groupBy('supplier')
             ->get();
         return response()->json(['summary' => $summary]);

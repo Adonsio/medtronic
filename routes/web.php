@@ -86,3 +86,5 @@ Route::group(['prefix' => 'delivery', 'middleware' => 'auth'], function (){
     Route::get('/complete/{id}', [DeliveryController::class, 'complete'])->name('complete');
     Route::get('/partial/{id}', [DeliveryController::class, 'partial'])->name('partial');
 });
+
+Route::get('/download/{id}', [FileController::class, 'download']);

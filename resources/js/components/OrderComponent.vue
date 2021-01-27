@@ -112,7 +112,6 @@
         methods: {
             clear(){
                 let app = this;
-                app.currentUser = [];
                 app.ordering_person = null;
                 app.input_name_id = [];
                 app.supplier = null;

@@ -58,8 +58,14 @@
                                     <button class="rounded-xl button rounded bg-blue-500 hover:bg-blue-200 p-2 my-2 font-bold text-white">
                                         Import now
                                     </button>
+
                                 </a>
                             @endif
+                            <a href="{{url('/download/'.$file->id)}}">
+                                <button class="rounded-xl button rounded bg-blue-500 hover:bg-blue-200 p-2 my-2 font-bold text-white">
+                                    Download now
+                                </button>
+                            </a>
                         </div>
 
                     @endforeach

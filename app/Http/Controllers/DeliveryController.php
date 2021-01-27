@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\OutstandingDelivery;
+use App\Models\Partial;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class DeliveryController extends Controller
 {
@@ -76,14 +79,19 @@ class DeliveryController extends Controller
     public function complete($id){
         $delivery = OutstandingDelivery::where('id', $id)->first();
         $delivery->c_date = Carbon::now('GMT+1');
-        $delivery->reciving_person = $delivery->user_id;
+        $delivery->reciving_person = Auth::user()->id;
         $delivery->save();
         return back()->with(['success' => 'Order Complete']);
     }
     public function partial($id){
         $delivery = OutstandingDelivery::where('id', $id)->first();
+        $partial = new Partial();
+        $partial->date = Carbon::now('GMT+1');
+        $partial->person = Auth::user()->fullname;
+        $partial->delivery_id = $delivery->id;
+        $partial->save();
         $delivery->p_date = Carbon::now('GMT+1');
-        $delivery->reciving_person = $delivery->ordering_person;
+        $delivery->reciving_person = Auth::user()->id;
         $delivery->save();
         return back()->with(['success' => 'Order Partial']);
     }

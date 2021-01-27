@@ -2200,10 +2200,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "EditOrder",
-  props: ['supplier'],
+  props: ['supplier', 'sum'],
   data: function data() {
     return {
       'showClass': 'bg-blue-500',
@@ -2217,7 +2219,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       'ordering_quantity': [],
       'user_list': [],
       'summary': [],
-      'user_ids': []
+      'user_ids': [],
+      'suppliername': '',
+      'transport': 1200
     };
   },
   methods: {
@@ -2235,27 +2239,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.ordering_quantity[index] = $event.target.value;
     },
     getOrders: function getOrders() {
-      var _this = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var app;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                app = _this;
-                _context.next = 3;
-                return axios.get("/api/orders/".concat(app.supplier)).then(function (response) {
-                  return app.orders = response.data.orders, app.summary = response.data.summary, app.user_ids = response.data.user_ids;
-                });
-
-              case 3:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
+      var app = this;
+      axios.get("/api/orders/".concat(app.supplier)).then(function (response) {
+        return app.orders = response.data.orders, app.summary = response.data.summary, app.user_ids = response.data.user_ids, app.suppliername = response.data.orders[0]['products'][0]['supplier_name'];
+      });
     },
     clear: function clear() {
       var app = this;
@@ -2285,15 +2272,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     addBulk: function addBulk() {
-      var _this2 = this;
+      var _this = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         var app, bulkorder;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context.prev = _context.next) {
               case 0:
-                app = _this2;
+                app = _this;
                 bulkorder = [];
                 Object.keys(app.order).forEach(function (key) {
                   var x = {
@@ -2308,23 +2295,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   bulkorder: bulkorder
                 }).then(function (response) {
                   return app.success = response.data.success;
-                }).then(_this2.clear());
-                _context2.next = 6;
-                return _this2.sleep(4000);
+                }).then(_this.clear());
+                _context.next = 6;
+                return _this.sleep(4000);
 
               case 6:
                 app.success = '';
 
               case 7:
               case "end":
-                return _context2.stop();
+                return _context.stop();
             }
           }
-        }, _callee2);
+        }, _callee);
       }))();
     },
     updateOrder: function updateOrder(idx) {
-      var _this3 = this;
+      var _this2 = this;
 
       var app = this;
       var index = parseInt(idx);
@@ -2334,12 +2321,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         'user_id': parseInt(app.ordering_person[index]),
         'quantity': app.ordering_quantity[index] ? app.ordering_quantity[index] : app.orders[index].quantity
       }).then(function (response) {
-        return confirm.info('Order updated!', _this3.getOrders());
+        return confirm.info('Order updated!', _this2.getOrders());
       });
       console.log(app.orders[index], app.ordering_person[index], app.ordering_quantity[index] ? app.ordering_quantity[index] : app.orders[index].quantity);
     },
     deleteOrder: function deleteOrder(idx) {
-      var _this4 = this;
+      var _this3 = this;
 
       var index = parseInt(idx);
       var app = this;
@@ -2348,7 +2335,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var onOk = function onOk() {
         confirm.info('Order deleted');
         axios["delete"]("/api/delete/order/".concat(app.orders[index].id)).then(function (response) {
-          return _this4.getOrders();
+          return _this3.getOrders();
         });
       };
 
@@ -2566,7 +2553,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   methods: {
     clear: function clear() {
       var app = this;
-      app.currentUser = [];
       app.ordering_person = null;
       app.input_name_id = [];
       app.supplier = null;
@@ -2788,6 +2774,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['userID'],
   name: "OrderIndividualComponent",
@@ -2796,6 +2793,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       success: '',
       input_name_id: [],
       order: {},
+      showSummary: false,
       user: [],
       users: [],
       currentUser: [],
@@ -2803,23 +2801,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       suppliers: [],
       supplier: '',
       products: [],
-      noProducts: false
+      noProducts: false,
+      individualorder: []
     };
   },
   methods: {
     clear: function clear() {
       var app = this;
-      app.currentUser = [];
       app.ordering_person = null;
       app.input_name_id = [];
       app.supplier = null;
       app.products = [];
       app.order = {};
+      app.showSummary = false;
+      app.individualorder.forEach(function (e) {
+        return e.setQuantity = 0;
+      });
+      app.individualorder = [];
     },
     getUser: function getUser() {
       var app = this;
       axios.get('/api/user/' + this.userID).then(function (response) {
-        return app.user = response.data.user[0];
+        return app.user = response.data.user[0], app.currentUser = response.data.user[0];
       });
     },
     getUsers: function getUsers() {
@@ -2832,6 +2835,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var app = this;
       axios.get('/api/suppliers').then(function (response) {
         return app.suppliers = response.data.suppliers;
+      });
+    },
+    summary: function summary() {
+      var app = this;
+      app.showSummary = !app.showSummary;
+      Object.keys(app.order).forEach(function (key) {
+        //let x = {'product' : app.products[key], 'quantity' : app.order[key], 'user': app.currentUser, 'supplier' : app.supplier+1};
+        var x = app.products[key];
+        x.setQuantity = app.order[key];
+        app.individualorder.push(x);
       });
     },
     addIndividual: function addIndividual() {
@@ -2891,7 +2904,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     setUser: function setUser() {
       var app = this;
       console.log(app.ordering_person);
-      app.currentUser = app.users[app.ordering_person];
+      app.currentUser = app.user;
     },
     today: function today() {
       var today = new Date();
@@ -40662,14 +40675,31 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "p-5 my-5 shadow bg-gray-50 w-auto rounded-xl" }, [
-      _c("p", { staticClass: "font-bold" }, [_vm._v("Supplier Name: :")]),
+      _c("p", { staticClass: "font-bold" }, [
+        _vm._v(
+          "Supplier Name: " +
+            _vm._s(_vm.suppliername ? _vm.suppliername : "loading..")
+        )
+      ]),
       _vm._v(" "),
       _c("p", { staticClass: "pl-5" }, [
         _vm._v("# Products: " + _vm._s(_vm.summary.quantity) + "  ")
       ]),
       _vm._v(" "),
+      _vm.sum > _vm.transport
+        ? _c("p", { staticClass: "pl-5" }, [
+            _vm._v("Total Price: " + _vm._s(_vm.sum) + " €")
+          ])
+        : _c("p", { staticClass: "pl-5 " }, [
+            _vm._v("Total Price: "),
+            _c("span", { staticClass: "text-red-500 font-bold" }, [
+              _vm._v(_vm._s(_vm.sum))
+            ]),
+            _vm._v(" €")
+          ]),
+      _vm._v(" "),
       _c("p", { staticClass: "pl-5" }, [
-        _vm._v("Total Purchase: " + _vm._s(_vm.summary.total) + " ")
+        _vm._v("Transport: " + _vm._s(_vm.transport) + " €")
       ]),
       _vm._v(" "),
       _c(
@@ -41448,107 +41478,95 @@ var render = function() {
       : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "w-full" }, [
-      _c("p", [_vm._v("Ordering Person")]),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.ordering_person,
-              expression: "ordering_person"
-            }
-          ],
-          attrs: { name: "ordering_person", id: "ordering_person" },
-          on: {
-            change: [
-              function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.ordering_person = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              },
-              function($event) {
-                return _vm.setUser()
-              }
-            ]
-          }
-        },
-        _vm._l(_vm.users, function(user, index) {
-          return _c("option", { key: user.id, domProps: { value: index } }, [
-            _vm._v(_vm._s(user.fullname))
+      _c("div", { staticClass: "flex" }, [
+        _c("div", { staticClass: "w-1/4" }, [
+          _c("p", [_vm._v("Ordering Person")]),
+          _vm._v(" "),
+          _c("p", { staticClass: "font-bold" }, [
+            _vm._v(_vm._s(_vm.user.fullname))
           ])
-        }),
-        0
-      ),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          directives: [
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "w-1/2" }, [
+          _c("p", [_vm._v("Select Supplier")]),
+          _vm._v(" "),
+          _c(
+            "select",
             {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.supplier,
-              expression: "supplier"
-            }
-          ],
-          attrs: { name: "supplier", id: "supplier" },
-          on: {
-            change: [
-              function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.supplier = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              },
-              function($event) {
-                return _vm.setProducts()
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.supplier,
+                  expression: "supplier"
+                }
+              ],
+              attrs: { name: "supplier", id: "supplier" },
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.supplier = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                  function($event) {
+                    return _vm.setProducts()
+                  }
+                ]
               }
-            ]
-          }
-        },
-        _vm._l(_vm.suppliers, function(supplier, index) {
-          return _c(
-            "option",
-            { key: supplier.supplier_id, domProps: { value: index } },
-            [_vm._v(_vm._s(supplier.name) + " ")]
+            },
+            _vm._l(_vm.suppliers, function(supplier, index) {
+              return _c(
+                "option",
+                { key: supplier.supplier_id, domProps: { value: index } },
+                [_vm._v(_vm._s(supplier.name) + " ")]
+              )
+            }),
+            0
           )
-        }),
-        0
-      ),
+        ])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "py-5" }, [
+        _vm.showSummary
+          ? _c(
+              "button",
+              {
+                staticClass: "bg-blue-300 mr-5 px-4 p-2 ",
+                on: {
+                  click: function($event) {
+                    return _vm.addIndividual()
+                  }
+                }
+              },
+              [_vm._v("Add to Individual Order ")]
+            )
+          : _vm._e(),
+        _vm._v(" "),
         _c(
           "button",
           {
-            staticClass: "bg-blue-300 mr-5 px-4 p-2 ",
+            staticClass: "bg-blue-300 mx-5 px-4 p-2",
             on: {
               click: function($event) {
-                return _vm.addIndividual()
+                return _vm.summary()
               }
             }
           },
-          [_vm._v("Create Individual Order ")]
+          [
+            _vm.showSummary ? _c("span", [_vm._v("Change Order")]) : _vm._e(),
+            _vm._v(" "),
+            !_vm.showSummary ? _c("span", [_vm._v("Show Summary ")]) : _vm._e()
+          ]
         ),
-        _vm._v(" "),
-        _vm._m(0),
         _vm._v(" "),
         _c(
           "button",
@@ -41579,7 +41597,7 @@ var render = function() {
                   "table-auto w-full text-left overflow-hidden overflow-x-auto"
               },
               [
-                _vm._m(1),
+                _vm._m(0),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -41588,99 +41606,178 @@ var render = function() {
                       ? _c("tr", [_vm._v("No Products found")])
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm._l(_vm.products, function(product, index) {
-                      return _c("tr", [
-                        _c("td", [_vm._v(_vm._s(product.supplier_id))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(product.product_id))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(product.desc))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(product.unit))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(product.price))]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(Math.round(product.rabatt * 100)) +
-                              "%\n                "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(
-                              (product.price * product.rabatt).toFixed(2)
-                            ) + "€"
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(
-                              (
-                                (product.price * product.rabatt) /
-                                product.unit
-                              ).toFixed(2)
-                            ) + "€"
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(product.group))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(product.supplier_name))]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.order[index],
-                                expression: "order[index]"
-                              }
-                            ],
-                            attrs: {
-                              type: "number",
-                              name: "input_name_id[" + product.id + "]"
-                            },
-                            domProps: { value: _vm.order[index] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.order, index, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(_vm.order[index]))]),
-                        _vm._v(" "),
-                        _vm.order[index]
-                          ? _c("td", { staticClass: "px-2" }, [
+                    _vm._l(_vm.individualorder, function(product, index) {
+                      return _vm.showSummary
+                        ? _c("tr", [
+                            _c("td", [_vm._v(_vm._s(product.supplier_id))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(product.product_id))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(product.desc))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(product.unit))]),
+                            _vm._v(" "),
+                            _c("td", [
                               _vm._v(
                                 _vm._s(
                                   (
-                                    _vm.order[index] *
-                                    (product.price * product.rabatt)
+                                    (product.price * product.rabatt) /
+                                    product.unit
                                   ).toFixed(2)
                                 ) + "€"
                               )
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        !_vm.order[index]
-                          ? _c("td", [_vm._v(" 0 €")])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(_vm.currentUser.department))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(_vm.currentUser.site))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(_vm.today()))])
-                      ])
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(product.group))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(product.supplier_name))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: product.setQuantity,
+                                    expression: "product.setQuantity"
+                                  }
+                                ],
+                                attrs: {
+                                  type: "number",
+                                  min: "1",
+                                  name: "input_name_id[" + product.id + "]"
+                                },
+                                domProps: { value: product.setQuantity },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      product,
+                                      "setQuantity",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(product.setQuantity))]),
+                            _vm._v(" "),
+                            product.setQuantity
+                              ? _c("td", { staticClass: "px-2" }, [
+                                  _vm._v(
+                                    _vm._s(
+                                      (
+                                        product.setQuantity *
+                                        (product.price * product.rabatt)
+                                      ).toFixed(2)
+                                    ) + "€"
+                                  )
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            !product.setQuantity
+                              ? _c("td", [_vm._v(" 0 €")])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(_vm._s(_vm.currentUser.department))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(_vm.currentUser.site))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(_vm.today()))])
+                          ])
+                        : _vm._e()
+                    }),
+                    _vm._v(" "),
+                    _vm._l(_vm.products, function(product, index) {
+                      return !_vm.showSummary
+                        ? _c("tr", [
+                            _c("td", [_vm._v(_vm._s(product.supplier_id))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(product.product_id))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(product.desc))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(product.unit))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                _vm._s(
+                                  (
+                                    (product.price * product.rabatt) /
+                                    product.unit
+                                  ).toFixed(2)
+                                ) + "€"
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(product.group))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(product.supplier_name))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.order[index],
+                                    expression: "order[index]"
+                                  }
+                                ],
+                                attrs: {
+                                  type: "number",
+                                  min: "1",
+                                  name: "input_name_id[" + product.id + "]"
+                                },
+                                domProps: { value: _vm.order[index] },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.order,
+                                      index,
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(_vm.order[index]))]),
+                            _vm._v(" "),
+                            _vm.order[index]
+                              ? _c("td", { staticClass: "px-2" }, [
+                                  _vm._v(
+                                    _vm._s(
+                                      (
+                                        _vm.order[index] *
+                                        (product.price * product.rabatt)
+                                      ).toFixed(2)
+                                    ) + "€"
+                                  )
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            !_vm.order[index]
+                              ? _c("td", [_vm._v(" 0 €")])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(_vm._s(_vm.currentUser.department))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(_vm.currentUser.site))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(_vm.today()))])
+                          ])
+                        : _vm._e()
                     })
                   ],
                   2
@@ -41689,28 +41786,10 @@ var render = function() {
             )
           ]
         )
-      : _vm._e(),
-    _vm._v(" "),
-    _c(
-      "ul",
-      _vm._l(_vm.users, function(user) {
-        return _c("li")
-      }),
-      0
-    )
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "bg-blue-300 mx-5 px-4 p-2" }, [
-      _c("a", { attrs: { href: "/summary/individual" } }, [
-        _vm._v("Show Summary")
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -41724,12 +41803,6 @@ var staticRenderFns = [
         _c("th", { staticClass: "w-auto " }, [_vm._v("Product Description")]),
         _vm._v(" "),
         _c("th", { staticClass: "w-auto " }, [_vm._v("Unit/Packiging")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "w-auto " }, [_vm._v("Gross Price Package")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "w-auto " }, [_vm._v("Applicable Rebate")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "w-auto " }, [_vm._v("Net Price Package")]),
         _vm._v(" "),
         _c("th", { staticClass: "w-auto " }, [_vm._v("Price Unit")]),
         _vm._v(" "),
