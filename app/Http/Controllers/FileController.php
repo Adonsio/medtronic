@@ -21,6 +21,7 @@ class FileController extends Controller
             $fileModel->user_id = Auth::user()->id;
             $fileModel->name = $request->name;
             $fileModel->path = $filePath;
+            $fileModel->imported = false;
             $fileModel->save();
 
         return back()->with(['success' => 'Your File was uploaded successfully!']);

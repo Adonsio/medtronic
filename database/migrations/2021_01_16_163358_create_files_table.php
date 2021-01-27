@@ -18,7 +18,7 @@ class CreateFilesTable extends Migration
                 $table->integer('user_id');
                 $table->string('name');
                 $table->string('path');
-                $table->boolean('imported');
+                $table->boolean('imported')->nullable();
                 $table->string('type');
                 $table->timestamps();
                 $table->softDeletes();
