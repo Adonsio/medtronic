@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Hash;
 class DeliveryController extends Controller
 {
     public function index(Request $request){
-
         $deliveries = OutstandingDelivery::filter()->get();
+
         if ($request->has('site', 'department','group')){
 
             $group = $request->group;

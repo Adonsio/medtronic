@@ -17,7 +17,7 @@
                     <x-nav-link :href="route('individual-order')" :active="request()->routeIs('individual-order')">
                         {{ __('Individual Order') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('outstanding')" :active="request()->routeIs('outstanding')">
+                    <x-nav-link href="{{url('/delivery?in=type,individual,bulk')}}" :active="request()->routeIs('outstanding')">
                         {{ __('Outstanding Deliveries') }}
                     </x-nav-link>
 
