@@ -13,6 +13,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <outstanding-delivery></outstanding-delivery>
+                    <br>
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6 bg-white border-b border-gray-200 product-table">
                             <table class="table-auto w-full text-left overflow-hidden overflow-x-auto" style="white-space: nowrap;" >
@@ -41,38 +42,35 @@
                                 </thead>
                                 <tbody>
                                 @foreach($deliveries as $delivery)
-                                        <tr class=" @if(($delivery->id % 2) == 0) bg-gray-100 @endif">
+                                        <tr>
                                             @php
                                                 $user = \App\Models\User::where('id', $delivery->user_id)->first();
                                             @endphp
                                             <td>
                                                 {{ $user->fullname }}
                                             </td>
-                                            <td>{{$delivery['product']['supplier']->name}}</td>
-                                            <td>{{$delivery['product']->product_id}}</td>
+                                            <td>{{$delivery->supplier_name}}</td>
+                                            <td>{{$delivery->product_id}}</td>
 
 
-                                            <td>{{$delivery['product']->desc}}</td>
-                                            <td>{{$delivery['product']->unit}}</td>
-                                            <td>{{$delivery['product']->price}}</td>
-                                            <td>{{number_format((float)$delivery['product']->rabatt, 2, '.', '')*100 }}%
+                                            <td>{{$delivery->desc}}</td>
+                                            <td>{{$delivery->unit}}</td>
+                                            <td>{{$delivery->price}}</td>
+                                            <td>{{number_format((float)$delivery->rabatt, 2, '.', '')*100 }}%
                                             </td>
-                                            <td>{{number_format((float)$delivery['product']->price * $delivery['product']->rabatt, 2, '.', '') }}€</td>
-                                            <td>{{number_format((float)($delivery['product']->price * $delivery['product']->rabatt)/$delivery['product']->unit, 2, '.', '') }}€</td>
+                                            <td>{{number_format((float)$delivery->net_price, 2, '.', '') }}€</td>
+                                            <td>{{number_format((float)$delivery->price_unit, 2, '.', '') }}€</td>
                                             <td>{{ $delivery->quantity }}</td>
-                                            <td>{{ ($delivery['product']->unit * $delivery->quantity) }}</td>
-                                            <td>{{ (number_format((float)$delivery['product']->price * $delivery['product']->rabatt, 2, '.', '') * $delivery->quantity) }}€</td>
-                                            <td>{{$delivery['product']->group}}</td>
-                                            <td>{{ $user->department}}</td>
-                                            <td>{{$user->site}}</td>
+                                            <td>{{ ($delivery->unit * $delivery->quantity) }}</td>
+                                            <td>{{ number_format((float)$delivery->total_price, 2, '.', '') }}€</td>
+                                            <td>{{$delivery->group}}</td>
+                                            <td>{{ $delivery->department}}</td>
+                                            <td>{{$delivery->site}}</td>
                                             <td>{{$delivery->reciving_person ? $user->fullname : ''}}</td>
                                             <td>@if($delivery->c_date) {{$delivery->c_date}} @else <a href="{{url('/delivery/complete/'.$delivery->id)}}" class="font-bold">Set Complete</a> @endif</td>
                                             <td style="display: inline-block;">@if($delivery->p_date)
                                                 <a href="{{url('/delivery/partial/'.$delivery->id)}}" class="font-bold ">Add Partial</a>
-                                                @foreach($delivery->Partial as $item)
-                                                        <span class="bg-blue-200 rounded-full py-1 px-3 m-2"> {{$item->date}}  /  {{ $item->person }}</span>
 
-                                                @endforeach
                                                 @else <a href="{{url('/delivery/partial/'.$delivery->id)}}" class="font-bold ">Set Partial</a>@endif
                                             </td>
                                         </tr>

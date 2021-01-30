@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\OutstandingDelivery;
 use App\Models\Partial;
 use Carbon\Carbon;
@@ -12,63 +13,44 @@ use Illuminate\Support\Facades\Hash;
 class DeliveryController extends Controller
 {
     public function index(Request $request){
-        $deliveries = OutstandingDelivery::filter()->get();
+        $deliveries = Order::filter()->get();
 
         if ($request->has('site', 'department','group')){
 
             $group = $request->group;
             $value = $request->site;
             $department = $request->department;
-            $deliveries = OutstandingDelivery::filter()->with('user', 'product')
-                ->whereHas('user', function ($query) use($value, $department){
-                $query->where('site', $value )->where('department', $department);
-                })
-                ->whereHas('product', function ($query) use($group){
-                    $query->where('group', $group);
-                })
+            $deliveries = Order::filter()->where('site', $value)->where('department', $department)->where('group', $group)
+                ->where('ordered', false)
                 ->get();
         } elseif ($request->has('department','site')){
             $value = $request->site;
             $department = $request->department;
-            $deliveries = OutstandingDelivery::filter()->with('user', 'product')->whereHas('user', function ($query) use($value, $department){
-                $query->where('site', $value)->where('department', $department);
-            })->get();
+            $deliveries = Order::filter()->where('department', $department)->where('site', $value)->get();
 
         } elseif ($request->has('site', 'group')){
             $group = $request->group;
             $value = $request->site;
-            $deliveries = OutstandingDelivery::filter()->with('user', 'product')
-                ->whereHas('user', function ($query) use($value){
-                $query->where('site', $value);
-                })
-                ->whereHas('product', function ($query) use($group){
-                    $query->where('group', $group);
-                })
+            $deliveries = Order::filter()->where('group', $group)
+                ->where('site', $value)
                 ->get();
 
 
         } elseif($request->has('department', 'group')){
             $group = $request->group;
             $value = $request->department;
-            $deliveries = OutstandingDelivery::filter()->with('user', 'product')
-                ->whereHas('user', function ($query) use($value){
-                $query->where('department', $value);
-                })
-                ->whereHas('product', function ($query) use($group){
-                    $query->where('group', $group);
-                })
+            $deliveries = Order::filter()->where('group', $group)->where('department', $value)
                 ->get();
 
         } elseif ($request->has('site')){
             $value = $request->site;
-            $deliveries = OutstandingDelivery::filter()->with('user', 'product')->whereHas('user', function ($query) use($value){
-                $query->where('site', $value);
-            })->get();
+            $deliveries = Order::filter()->where('site', $value)->get();
         }elseif ($request->has('department')){
             $value = $request->department;
-            $deliveries = OutstandingDelivery::filter()->with('user', 'product')->whereHas('user', function ($query) use($value){
-                $query->where('department', $value);
-            })->get();
+            $deliveries = Order::filter()->where('department', $value)->get();
+        }elseif ($request->has('group')){
+            $value = $request->group;
+            $deliveries = Order::filter()->where('group', $value)->get();
         }
 
 

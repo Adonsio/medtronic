@@ -33,9 +33,9 @@ Route::get('suppliers', function (){
    return response()->json(['suppliers' => $suppliers]);
 });
 
-Route::post('/addbulk', [OrderController::class, 'addbulk'] );
-Route::post('/addIndividual', [OrderController::class, 'addIndividual'] );
-Route::get('/orders/{id}', [OrderController::class, 'getOrders']);
+Route::post('/addbulk', [OrderController::class, 'createOrder'] );
+Route::post('/addIndividual', [OrderController::class, 'createOrder'] );
+Route::get('/orders/{id}/{type}', [OrderController::class, 'getOrders']);
 Route::get('/orders/individual/{id}', [OrderController::class, 'getIndividualOrders']);
 
 Route::get('/summaries', [SummaryController::class, 'getSummaries']);

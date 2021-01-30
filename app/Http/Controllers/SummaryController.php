@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BulkOrder;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,47 +12,54 @@ class SummaryController extends Controller
 {
     public function index(){
 
-        $summaries = DB::table('bulk_orders')
+        $summaries = DB::table('orders')
+                ->where('type', '=','bulk')
                 ->select('*',
                     DB::raw('count(*) as products'),
-                    DB::raw('sum(quantity) total ')
+                    DB::raw('sum(quantity) as total ')
                 )
-                ->groupBy('supplier')
+                ->groupBy('supplier_name')
                 ->get();
-        foreach ($summaries as $summary){
-            $summary->totalSum = 0;
-        }
-        foreach ($summaries as $summary){
-            $product = Product::where('id', $summary->product_id)->first();
-            $price = $product->price;
-            $rabatt = $product->rabatt;
 
-            $summary->totalSum += number_format($summary->quantity *  ((float)$price*(float)$rabatt), 2, '.', '');
-        }
+        //dd($summaries, $summariesnew);
+        $summaries = Order::where('type', 'bulk')->groupBy('supplier_name')->get();
 
-        return view('summary.bulk', compact('summaries'));
+        $sum = Order::where('type', 'bulk')->groupBy('supplier_name')->sum('total_price');
+
+        return view('summary.bulk', compact('summaries', 'sum'));
     }
 
     public function getSummaries(){
-        $summary = DB::table('bulk_orders')
+
+        $summary = DB::table('orders')
+            ->where('type', '=', 'bulk')
             ->select('*',
                 DB::raw('count(*) as products'),
                 DB::raw('sum(quantity) total ')
             )
-            ->where('id')
-            ->groupBy('supplier')
+            ->groupBy('supplier_name')
             ->get();
         return response()->json(['summary' => $summary]);
     }
 
     public function individual(){
-        $summaries = DB::table('individual_orders')
+        $summaries = DB::table('orders')
             ->select('*',
                 DB::raw('count(*) as products'),
                 DB::raw('sum(quantity) total ')
             )
-            ->groupBy('supplier')
+            ->where('type', '=','individual')
+            ->groupBy('supplier_name')
             ->get();
+        //dd($summaries, $summariesnew);
+        foreach ($summaries as $summary){
+            $summary->totalSum = 0;
+        }
+        foreach ($summaries as $summary){
+
+            $summary->totalSum += number_format($summary->total_price, 2, '.', '');
+        }
+
         return view('summary.individual', compact('summaries'));
     }
 }

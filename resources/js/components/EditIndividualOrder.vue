@@ -1,12 +1,12 @@
 <template>
     <div>
         <div class="p-5 my-5 shadow bg-gray-50 w-auto rounded-xl">
-            <p>Order Identifier (ID): <strong>{{ summary.identifier }}</strong></p>
-            <p class="font-bold">Supplier Name: :</p>
+            <p class="font-bold">Supplier Name: {{ suppliername ? suppliername : 'loading..'}}</p>
             <p class="pl-5"># Products: {{ summary.quantity }}  </p>
-            <p class="pl-5">Total Purchase: {{ summary.total }} </p>
+            <p class="pl-5" v-if="sum > transport">Total Price: {{sum.toFixed(2)}} €</p>
+            <p class="pl-5 " v-else>Total Price: <span class="text-red-500 font-bold">{{sum}}</span> €</p>
+            <p class="pl-5" >Transport: {{ transport }} €</p>
             <p class="pl-5">Ordering Person: <span class="bg-blue-200 rounded-full py-1 px-3 m-2" v-for="user in user_ids">{{user.fullname}}  /  {{ user.department}}</span> </p>
-            <a :href="'/coupon/individual/create/'+ summary.identifier" ><button class="p-2 my-4 mb-3 bg-blue-500 text-white font-bold rounded">Create Coupon</button></a>
         </div>
         <button :class="showClass  + ' text-white rounded-full py-1 px-3 my-2 font-bold'" @click="showOrder()"> <span v-if="!show">Edit Order</span> <span v-if="show">Abort</span> </button>
         <div class="zui-wrapper" v-if="show">
@@ -15,7 +15,7 @@
                 <table class="table-auto w-full text-left overflow-hidden overflow-x-auto  zui-table">
                     <thead>
                     <tr>
-                        <th class="w-100 text-center zui-sticky-col">Update / Delete</th>
+                        <th class="w-100 zui-sticky-col">Update / Delete</th>
                         <th class="w-auto ">Ordering Person</th>
                         <th class="w-auto ">Supplier ID</th>
                         <th class="w-auto ">Product #</th>
@@ -38,7 +38,6 @@
                     <tbody>
                     <tr v-for="(product, index) in orders" >
                         <td class="zui-sticky-col  w-auto">
-
                             <button class="p-2 mb-3 bg-green-300 font-bold" @click="updateOrder(index)">Update</button>
                             <button class="p-2 mb-3 bg-red-300 font-bold" @click="deleteOrder(index)">Delete</button>
                         </td>
@@ -48,26 +47,34 @@
                                 <option v-for="(user) in users" :key="user.id"  :value="user.id" >{{user.fullname}}</option>
                             </select>
                         </td>
-                        <td>{{product['supplier']}}</td>
-                        <td>{{product['products'][0]['product_id']}}</td>
-                        <td>{{product['products'][0]['desc']}}</td>
-                        <td>{{product['products'][0]['unit']}}</td>
-                        <td>{{product['products'][0]['price']}}</td>
+                        <td>{{product['supplier_id']}}</td>
+                        <td>{{product['product_id']}}</td>
+                        <td>{{product['desc']}}</td>
+                        <td>{{product['unit']}}</td>
+                        <td>{{product['price']}}</td>
 
-                        <td>{{ Math.round((product['products'][0]['rabatt'] ) * 100)}}%
+                        <td>{{ Math.round((product['rabatt'] ) * 100)}}%
                         </td>
 
-                         <td>{{(product['products'][0]['price'] * product['products'][0]['rabatt']).toFixed(2) }}€</td>
-                        <td>{{((product['products'][0]['price'] * product['products'][0]['rabatt'])/product['products'][0]['unit']).toFixed(2) }}€</td>
-                        <td>{{product['products'][0]['group']}}</td>
-                        <td>{{product['products'][0]['supplier_name']}}</td>
-                        <td><input type="number" min="1" :name="'input_name_id['  + product['products'][0]['id']  + ']'"
-                                    :value="product.quantity" @change="updateQuantity(index, $event)"/></td>
+                        <td>{{product['net_price'] }}€</td>
+                        <td>{{product['price_unit'] }}€</td>
+                        <td>{{product['group']}}</td>
+                        <td>{{product['supplier_name']}}</td>
+                        <td><input type="number" min="1" :name="'input_name_id['  + product['id']  + ']'"
+                                   :value="product.quantity" @change="updateQuantity(index, $event)"/></td>
                         <td>{{product.quantity}}</td>
-                        <td class="px-2" >{{(product.quantity * (product['products'][0]['price'] * product['products'][0]['rabatt'])).toFixed(2) }}€</td>
+                        <td class="px-2" >{{(product.quantity * (product['total_price'])).toFixed(2) }}€</td>
 
-                        <td>{{ (user_list[index]) ? user_list[index].department : product['user']['department'] }}</td>
-                        <td>{{ (user_list[index]) ? user_list[index].site : product['user']['site'] }}</td>
+                        <td>
+                            <select  :id="'departments-'+ product.department" v-model="selectedDepartments[index]"  >
+                                <option v-for="(department) in departments" :key="department.department"  :value="department.department" >{{department.department}}</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select  :id="'sites-'+ product.site" v-model="selectedSites[index]" >
+                                <option v-for="(site) in sites" :key="site.site" :value="site.site" >{{site.site}}</option>
+                            </select>
+                        </td>
                         <td>{{ today(product['created_at']) }}</td>
 
                     </tr>
@@ -93,10 +100,20 @@
                 'currentUser': [],
                 'order': [],
                 'ordering_person': [],
+                'departments': [],
+                'sites': [],
+                'selectedDepartments': [],
+                'selectedSites': [],
                 'ordering_quantity': [],
                 'user_list': [],
                 'summary': [],
-                'user_ids': []
+                'user_ids': [],
+                'department': '',
+                'site': '',
+                'suppliername': '',
+                'transport': 1200,
+                'site_list': [],
+                'sum': null,
             }
         },
         methods: {
@@ -116,8 +133,16 @@
             },
             async getOrders(){
                 let app = this;
-                await axios.get(`/api/orders/individual/${app.supplier}`)
-                    .then(response => (app.orders = response.data.orders, app.summary = response.data.summary, app.user_ids = response.data.user_ids));
+                await axios.get(`/api/orders/${app.supplier}/individual`)
+                    .then(response => (
+                        console.log(response.data.orders),
+                            app.orders = response.data.orders,
+                            app.summary = response.data.summary,
+                            app.user_ids = response.data.user_ids,
+                            app.suppliername = response.data.orders[0]['supplier_name'],
+                            app.sites = response.data.sites,
+                            app.sum = response.data.sum,
+                            app.departments = response.data.departments))
 
             },
             clear(){
@@ -125,8 +150,6 @@
                 app.currentUser = [];
                 app.ordering_person = null;
                 app.input_name_id = [];
-                app.supplier = null;
-                app.products = [];
                 app.order  = {};
 
             },
@@ -149,22 +172,23 @@
                 let app = this;
                 const index = parseInt(idx);
                 let confirm = this.$awn;
-                axios.patch('/api/update/order/individual/',
+                axios.patch('/api/update/order',
                     {
                         'order': app.orders[index],
                         'user_id': parseInt(app.ordering_person[index]),
                         'quantity': (app.ordering_quantity[index] ? app.ordering_quantity[index] : app.orders[index].quantity),
+                        'site': app.selectedSites[index],
+                        'department': app.selectedDepartments[index],
                     }
                 )
-                    .then(response => (confirm.info('Individual Order updated!', this.getOrders())));
-                console.log(app.orders[index], app.ordering_person[index], (app.ordering_quantity[index] ? app.ordering_quantity[index] : app.orders[index].quantity))
+                    .then(response => (confirm.info('Order updated!', this.getOrders())));
             },
             deleteOrder(idx){
                 const index = parseInt(idx);
                 let app = this;
                 let confirm = this.$awn;
                 let onOk = () => { confirm.info('Order deleted');
-                    axios.delete(`/api/delete/order/individual/${app.orders[index].id}`)
+                    axios.delete(`/api/delete/order/${app.orders[index].id}`)
                         .then(response => (this.getOrders()));
 
                 };
@@ -209,6 +233,12 @@
                 for (let i = 0; i < app.orders.length; i++){
                     app.ordering_person[i] = app.orders[i].user_id;
                 }
+                for (let i = 0; i < app.orders.length; i++){
+                    app.selectedSites[i] = app.orders[i].site;
+                }
+                for (let i = 0; i < app.orders.length; i++){
+                    app.selectedDepartments[i] = app.orders[i].department;
+                }
 
             }
         },
@@ -248,7 +278,7 @@
         position: relative;
     }
     .zui-scroller {
-        margin-left: 140px;
+        margin-left: 220px;
         overflow-x: scroll;
         overflow-y: visible;
         padding-bottom: 5px;
@@ -258,6 +288,6 @@
         left: 0;
         position: absolute;
         top: auto;
-        width: 140px;
+        width: 220px;
     }
 </style>

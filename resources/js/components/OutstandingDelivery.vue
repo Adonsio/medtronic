@@ -26,8 +26,8 @@
             <option value="" selected >Choose a Product Group</option>
             <option v-for="group in groups" :value="'&group='+group.group">{{group.group}}</option>
         </select>
-        <br>
-        <div class="my-6">
+
+        <div class="my-12 block">
             <a :href="'/delivery'+url" class="bg-blue-500 py-4 px-6 font-bold text-white">Refresh</a>
         </div>
     </div>

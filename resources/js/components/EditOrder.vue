@@ -3,8 +3,8 @@
         <div class="p-5 my-5 shadow bg-gray-50 w-auto rounded-xl">
             <p class="font-bold">Supplier Name: {{ suppliername ? suppliername : 'loading..'}}</p>
             <p class="pl-5"># Products: {{ summary.quantity }}  </p>
-            <p class="pl-5" v-if="sum > transport">Total Price: {{sum}} €</p>
-            <p class="pl-5 " v-else>Total Price: <span class="text-red-500 font-bold">{{sum}}</span> €</p>
+            <p class="pl-5" v-if="sum > transport">Total Price: {{ sum.toFixed(2) }} €</p>
+            <p class="pl-5 " v-else>Total Price: <span class="text-red-500 font-bold">{{summary.total_sum}}</span> €</p>
             <p class="pl-5" >Transport: {{ transport }} €</p>
             <p class="pl-5">Ordering Person: <span class="bg-blue-200 rounded-full py-1 px-3 m-2" v-for="user in user_ids">{{user.fullname}}  /  {{ user.department}}</span> </p>
         </div>
@@ -47,26 +47,34 @@
                                 <option v-for="(user) in users" :key="user.id"  :value="user.id" >{{user.fullname}}</option>
                             </select>
                         </td>
-                        <td>{{product['supplier']}}</td>
-                        <td>{{product['products'][0]['product_id']}}</td>
-                        <td>{{product['products'][0]['desc']}}</td>
-                        <td>{{product['products'][0]['unit']}}</td>
-                        <td>{{product['products'][0]['price']}}</td>
+                        <td>{{product['supplier_id']}}</td>
+                        <td>{{product['product_id']}}</td>
+                        <td>{{product['desc']}}</td>
+                        <td>{{product['unit']}}</td>
+                        <td>{{product['price']}}</td>
 
-                        <td>{{ Math.round((product['products'][0]['rabatt'] ) * 100)}}%
+                        <td>{{ Math.round((product['rabatt'] ) * 100)}}%
                         </td>
 
-                         <td>{{(product['products'][0]['price'] * product['products'][0]['rabatt']).toFixed(2) }}€</td>
-                        <td>{{((product['products'][0]['price'] * product['products'][0]['rabatt'])/product['products'][0]['unit']).toFixed(2) }}€</td>
-                        <td>{{product['products'][0]['group']}}</td>
-                        <td>{{product['products'][0]['supplier_name']}}</td>
-                        <td><input type="number" min="1" :name="'input_name_id['  + product['products'][0]['id']  + ']'"
-                                    :value="product.quantity" @change="updateQuantity(index, $event)"/></td>
+                        <td>{{product['net_price'] }}€</td>
+                        <td>{{product['price_unit'] }}€</td>
+                        <td>{{product['group']}}</td>
+                        <td>{{product['supplier_name']}}</td>
+                        <td><input type="number" min="1" :name="'input_name_id['  + product['id']  + ']'"
+                                   :value="product.quantity" @change="updateQuantity(index, $event)"/></td>
                         <td>{{product.quantity}}</td>
-                        <td class="px-2" >{{(product.quantity * (product['products'][0]['price'] * product['products'][0]['rabatt'])).toFixed(2) }}€</td>
+                        <td class="px-2" >{{product['total_price'] }}€</td>
 
-                        <td>{{ (user_list[index]) ? user_list[index].department : product['user']['department'] }}</td>
-                        <td>{{ (user_list[index]) ? user_list[index].site : product['user']['site'] }}</td>
+                        <td>
+                            <select  :id="'departments-'+ product.department" v-model="selectedDepartments[index]" @change="setDepartments(index, $event)" >
+                                <option v-for="(department) in departments" :key="department.department"  :value="department.department" >{{department.department}}</option>
+                            </select>
+                            </td>
+                        <td>
+                            <select  :id="'sites-'+ product.site" v-model="selectedSites[index]" @change="setSites(index, $event)" >
+                                <option v-for="(site) in sites" :key="site.site" :value="site.site" >{{site.site}}</option>
+                            </select>
+                        </td>
                         <td>{{ today(product['created_at']) }}</td>
 
                     </tr>
@@ -81,7 +89,7 @@
     import {ref, watchEffect} from 'vue';
     export default {
         name: "EditOrder",
-        props: ['supplier', 'sum'],
+        props: ['supplier'],
         data: function () {
             return {
                 'showClass': 'bg-blue-500',
@@ -92,12 +100,20 @@
                 'currentUser': [],
                 'order': [],
                 'ordering_person': [],
+                'departments': [],
+                'sites': [],
+                'selectedDepartments': [],
+                'selectedSites': [],
                 'ordering_quantity': [],
                 'user_list': [],
                 'summary': [],
                 'user_ids': [],
+                'department': '',
+                'site': '',
                 'suppliername': '',
                 'transport': 1200,
+                'site_list': [],
+                'sum': null,
             }
         },
         methods: {
@@ -117,12 +133,16 @@
             },
             getOrders(){
                 let app = this;
-                    axios.get(`/api/orders/${app.supplier}`)
+                    axios.get(`/api/orders/${app.supplier}/bulk`)
                     .then(response => (
+                        console.log(response.data.orders),
                         app.orders = response.data.orders,
                             app.summary = response.data.summary,
                             app.user_ids = response.data.user_ids,
-                            app.suppliername = response.data.orders[0]['products'][0]['supplier_name']))
+                            app.suppliername = response.data.orders[0]['supplier_name'],
+                            app.sites = response.data.sites,
+                            app.departments = response.data.departments,
+                            app.sum = response.data.sum))
 
             },
             clear(){
@@ -130,9 +150,8 @@
                 app.currentUser = [];
                 app.ordering_person = null;
                 app.input_name_id = [];
-                app.supplier = null;
-                app.products = [];
                 app.order  = {};
+                app.setOrderingPerson();
 
             },
             getUser(){
@@ -180,10 +199,11 @@
                         'order': app.orders[index],
                         'user_id': parseInt(app.ordering_person[index]),
                         'quantity': (app.ordering_quantity[index] ? app.ordering_quantity[index] : app.orders[index].quantity),
+                        'site': app.selectedSites[index],
+                        'department': app.selectedDepartments[index],
                     }
                 )
                     .then(response => (confirm.info('Order updated!', this.getOrders())));
-                console.log(app.orders[index], app.ordering_person[index], (app.ordering_quantity[index] ? app.ordering_quantity[index] : app.orders[index].quantity))
             },
             deleteOrder(idx){
                 const index = parseInt(idx);
@@ -221,6 +241,16 @@
                 app.user_list[index] = found;
 
             },
+            setSites(index, event){
+                let app = this;
+                const search = app.sites;
+                app.selectedSites[index] = event.target.value;
+                const found = search.find(element => element.id === parseInt(event.target.value));
+                app.site_list[index] = found;
+            },
+            setDepartments(){
+
+            },
             today(date){
                 let today = new Date(date);
                 let dd = String(today.getDate()).padStart(2, '0');
@@ -232,8 +262,16 @@
             },
             setOrderingPerson(){
                 let app = this;
+                console.log(app.orders.length);
                 for (let i = 0; i < app.orders.length; i++){
                     app.ordering_person[i] = app.orders[i].user_id;
+                    console.log(i)
+                }
+                for (let i = 0; i < app.orders.length; i++){
+                    app.selectedSites[i] = app.orders[i].site;
+                }
+                for (let i = 0; i < app.orders.length; i++){
+                    app.selectedDepartments[i] = app.orders[i].department;
                 }
 
             },
@@ -259,7 +297,7 @@
         border: none;
         padding-bottom: 5px;
         text-align: left;
-
+        padding-right: 20px;
         white-space: nowrap;
     }
     .zui-table tbody td {

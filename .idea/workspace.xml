@@ -2,9 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54a6d728-e39a-4740-9f29-8a3c7ead7d6d" name="Default Changelist" comment="update">
+      <change afterPath="$PROJECT_DIR$/resources/views/invoice/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DeliveryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DeliveryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SetupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SetupController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SummaryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SummaryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/EditIndividualOrder.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/EditIndividualOrder.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/EditOrder.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/EditOrder.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/OrderComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/OrderComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/OrderIndividualComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/OrderIndividualComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/OutstandingDelivery.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/OutstandingDelivery.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/delivery/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/delivery/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/summary/bulk.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/summary/bulk.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/summary/individual.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/summary/individual.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,95 +50,55 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/web.php">
+        <entry file="file://$PROJECT_DIR$/resources/js/components/OutstandingDelivery.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="89" column="62" selection-start-line="89" selection-start-column="62" selection-end-line="89" selection-end-column="62" />
+            <state relative-caret-position="471">
+              <caret line="28" selection-start-line="28" selection-end-line="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Models/OutstandingDelivery.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="276">
+              <caret line="12" selection-start-line="12" selection-end-line="12" selection-end-column="32" />
               <folding>
-                <element signature="e#7#49#0#PHP" expanded="true" />
+                <element signature="e#30#84#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/FileController.php">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DeliveryController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="30" column="75" selection-start-line="30" selection-start-column="75" selection-end-line="30" selection-end-column="75" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/js/app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="4" column="76" lean-forward="true" selection-start-line="4" selection-start-column="76" selection-end-line="4" selection-end-column="76" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package-lock.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-10074" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/composer.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+            <state relative-caret-position="426">
+              <caret line="22" column="121" selection-start-line="22" selection-start-column="121" selection-end-line="22" selection-end-column="121" />
+              <folding>
+                <element signature="e#40#61#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
+        <entry file="file://$PROJECT_DIR$/app/Models/Order.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="15" column="25" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ImportController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="20" column="52" lean-forward="true" selection-start-line="20" selection-start-column="52" selection-end-line="20" selection-end-column="66" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.env">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="11" column="12" lean-forward="true" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Providers/AppServiceProvider.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="27" column="9" lean-forward="true" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
+            <state relative-caret-position="230">
+              <caret line="10" column="32" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
               <folding>
-                <element signature="e#33#69#0#PHP" expanded="true" />
+                <element signature="e#30#84#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/delivery/index.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="242">
+              <caret line="65" column="73" selection-start-line="65" selection-start-column="73" selection-end-line="65" selection-end-column="73" />
             </state>
           </provider>
         </entry>
@@ -139,7 +117,18 @@
       <find>ordering</find>
       <find>getSum</find>
       <find>addBulk</find>
+      <find>department</find>
+      <find>dist</find>
+      <find>user_list</find>
       <find>ordering_person</find>
+      <find>supplier</find>
+      <find>setOrderingPerson</find>
+      <find>getUsers</find>
+      <find>users</find>
+      <find>app.users</find>
+      <find>bulkorder</find>
+      <find>user_ids</find>
+      <find>test</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -149,57 +138,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/views/orders/individual.blade.php" />
-        <option value="$PROJECT_DIR$/resources/sass/app.scss" />
-        <option value="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" />
-        <option value="$PROJECT_DIR$/config/filesystems.php" />
-        <option value="$PROJECT_DIR$/resources/views/welcome.blade.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2021_01_16_163358_create_files_table.php" />
-        <option value="$PROJECT_DIR$/app/Models/File.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/ImportController.php" />
         <option value="$PROJECT_DIR$/database/migrations/2021_01_17_161702_create_setups_table.php" />
         <option value="$PROJECT_DIR$/app/Models/Setup.php" />
         <option value="$PROJECT_DIR$/resources/views/auth/register.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/auth/login.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/dashboard.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/list/user.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/SetupController.php" />
         <option value="$PROJECT_DIR$/resources/views/orders/index.blade.php" />
         <option value="$PROJECT_DIR$/database/migrations/2021_01_07_193109_create_bulk_orders_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2021_01_07_193130_create_individual_orders_table.php" />
         <option value="$PROJECT_DIR$/app/Models/BulkOrder.php" />
         <option value="$PROJECT_DIR$/app/Models/IndividualOrder.php" />
-        <option value="$PROJECT_DIR$/resources/views/summary/individual.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ListController.php" />
-        <option value="$PROJECT_DIR$/resources/js/components/EditIndividualOrder.vue" />
         <option value="$PROJECT_DIR$/resources/views/coupon/create.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/CouponController.php" />
         <option value="$PROJECT_DIR$/public/js/app.js" />
         <option value="$PROJECT_DIR$/resources/js/app.js" />
         <option value="$PROJECT_DIR$/app/Models/User.php" />
-        <option value="$PROJECT_DIR$/routes/api.php" />
         <option value="$PROJECT_DIR$/app/Models/Product.php" />
         <option value="$PROJECT_DIR$/database/migrations/2021_01_20_010059_create_outstanding_deliveries_table.php" />
-        <option value="$PROJECT_DIR$/resources/js/components/OutstandingDelivery.vue" />
-        <option value="$PROJECT_DIR$/resources/views/layouts/navigation.blade.php" />
-        <option value="$PROJECT_DIR$/resources/js/components/OrderIndividualComponent.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/OrderComponent.vue" />
-        <option value="$PROJECT_DIR$/resources/views/overview/index.blade.php" />
         <option value="$PROJECT_DIR$/database/migrations/2021_01_26_110626_create_partials_table.php" />
         <option value="$PROJECT_DIR$/app/Models/Partial.php" />
         <option value="$PROJECT_DIR$/app/Models/OutstandingDelivery.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/DeliveryController.php" />
-        <option value="$PROJECT_DIR$/resources/views/delivery/index.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" />
+        <option value="$PROJECT_DIR$/resources/views/upload/index.blade.php" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
+        <option value="$PROJECT_DIR$/app/Providers/SecureRoutingServiceProvider.php" />
+        <option value="$PROJECT_DIR$/config/app.php" />
+        <option value="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/navigation.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/overview/index.blade.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2021_01_16_163358_create_files_table.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/FileController.php" />
+        <option value="$PROJECT_DIR$/config/database.php" />
+        <option value="$PROJECT_DIR$/resources/js/components/OutstandingDelivery.vue" />
+        <option value="$PROJECT_DIR$/resources/js/components/OrderComponent.vue" />
+        <option value="$PROJECT_DIR$/database/migrations/2021_01_27_180746_create_orders_table.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/SetupController.php" />
+        <option value="$PROJECT_DIR$/routes/api.php" />
+        <option value="$PROJECT_DIR$/resources/views/summary/individual.blade.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/resources/views/invoice/index.blade.php" />
+        <option value="$PROJECT_DIR$/resources/sass/app.scss" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/SummaryController.php" />
         <option value="$PROJECT_DIR$/resources/views/summary/bulk.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" />
+        <option value="$PROJECT_DIR$/resources/js/components/OrderIndividualComponent.vue" />
+        <option value="$PROJECT_DIR$/resources/js/components/EditIndividualOrder.vue" />
         <option value="$PROJECT_DIR$/resources/js/components/EditOrder.vue" />
-        <option value="$PROJECT_DIR$/resources/views/upload/index.blade.php" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/FileController.php" />
-        <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" />
-        <option value="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/delivery/index.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/DeliveryController.php" />
+        <option value="$PROJECT_DIR$/app/Models/Order.php" />
       </list>
     </option>
   </component>
@@ -383,6 +372,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -427,6 +417,12 @@
               <item name="Medtronic" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="Models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Medtronic" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Medtronic" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Providers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Medtronic" type="b2602c69:ProjectViewProjectNode" />
@@ -507,6 +503,13 @@
               <item name="Medtronic" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="orders" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Medtronic" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Medtronic" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="overview" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -532,11 +535,10 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="AppSer&#9;null&#9;null&#10;push&#9;ACTION&#9;Vcs.Push&#10;layout&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/views/layouts&#10;Imp&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Http/Controllers/ImportController.php&#10;Import&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Imports/UsersImport.php&#10;FileCon&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Http/Controllers/FileController.php&#10;web&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/routes/web.php&#10;env&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/.env&#10;upload&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/public/upload&#10;api&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/routes/api.php&#10;edit&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/js/components/EditOrder.vue&#10;summary&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Http/Controllers/SummaryController.php&#10;editorder&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/js/components/EditOrder.vue&#10;Out&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Models/OutstandingDelivery.php&#10;Part&#9;null&#9;null&#10;create_part&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/database/migrations/2021_01_26_110626_create_partials_table.php&#10;outstanding&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Models/OutstandingDelivery.php&#10;del&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Http/Controllers/DeliveryController.php&#10;web.&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/routes/web.php&#10;OrderCom&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/js/components/OrderComponent.vue&#10;Naviga&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/views/layouts/navigation.blade.php&#10;navig&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/views/layouts/navigation.blade.php&#10;deliv&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/js/components/OutstandingDelivery.vue&#10;deliver&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Models/OutstandingDelivery.php&#10;DeliveryCon&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Http/Controllers/DeliveryController.php&#10;Order&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/js/components/OrderComponent.vue&#10;OrderCon&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Http/Controllers/OrderController.php&#10;create_o&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/database/migrations/2021_01_20_010059_create_outstanding_deliveries_table.php&#10;Produ&#9;null&#9;null&#10;.vue&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/js/components/OrderComponent.vue&#10;outs&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Models/OutstandingDelivery.php&#10;create&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/database/migrations/2021_01_20_010059_create_outstanding_deliveries_table.php&#10;Outs&#9;null&#9;null&#10;create_out&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/database/migrations/2021_01_20_010059_create_outstanding_deliveries_table.php&#10;app&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/js/app.js&#10;Delivery&#9;null&#9;null&#10;Coupon&#9;null&#9;null&#10;das&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/views/dashboard.blade.php&#10;editi&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/js/components/EditIndividualOrder.vue&#10;Coup&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Http/Controllers/CouponController.php&#10;orderCom&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/js/components/OrderComponent.vue&#10;list&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/views/list&#10;Cou&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Http/Controllers/CouponController.php&#10;Summ&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Http/Controllers/SummaryController.php&#10;individua&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/views/summary/individual.blade.php&#10;individual&#9;null&#9;null&#10;OrderIn&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/js/components/OrderIndividualComponent.vue&#10;Controller&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Http/Controllers/OrderController.php&#10;indiv&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Models/IndividualOrder.php&#10;BulkOrder&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Models/BulkOrder.php" />
+    <property name="SearchEverywhereHistoryKey" value="Order&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Models/Order.php&#10;DeliverCon&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Http/Controllers/DeliveryController.php&#10;Outstandin&#9;null&#9;null&#10;out&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/js/components/OutstandingDelivery.vue&#10;OrderCom&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/js/components/OrderComponent.vue&#10;orderIn&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/js/components/OrderIndividualComponent.vue&#10;bulk&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/views/summary/bulk.blade.php&#10;web&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/routes/web.php&#10;editIn&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/js/components/EditIndividualOrder.vue&#10;scss&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/sass/app.scss&#10;api&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/routes/api.php&#10;editOrder&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/js/components/EditOrder.vue&#10;web.&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/routes/web.php&#10;editindiOrder&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/js/components/EditIndividualOrder.vue&#10;api.&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/routes/api.php&#10;summary&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Http/Controllers/SummaryController.php&#10;EditIn&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/js/components/EditIndividualOrder.vue&#10;OrderComp&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/js/components/OrderComponent.vue&#10;Outstand&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/js/components/OutstandingDelivery.vue&#10;setup&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Http/Controllers/SetupController.php&#10;OrderCon&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Http/Controllers/OrderController.php&#10;order&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/database/migrations/2021_01_27_180746_create_orders_table.php&#10;editO&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/js/components/EditOrder.vue&#10;sum&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Http/Controllers/SummaryController.php&#10;OrderIn&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/js/components/OrderIndividualComponent.vue&#10;create_ou&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/database/migrations/2021_01_20_010059_create_outstanding_deliveries_table.php&#10;ordercon&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Http/Controllers/OrderController.php&#10;create_orders&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/database/migrations/2021_01_27_180746_create_orders_table.php&#10;individual_o&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/database/migrations/2021_01_07_193130_create_individual_orders_table.php&#10;create_ord&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/database/migrations/2021_01_07_193109_create_bulk_orders_table.php&#10;create_pro&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/database/migrations/2021_01_07_193231_create_products_table.php&#10;data&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/config/database.php&#10;File&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Http/Controllers/FileController.php&#10;Impor&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Http/Controllers/ImportController.php&#10;impor&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Imports/UsersImport.php&#10;create_file&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/database/migrations/2021_01_16_163358_create_files_table.php&#10;config/database&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/config/database.php&#10;web.p&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/routes/web.php&#10;nav&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/views/layouts/navigation.blade.php&#10;push&#9;ACTION&#9;Vcs.Push&#10;config/app&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/config/app.php&#10;pus&#9;ACTION&#9;Vcs.Push&#10;AppSer&#9;null&#9;null&#10;layout&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/views/layouts&#10;Imp&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Http/Controllers/ImportController.php&#10;Import&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Imports/UsersImport.php&#10;FileCon&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/app/Http/Controllers/FileController.php&#10;env&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/.env&#10;upload&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/public/upload&#10;edit&#9;FILE&#9;file://F:/Programmier Projekte/. Jobs/Medtronic/resources/js/components/EditOrder.vue" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -614,10 +616,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.prod" />
+        <item itemvalue="npm.watch" />
         <item itemvalue="npm.production" />
         <item itemvalue="npm.dev" />
-        <item itemvalue="npm.watch" />
-        <item itemvalue="npm.prod" />
       </list>
     </recent_temporary>
   </component>
@@ -652,7 +654,10 @@
       <workItem from="1611321992489" duration="1165000" />
       <workItem from="1611578576694" duration="7315000" />
       <workItem from="1611654861160" duration="13433000" />
-      <workItem from="1611746348383" duration="5267000" />
+      <workItem from="1611746348383" duration="13071000" />
+      <workItem from="1611835519131" duration="16399000" />
+      <workItem from="1611924611113" duration="5147000" />
+      <workItem from="1611976965013" duration="9198000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1611749153593</created>
@@ -675,35 +680,63 @@
       <option name="project" value="LOCAL" />
       <updated>1611750477034</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="update">
+      <created>1611751680541</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1611751680541</updated>
+    </task>
+    <task id="LOCAL-00005" summary="update">
+      <created>1611752622387</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1611752622387</updated>
+    </task>
+    <task id="LOCAL-00006" summary="update">
+      <created>1611755738834</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1611755738834</updated>
+    </task>
+    <task id="LOCAL-00007" summary="update">
+      <created>1611760712889</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1611760712889</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="181187000" />
+    <option name="totallyTimeSpent" value="219735000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.47969264" visible="true" weight="0.17252396" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.47639957" visible="true" weight="0.17252396" />
       <window_info id="Structure" order="1" sideWeight="0.50384194" side_tool="true" weight="0.2657082" />
-      <window_info id="npm" order="2" sideWeight="0.52030736" side_tool="true" visible="true" weight="0.17252396" />
+      <window_info id="npm" order="2" sideWeight="0.52360046" side_tool="true" visible="true" weight="0.17252396" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.497426" weight="0.32930845" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.497426" visible="true" weight="0.32930845" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4993565" visible="true" weight="0.32930845" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4993565" weight="0.32930845" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.497426" weight="0.36553237" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5006435" side_tool="true" weight="0.32930845" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24973376" />
       <window_info anchor="right" id="Database" order="3" />
     </layout>
     <layout-to-restore>
@@ -767,240 +800,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Models/Setup.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/auth/login.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/auth/register.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/File.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/list/user.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="25" column="44" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/orders/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2021_01_07_193109_create_bulk_orders_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2021_01_07_193130_create_individual_orders_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/BulkOrder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="12" column="86" selection-start-line="12" selection-start-column="86" selection-end-line="12" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/IndividualOrder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="10" column="71" selection-start-line="10" selection-start-column="71" selection-end-line="10" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/summary/individual.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="11" column="68" lean-forward="true" selection-start-line="11" selection-start-column="68" selection-end-line="11" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/EditIndividualOrder.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="8" column="70" selection-start-line="8" selection-start-column="70" selection-end-line="8" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="2910" column="3" lean-forward="true" selection-start-line="2910" selection-start-column="3" selection-end-line="2910" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/coupon/create.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="16" column="35" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="59" column="69" selection-start-line="59" selection-start-column="69" selection-end-line="59" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/Product.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="16" column="75" selection-start-line="16" selection-start-column="75" selection-end-line="16" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/list/bulkorder.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1263">
-          <caret line="63" column="22" selection-start-line="13" selection-start-column="12" selection-end-line="63" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2021_01_20_010059_create_outstanding_deliveries_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="20" column="37" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CouponController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="30" column="82" lean-forward="true" selection-start-line="30" selection-start-column="82" selection-end-line="30" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ListController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="713">
           <caret line="37" column="22" selection-start-line="37" selection-start-column="22" selection-end-line="39" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SetupController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="20" column="61" selection-start-line="20" selection-start-column="61" selection-end-line="20" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/OrderComponent.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1478">
-          <caret line="114" column="37" selection-start-line="114" selection-start-column="37" selection-end-line="114" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/navigation.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="21" column="33" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/welcome.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/OrderIndividualComponent.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/OutstandingDelivery.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1104">
-          <caret line="75" selection-start-line="75" selection-end-line="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/overview/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/delivery/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1380">
-          <caret line="60" column="50" selection-start-line="60" selection-start-column="50" selection-end-line="60" selection-end-column="171" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SummaryController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
-          <folding>
-            <element signature="e#40#65#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/api.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="736">
-          <caret line="37" column="39" selection-start-line="37" selection-start-column="39" selection-end-line="37" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/summary/bulk.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="14" column="78" selection-start-line="14" selection-start-column="78" selection-end-line="14" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/OrderController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2277">
-          <caret line="107" column="9" selection-start-line="107" selection-start-column="9" selection-end-line="107" selection-end-column="9" />
-          <folding>
-            <element signature="e#40#65#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DeliveryController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1978">
-          <caret line="91" column="25" selection-start-line="91" selection-start-column="25" selection-end-line="91" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -1018,27 +821,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/OutstandingDelivery.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="11" column="34" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/EditOrder.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="102" column="18" selection-start-line="102" selection-start-column="18" selection-end-line="102" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/dashboard.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="11" column="40" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/upload/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="142">
@@ -1046,41 +828,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="89" column="62" selection-start-line="89" selection-start-column="62" selection-end-line="89" selection-end-column="62" />
-          <folding>
-            <element signature="e#7#49#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ImportController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="20" column="52" lean-forward="true" selection-start-line="20" selection-start-column="52" selection-end-line="20" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Imports/UsersImport.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="29" column="47" lean-forward="true" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/FileController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="30" column="75" selection-start-line="30" selection-start-column="75" selection-end-line="30" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>
@@ -1090,24 +841,42 @@
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
-          <caret line="4" column="76" lean-forward="true" selection-start-line="4" selection-start-column="76" selection-end-line="4" selection-end-column="76" />
+          <caret line="4" column="76" selection-start-line="4" selection-start-column="76" selection-end-line="4" selection-end-column="76" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
-          <caret line="11" column="12" lean-forward="true" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
+          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="175" column="50" selection-start-line="175" selection-start-column="50" selection-end-line="175" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Providers/SecureRoutingServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="34" column="26" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Providers/AppServiceProvider.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="27" column="9" lean-forward="true" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-          <folding>
-            <element signature="e#33#69#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="92">
+          <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -1123,10 +892,265 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/navigation.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="19" column="78" selection-start-line="19" selection-start-column="78" selection-end-line="19" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/overview/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="16" column="66" selection-start-line="16" selection-start-column="66" selection-end-line="16" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/File.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2021_01_16_163358_create_files_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="20" column="56" selection-start-line="20" selection-start-column="56" selection-end-line="20" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Imports/UsersImport.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
-          <caret line="15" column="25" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
+          <caret line="29" column="47" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ImportController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-299">
+          <caret line="20" column="52" lean-forward="true" selection-start-line="20" selection-start-column="52" selection-end-line="20" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/FileController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/database.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="52" column="49" selection-start-line="52" selection-start-column="49" selection-end-line="52" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/welcome.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/dashboard.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/css/app.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2021_01_07_193130_create_individual_orders_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="17" selection-start-line="17" selection-end-line="21" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2021_01_07_193109_create_bulk_orders_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="21" column="41" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2021_01_20_010059_create_outstanding_deliveries_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="22" selection-start-line="22" selection-end-line="26" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/orders/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/orders/individual.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2021_01_07_193231_create_products_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2021_01_27_180746_create_orders_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SetupController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/summary/individual.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="14" column="113" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/invoice/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="598">
+          <caret line="26" column="52" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/list/bulkorder.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="13" selection-start-line="13" selection-end-line="64" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/sass/app.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="5" column="47" selection-start-line="5" selection-start-column="47" selection-end-line="5" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="61" column="37" selection-start-line="61" selection-start-column="37" selection-end-line="61" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/api.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="35" column="66" selection-start-line="35" selection-start-column="66" selection-end-line="35" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/summary/bulk.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="17" column="80" selection-start-line="17" selection-start-column="80" selection-end-line="17" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SummaryController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="23" column="40" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
+          <folding>
+            <element signature="e#40#65#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/OrderController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="115" column="69" selection-start-line="115" selection-start-column="69" selection-end-line="115" selection-end-column="69" />
+          <folding>
+            <element signature="e#40#65#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/OrderComponent.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="124" column="16" selection-start-line="124" selection-start-column="12" selection-end-line="124" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/OrderIndividualComponent.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1748">
+          <caret line="76" column="108" selection-start-line="76" selection-start-column="108" selection-end-line="76" selection-end-column="119" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/EditIndividualOrder.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="5" column="69" selection-start-line="5" selection-start-column="69" selection-end-line="5" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/EditOrder.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="3" column="98" selection-start-line="3" selection-start-column="98" selection-end-line="3" selection-end-column="98" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/OutstandingDelivery.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="471">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/delivery/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="65" column="73" selection-start-line="65" selection-start-column="73" selection-end-line="65" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DeliveryController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="22" column="121" selection-start-line="22" selection-start-column="121" selection-end-line="22" selection-end-column="121" />
+          <folding>
+            <element signature="e#40#61#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/OutstandingDelivery.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="12" selection-start-line="12" selection-end-line="12" selection-end-column="32" />
+          <folding>
+            <element signature="e#30#84#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/Order.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="10" column="32" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
+          <folding>
+            <element signature="e#30#84#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

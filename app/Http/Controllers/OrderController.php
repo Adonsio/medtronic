@@ -21,15 +21,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $supplier = Supplier::where('supplier_id', 2)->with('products')->get()->first();
-
         return view('orders.index');
     }
 
     public function individual(){
-        $supplier = Supplier::where('supplier_id', 2)->with('products')->get()->first();
-
-        return view('orders.individual', compact('supplier'));
+        return view('orders.individual');
     }
 
     public function addbulk(Request $request){
@@ -90,37 +86,50 @@ class OrderController extends Controller
      * @param $supplier
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getOrders($supplier){
-        $summary = DB::table('bulk_orders')
+    public function getOrders($supplier, $type){
+        $summary = DB::table('orders')
+            ->where('type', '=', $type)
             ->select('*',
                 DB::raw('count(*) as products'),
-                DB::raw('sum(quantity) total ')
+                DB::raw('sum(quantity) as total ')
             )
-            ->groupBy('supplier')
-            ->where('supplier', $supplier)
-            ->first();
+            ->groupBy('supplier_name')
+
+            ->where('supplier_id', $supplier)
+            ->get();
         $userIDs = [];
-        $users = BulkOrder::where('supplier', $supplier)->groupBy('user_id')->get();
+        foreach ($summary as $item){
+            $item->totalSum = 0;
+        }
+        foreach ($summary as $item){
+
+            $item->totalSum += number_format($item->total_price, 2, '.', '');
+        }
+        $users = Order::where('supplier_id', $supplier)->where('type', $type)->groupBy('user_fullname')->get();
         foreach ($users as $id){
-            $user = \App\Models\User::where('id', $id->user_id)->first();
+            $user = \App\Models\User::where('fullname', $id->user_fullname)->first();
             array_push($userIDs, $user);
 
         }
-        $orders = BulkOrder::where('supplier', $supplier)->get();
-        return response()->json(['orders' => $orders, 'summary' => $summary, 'user_ids' => $userIDs]);
+        $sum = Order::where('type', $type)->where('supplier_id', $supplier)->sum('total_price');
+        $sites = User::select('site')->distinct()->get();
+        $departments = User::select('department')->distinct()->get();
+        $orders = Order::where('supplier_id', $supplier)->where('type', $type)->get();
+        return response()->json(['orders' => $orders, 'summary' => $summary, 'user_ids' => $userIDs, 'sites' => $sites, 'departments' => $departments, 'sum' => $sum]);
     }
 
     public function getIndividualOrders($supplier){
-        $summary = DB::table('individual_orders')
+        $summary = DB::table('orders')
+            ->where('type','=','individual')
             ->select('*',
                 DB::raw('count(*) as products'),
                 DB::raw('sum(quantity) total ')
             )
             ->groupBy('identifier')
-            ->where('supplier', $supplier)
+            ->where('supplier_id', $supplier)
             ->first();
         $userIDs = [];
-        $users = IndividualOrder::where('supplier', $supplier)->groupBy('user_id')->get();
+        $users = Order::where('supplier_id', $supplier)->groupBy('user_id')->get();
         foreach ($users as $id){
             $user = \App\Models\User::where('id', $id->user_id)->first();
             array_push($userIDs, $user);
@@ -131,11 +140,14 @@ class OrderController extends Controller
     }
 
     public function updateOrder(Request $request){
-        $order = BulkOrder::where('id', $request->order['id'])->first();
-
+        $order = Order::where('id', $request->order['id'])->first();
+        $user = User::where('id', $request->user_id)->first();
         $order->update([
             'quantity' => $request->quantity,
-            'user_id' => $request->user_id
+            'user_id' => $request->user_id,
+            'user_fullname' => $user->fullname,
+            'department' => $request->department,
+            'site' => $request->site,
         ]);
         $order->save();
 
@@ -152,7 +164,7 @@ class OrderController extends Controller
     }
 
     public function deleteOrder($id){
-        $order = BulkOrder::where('id', $id);
+        $order = Order::where('id', $id);
         $order->delete();
 
     }
@@ -173,5 +185,49 @@ class OrderController extends Controller
     public function getGroups(){
         $groups = Product::select('group')->distinct()->get();
         return response()->json(['groups' => $groups]);
+    }
+
+    public function createOrder(Request $request){
+        $identifier = $this->randomPassword();
+        foreach ($request->order as $key => $item){
+            $order = new Order();
+            $quantity = $request->order[$key]['quantity'];
+            $product_id = $request->order[$key]['product']['id'];
+            $user_id = $request->order[$key]['user']['id'];
+            $supplier_id = $request->order[$key]['supplier'];
+            $type = $request->order[$key]['type'];
+
+            $product = Product::where('id', $product_id)->first();
+            $user = User::where('id', $user_id)->first();
+            $supplier = Supplier::where('id', $supplier_id)->first();
+
+            $order->user_id = $user->id;
+            $order->identifier = $identifier;
+            $order->product_id = $product->product_id;
+            $order->quantity = $quantity;
+            $order->user_fullname = $user->fullname;
+            $order->supplier_id = $supplier->supplier_id;
+            $order->supplier_name = $supplier->name;
+            $order->desc = $product->desc;
+            $order->unit = $product->unit;
+            $order->price = $product->price;
+            $order->rabatt = $product->rabatt;
+            $order->net_price = number_format((float)$product->price * $product->rabatt, 2, '.', '');
+            $order->price_unit = number_format((float)($product->price * $product->rabatt)/$product->unit, 2, '.', '');
+            $order->total_price = (number_format((float)$product->price * $product->rabatt, 2, '.', '') * $quantity);
+            $order->group = $product->group;
+            $order->type = $type;
+            $order->ordered = false;
+            $order->complete = false;
+            $order->partial = false;
+            $order->department = $user->department;
+            $order->site = $user->site;
+            $order->save();
+
+
+            //IndividualOrder::create(['product_id' => $product_id, 'quantity' => $quantity,  'user_id' => $user_id, 'supplier' => $supplier, 'identifier' => $identifier]);
+            //OutstandingDelivery::create(['user_id' => $user_id, 'product_id' => $product_id, 'supplier_id' => $supplier, 'type' => 'individual', 'complete' => false, 'partial' => false, 'quantity' => $quantity]);
+        }
+        return response()->json(['success' => ''. ucwords($type) .' Order Created']);
     }
 }

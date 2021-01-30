@@ -107,6 +107,7 @@
                 products: [],
                 noProducts: false,
                 bulkorder: [],
+                type: 'bulk',
             }
         },
         methods: {
@@ -166,13 +167,13 @@
                 let app = this;
                 let bulkorder = [];
                 Object.keys(app.order).forEach(key => {
-                    let x = {'product' : app.products[key], 'quantity' : app.order[key], 'user': app.currentUser, 'supplier' : app.supplier+1};
+                    let x = {'product' : app.products[key], 'quantity' : app.order[key], 'user': app.currentUser, 'supplier' : app.supplier+1, 'type': app.type};
                     x.setQuantity = app.order[key];
                     bulkorder.push(x);
 
                 });
                 axios.post('/api/addbulk', {
-                    bulkorder: bulkorder
+                    order: bulkorder
                 })
                     .then(response => (app.success = response.data.success))
                     .then(this.clear());
@@ -214,9 +215,5 @@
 </script>
 
 <style scoped>
-    .product-table { overflow-x: scroll; }
-    th, td { min-width: auto; }
-    tbody tr:nth-of-type(odd) {
-        background-color: rgba(0, 0, 0, .09);
-    }
+
 </style>

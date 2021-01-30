@@ -4,5 +4,51 @@
 // Variables
 @import 'variables';
 @import '~vue-awesome-notifications/dist/styles/style.css';
+
 .product-table { overflow-x: scroll; }
-th, td { min-width: 200px; }
+  th, td { min-width: auto; }
+tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, .09);
+}
+
+.product-table td{
+  padding: 4px;
+}
+.zui-table {
+  border: none;
+  border-collapse: separate;
+  border-spacing: 0;
+
+}
+.zui-table thead th {
+  border: none;
+  padding-bottom: 5px;
+  text-align: left;
+  padding-right: 20px;
+  white-space: nowrap;
+}
+.zui-table tbody td {
+  color: #333;
+
+
+
+}
+.zui-table    tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, .09);
+}
+.zui-wrapper {
+  position: relative;
+}
+.zui-scroller {
+  margin-left: 220px;
+  overflow-x: scroll;
+  overflow-y: visible;
+  padding-bottom: 5px;
+
+}
+.zui-table .zui-sticky-col {
+  left: 0;
+  position: absolute;
+  top: auto;
+  width: 220px;
+}

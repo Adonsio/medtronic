@@ -72,7 +72,7 @@
                     <td>{{product.group}}</td>
                     <td>{{product.supplier_name}}</td>
                     <td><input type="number" min="1" :name="'input_name_id['  + product.id  + ']'"
-                               v-model="order[index]" /></td>
+                               v-model="order[index]"/></td>
                     <td>{{order[index]}}</td>
                     <td class="px-2" v-if="order[index]">{{(order[index] * (product.price * product.rabatt)).toFixed(2) }}€</td>
                     <td v-if="!order[index]"> 0 €</td>
@@ -153,13 +153,13 @@
                 let app = this;
                 let individualorder = [];
                 Object.keys(app.order).forEach(key => {
-                    let x = {'product' : app.products[key], 'quantity' : app.order[key], 'user': app.currentUser, 'supplier' : app.supplier+1};
+                    let x = {'product' : app.products[key], 'quantity' : app.order[key], 'user': app.currentUser, 'supplier' : app.supplier+1, 'type': 'individual'};
                     individualorder.push(x);
 
                 });
 
                 axios.post('/api/addIndividual', {
-                    individualorder: individualorder
+                    order: individualorder
                 })
                     .then(response => (app.success = response.data.success))
                     .then(this.clear());

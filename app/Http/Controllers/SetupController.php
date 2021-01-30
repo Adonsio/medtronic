@@ -23,6 +23,9 @@ class SetupController extends Controller
             Role::create(['name' => 'people']);
         }
         $user->assignRole('superuser');
+        $user->department = 'none';
+        $user->site = 'none';
+        $user->save();
         $setup = new Setup();
         $setup->done = true;
         $setup->save();

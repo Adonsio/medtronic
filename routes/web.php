@@ -88,3 +88,4 @@ Route::group(['prefix' => 'delivery', 'middleware' => 'auth'], function (){
 });
 
 Route::get('/download/{id}', [FileController::class, 'download']);
+Route::get('/invoice', [DeliveryController::class, 'invoce']);

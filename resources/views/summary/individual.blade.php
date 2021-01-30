@@ -12,7 +12,7 @@
                 <div class="p-6 bg-white border-b border-gray-200 ">
 
                     @foreach($summaries as $summary)
-                        <edit-individual-order supplier="{{$summary->supplier}}"></edit-individual-order>
+                        <edit-individual-order supplier="{{$summary->supplier_id}} " sum="{{$summary->totalSum}}"></edit-individual-order>
 
                     @endforeach
 
