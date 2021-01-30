@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Models\Supplier;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SummaryController;
+use Illuminate\Support\Facades\URL;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,7 +18,9 @@ use App\Http\Controllers\SummaryController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+if (env('APP_ENV') !== 'local'){
+    URL::forceScheme('https');
+}
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
