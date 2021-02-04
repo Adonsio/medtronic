@@ -190,7 +190,9 @@ class OrderController extends Controller
     public function createOrder(Request $request){
         $identifier = $this->randomPassword();
         foreach ($request->order as $key => $item){
-            $order = new Order();
+
+
+
             $quantity = $request->order[$key]['quantity'];
             $product_id = $request->order[$key]['product']['id'];
             $user_id = $request->order[$key]['user']['id'];
@@ -200,7 +202,7 @@ class OrderController extends Controller
             $product = Product::where('id', $product_id)->first();
             $user = User::where('id', $user_id)->first();
             $supplier = Supplier::where('id', $supplier_id)->first();
-
+            $order = new Order();
             $order->user_id = $user->id;
             $order->identifier = $identifier;
             $order->product_id = $product->product_id;
@@ -229,5 +231,12 @@ class OrderController extends Controller
             //OutstandingDelivery::create(['user_id' => $user_id, 'product_id' => $product_id, 'supplier_id' => $supplier, 'type' => 'individual', 'complete' => false, 'partial' => false, 'quantity' => $quantity]);
         }
         return response()->json(['success' => ''. ucwords($type) .' Order Created']);
+    }
+
+    public function getProducts($id, $fullname){
+        $products = Product::where('supplier_id', $id)->where('user_fullname', null)->get();
+        $user_products = Product::where('supplier_id', $id+1)->where('user_fullname', $fullname)->get();
+
+        return response()->json(['products' => $products, 'user_products' => $user_products]);
     }
 }

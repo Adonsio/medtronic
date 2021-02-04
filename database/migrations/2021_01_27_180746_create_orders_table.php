@@ -39,7 +39,10 @@ class CreateOrdersTable extends Migration
             $table->boolean('partial')->nullable();
             $table->date('c_date')->nullable();
             $table->date('p_date')->nullable();
-            $table->timestamps();
+            $table->date('created_at');
+            $table->date('deleted_at');
+            $table->date('updated_at');
+            //$table->timestamps();
         });
     }
 

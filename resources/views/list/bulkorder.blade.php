@@ -31,11 +31,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($bulkorders as $bulkorder)
-                            @foreach($bulkorder->products  as $product)
-                            <tr class=" @if(($bulkorder->id % 2) == 0) bg-gray-100 @endif">
+                            @foreach($bulkorders  as $product)
+                            <tr class=" @if(($product->id % 2) == 0) bg-gray-100 @endif">
                                 @php
-                                    $user = \App\Models\User::where('id', $bulkorder->user_id)->first();
+                                    $user = \App\Models\User::where('id', $product->user_id)->first();
                                 @endphp
                                 <td>
                                     {{ $user->fullname }}
@@ -58,7 +57,6 @@
 
                             </tr>
                                 @endforeach
-                        @endforeach
                         </tbody>
                     </table>
                 </div>

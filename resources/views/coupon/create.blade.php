@@ -15,10 +15,13 @@
 
                     <p class="font-bold">Ordering Person</p>
                     @if(isset($bulk))
-                        <form action="{{url('/coupon/bulk/print/'. $order[0]->identifier)}}">
+                        <form method="POST" action="{{url('/coupon/bulk/print/'. $order[0]->identifier)}}">
+                            @csrf
                     @else
-                        <form action="{{url('/coupon/individual/print/'. $order[0]->identifier)}}">
+                        <form method="POST" action="{{url('/coupon/individual/print/'. $order[0]->identifier)}}">
+                            @csrf
                     @endif
+
                     <select name="user" id="user">
                         @foreach($users as $user)
                             <option @if($user->id == Auth::user()->id) selected @endif value="{{$user->id}}">{{$user->fullname}}</option>
@@ -30,6 +33,10 @@
                         <button type="submit" class="bg-blue-500 py-3 px-2 my-8 rounded text-white">Create</button>
                     </div>
                     </form>
+                        </form>
+                    <div class="border border-1 border-gray">
+                    </div>
+
                 </div>
             </div>
         </div>

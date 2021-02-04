@@ -8,7 +8,7 @@ use Mehradsadeghi\FilterQueryString\FilterQueryString;
 class Order extends Model
 {
     use HasFactory, FilterQueryString;
-    protected $filters = ['in'];
+    protected $filters = ['in', 'greater_or_equal', 'less_or_equal'];
     protected $fillable = [
         'identifier',
         'product_id',
@@ -34,4 +34,11 @@ class Order extends Model
         'department',
         'site',
     ];
+    public function Partial(){
+        return $this->hasMany(Partial::class, 'delivery_id', 'id');
+    }
+
+    public function invoice(){
+        return $this->belongsToMany(Invoice::class, 'order_invoice');
+    }
 }

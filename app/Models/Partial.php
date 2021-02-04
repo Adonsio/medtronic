@@ -11,6 +11,6 @@ class Partial extends Model
     protected $fillable = ['delivery_id', 'date', 'person'];
 
     public function delivery() {
-        return $this->belongsTo(OutstandingDelivery::class, 'id', 'delivery_id');
+        return $this->belongsTo(Order::class, 'id', 'delivery_id');
     }
 }

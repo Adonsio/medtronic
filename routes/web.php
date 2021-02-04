@@ -61,6 +61,7 @@ Route::group(['prefix' => 'order', 'middleware' => 'auth'], function (){
 Route::group(['prefix' => 'summary', 'middleware' => 'auth'], function (){
     Route::get('/bulk', [SummaryController::class, 'index'])->name('bulk-summary');
     Route::get('/individual', [SummaryController::class, 'individual'])->name('individual-summary');
+    Route::get('analyse', [SummaryController::class, 'analyse'])->name('analyse');
 });
 
 Route::get('/home', function (){
@@ -76,7 +77,7 @@ Route::group(['prefix' => 'coupon', 'middleware' => 'auth'], function (){
 
 Route::group(['prefix' => 'coupon', 'middleware' => 'auth'], function () {
     Route::get('individual/create/{identifier}', [CouponController::class, 'createIndividual'])->name('individual-coupon');
-    Route::get('bulk/create/{identifier}', [CouponController::class, 'createBulk'])->name('bulk-coupon');
+    Route::get('bulk/create', [CouponController::class, 'createBulk'])->name('bulk-coupon');
     Route::post('individual/print/{identifier}', [CouponController::class, 'printIndivudual'])->name('print-individual');
     Route::post('bulk/print/{identifier}', [CouponController::class, 'printBulk'])->name('print-bulk');
 });
@@ -87,5 +88,10 @@ Route::group(['prefix' => 'delivery', 'middleware' => 'auth'], function (){
     Route::get('/partial/{id}', [DeliveryController::class, 'partial'])->name('partial');
 });
 
-Route::get('/download/{id}', [FileController::class, 'download']);
-Route::get('/invoice', [DeliveryController::class, 'invoce']);
+Route::post('/user/role/{id}', [ListController::class, 'changeRole'])->middleware(['auth']);
+Route::get('/user/reset/{id}', [ListController::class, 'resetPassword'])->middleware(['auth']);
+Route::get('/user/edit/{id}', [ListController::class, 'editUser'])->middleware(['auth']);
+Route::post('/user/edit/{id}', [ListController::class, 'updateUser'])->middleware(['auth']);
+Route::get('/download/{id}', [FileController::class, 'download'])->middleware(['auth']);
+Route::get('/invoices', [DeliveryController::class, 'invoice'])->middleware(['auth']);
+Route::get('/chart', [SummaryController::class, 'chart'])->middleware(['auth']);

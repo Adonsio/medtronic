@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
     protected $with = ['supplier'];
-    protected $fillable = ['supplier_id', 'product_id', 'desc', 'unit', 'price', 'rabatt', 'net_price', 'price_unit', 'group', 'supplier_name'];
+    protected $fillable = ['supplier_id', 'product_id', 'desc', 'unit', 'price', 'rabatt', 'net_price', 'price_unit', 'group', 'supplier_name', 'active', 'user_fullname'];
     public function Supplier(){
         return $this->belongsTo(Supplier::class, 'supplier_id', 'supplier_id');
     }

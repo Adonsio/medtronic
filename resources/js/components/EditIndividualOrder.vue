@@ -2,11 +2,13 @@
     <div>
         <div class="p-5 my-5 shadow bg-gray-50 w-auto rounded-xl">
             <p class="font-bold">Supplier Name: {{ suppliername ? suppliername : 'loading..'}}</p>
+            <p class="font-bold">Identifier: {{ orders[0].identifier }}</p>
             <p class="pl-5"># Products: {{ summary.quantity }}  </p>
             <p class="pl-5" v-if="sum > transport">Total Price: {{sum.toFixed(2)}} €</p>
             <p class="pl-5 " v-else>Total Price: <span class="text-red-500 font-bold">{{sum}}</span> €</p>
             <p class="pl-5" >Transport: {{ transport }} €</p>
             <p class="pl-5">Ordering Person: <span class="bg-blue-200 rounded-full py-1 px-3 m-2" v-for="user in user_ids">{{user.fullname}}  /  {{ user.department}}</span> </p>
+            <a :href="'/coupon/individual/create/' + orders[0].identifier" class="inline-block mt-6 p-2 bg-blue-500 text-white font-bold">Create Order Coupon</a>
         </div>
         <button :class="showClass  + ' text-white rounded-full py-1 px-3 my-2 font-bold'" @click="showOrder()"> <span v-if="!show">Edit Order</span> <span v-if="show">Abort</span> </button>
         <div class="zui-wrapper" v-if="show">

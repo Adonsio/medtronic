@@ -25,6 +25,8 @@ class CreateProductsTable extends Migration
             $table->string('price_unit');
             $table->string('group');
             $table->string('supplier_name');
+            $table->string('user_fullname')->nullable();
+            $table->boolean('active');
             $table->timestamps();
         });
     }

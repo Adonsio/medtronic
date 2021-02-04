@@ -19,9 +19,7 @@
 
                     <a href="{{ url('file/upload') }}" class="text-white font-bold bg-blue-500 p-2 my-8">Upload / Import File</a>
                     @endrole
-                    @if(!$setup)
-                    <a href="{{ url('setup') }}" class="text-white font-bold bg-blue-500 p-2 my-8">Start Setup</a>
-                    @endif
+
                 </div>
             </div>
         </div>

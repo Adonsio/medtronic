@@ -16,6 +16,8 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
 
+
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -31,6 +33,11 @@
                         {{ Session::get('success')}}
                     </div>
                 @endif
+                @if(Session::has('error'))
+                    <div class="p-4 bg-red-400 text-center">
+                        <b>{{ Session::get('error')}}</b>
+                    </div>
+                @endif
             </header>
 
             <!-- Page Content -->
@@ -40,5 +47,6 @@
                 </div>
             </main>
         </div>
+
     </body>
 </html>

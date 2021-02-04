@@ -68,9 +68,13 @@
                                             <td>{{$delivery->site}}</td>
                                             <td>{{$delivery->reciving_person ? $user->fullname : ''}}</td>
                                             <td>@if($delivery->c_date) {{$delivery->c_date}} @else <a href="{{url('/delivery/complete/'.$delivery->id)}}" class="font-bold">Set Complete</a> @endif</td>
-                                            <td style="display: inline-block;">@if($delivery->p_date)
-                                                <a href="{{url('/delivery/partial/'.$delivery->id)}}" class="font-bold ">Add Partial</a>
 
+                                            <td style="display: inline-block;">@if($delivery->p_date)
+                                                    <a href="{{url('/delivery/partial/'.$delivery->id)}}" class="font-bold ">Add Partial</a>
+                                                    @foreach($delivery->Partial as $item)
+                                                        <span class="bg-blue-200 rounded-full py-1 px-3 m-2"> {{$item->date}}  /  {{ $item->person }}</span>
+
+                                                    @endforeach
                                                 @else <a href="{{url('/delivery/partial/'.$delivery->id)}}" class="font-bold ">Set Partial</a>@endif
                                             </td>
                                         </tr>

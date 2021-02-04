@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\File;
+use App\Models\Product;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use App\Imports\UsersImport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -38,6 +40,17 @@ class ImportController extends Controller
     }
 
     public function product($file){
+        $products = Product::all();
+        if ($products){
+            foreach ($products as $product){
+                $product->active = false;
+                $product->save();
+            }
+        }
+        $supplier = Supplier::all();
+        if (!count($supplier)){
+            return redirect('/file/upload')->with('error', 'Import Suppliers first!');
+        }
         $filePath = File::where('id', $file)->first();
         $filePath->imported = true;
         $filePath->save();

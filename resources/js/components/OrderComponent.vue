@@ -21,6 +21,7 @@
                 <button class="bg-blue-300 mr-5 px-4 p-2 " @click="addBulk()" v-if="showSummary">Add to Bulk Order </button>
                 <button class="bg-blue-300 mx-5 px-4 p-2" @click="summary()"><span v-if="showSummary">Change Order</span> <span v-if="!showSummary">Show Summary </span> </button>
                 <button class="bg-blue-300 mx-5 px-4 p-2" @click="clear()">Clear </button>
+                <!--<button class="bg-blue-300 mx-5 px-4 p-2" @click="clear()">Show All Products </button>-->
             </div>
         </div>
 
@@ -54,14 +55,15 @@
                     <td>{{product.group}}</td>
                     <td>{{product.supplier_name}}</td>
                     <td><input type="number" min="1" :name="'input_name_id['  + product.id  + ']'"
-                               v-model="product.setQuantity" @change="test()"/></td>
-                    <td>{{product.setQuantity}}</td>
-                    <td class="px-2" v-if="product.setQuantity">{{(product.setQuantity * (product.price * product.rabatt)).toFixed(2) }}€</td>
-                    <td v-if="!product.setQuantity"> 0 €</td>
+                               v-model="order[product.product_id]" /></td>
+                    <td>{{order[product.product_id]}}</td>
+                    <td class="px-2" v-if="order[product.product_id]">{{(order[product.product_id] * (product.price * product.rabatt)).toFixed(2) }}€</td>
+                    <td v-if="!order[product.product_id]"> 0 €</td>
                     <td>{{currentUser.department}}</td>
                     <td>{{ currentUser.site}}</td>
                     <td>{{ today() }}</td>
                 </tr>
+
                 <tr v-for="(product, index) in products" v-if="!showSummary">
 
                     <td>{{product.supplier_id}}</td>
@@ -72,14 +74,17 @@
                     <td>{{product.group}}</td>
                     <td>{{product.supplier_name}}</td>
                     <td><input type="number" min="1" :name="'input_name_id['  + product.id  + ']'"
-                               v-model="order[index]" @change="test()"/></td>
-                    <td>{{order[index]}}</td>
-                    <td class="px-2" v-if="order[index]">{{(order[index] * (product.price * product.rabatt)).toFixed(2) }}€</td>
-                    <td v-if="!order[index]"> 0 €</td>
+                               v-model="order[product.product_id]" @change="test()"/></td>
+                    <td>{{order[product.product_id]}}</td>
+                    <td class="px-2" v-if="order[product.product_id]">{{(order[product.product_id] * (product.price * product.rabatt)).toFixed(2) }}€</td>
+                    <td v-if="!order[product.product_id]"> 0 €</td>
                     <td>{{currentUser.department}}</td>
                     <td>{{ currentUser.site}}</td>
                     <td>{{ today() }}</td>
                 </tr>
+
+
+
                 </tbody>
             </table>
         </div>
@@ -107,7 +112,10 @@
                 products: [],
                 noProducts: false,
                 bulkorder: [],
+                showAll: false,
                 type: 'bulk',
+                user_products: [],
+                loading: false,
             }
         },
         methods: {
@@ -121,9 +129,10 @@
                 app.showSummary = false;
                 app.bulkorder.forEach(e => e.setQuantity = 0);
                 app.bulkorder = [];
+                app.loading = false;
             },
             test(){
-              console.log(this.order)
+              console.log(this.order )
             },
             getUser(){
                 let app = this;
@@ -143,14 +152,21 @@
             summary(){
                 let app = this;
                 app.showSummary = !app.showSummary;
+                let orders = app.order;
 
-                Object.keys(app.order).forEach(key => {
-                    //let x = {'product' : app.products[key], 'quantity' : app.order[key], 'user': app.currentUser, 'supplier' : app.supplier+1};
-                    let x = app.products[key];
-                    x.setQuantity = app.order[key];
+                for(let i = 0; i < Object.keys(app.order).length; i++){
+                    let x = app.products[i];
+                    x.setQuantity = app.order[app.products[i].product_id];
                     app.bulkorder.push(x);
 
-                });
+                }
+              /*  Object.keys(app.order).forEach(key => {
+                    //let x = {'product' : app.products[key], 'quantity' : app.order[key], 'user': app.currentUser, 'supplier' : app.supplier+1};
+                    let x = app.products[key];
+                    x.setQuantity = app.order[app.products[key].product_id];
+                    app.bulkorder.push(x);
+
+                });*/
                 /*
                 axios.post('/api/addbulk', {
                     bulkorder: bulkorder
@@ -166,12 +182,16 @@
             async addBulk(){
                 let app = this;
                 let bulkorder = [];
-                Object.keys(app.order).forEach(key => {
-                    let x = {'product' : app.products[key], 'quantity' : app.order[key], 'user': app.currentUser, 'supplier' : app.supplier+1, 'type': app.type};
-                    x.setQuantity = app.order[key];
+                for(let i = 0; i < Object.keys(app.order).length; i++){
+                    let x = {'product' : app.products[i], 'quantity' : app.order[app.products[i].product_id], 'user': app.currentUser, 'supplier' : app.supplier+1, 'type': app.type};
+                    x.setQuantity = app.order[app.products[i].product_id];
                     bulkorder.push(x);
-
-                });
+                }
+               /* Object.keys(app.order).forEach(key => {
+                    let x = {'product' : app.products[key], 'quantity' : app.order[app.products[key].product_id], 'user': app.currentUser, 'supplier' : app.supplier+1, 'type': app.type};
+                    x.setQuantity = app.order[app.products[key].product_id];
+                    bulkorder.push(x);
+                });*/
                 axios.post('/api/addbulk', {
                     order: bulkorder
                 })
@@ -188,6 +208,11 @@
                 }))
             },
             setProducts(){
+               /* app.loading = true;
+                axios.get(`/api/products/${app.supplier}/${app.currentUser.fullname}`).then(
+                    response => (app.products = response.data.products, app.user_products = response.data.user_products, app.loading = false)
+                );
+                */
                 let app = this;
                 app.order  = {};
                 app.noProducts = false;

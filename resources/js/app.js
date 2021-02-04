@@ -30,6 +30,9 @@ Vue.component('order-individual-component', require('./components/OrderIndividua
 Vue.component('edit-order', require('./components/EditOrder.vue').default);
 Vue.component('edit-individual-order', require('./components/EditIndividualOrder.vue').default);
 Vue.component('outstanding-delivery', require('./components/OutstandingDelivery.vue').default);
+Vue.component('analyse', require('./components/Analyse.vue').default);
+Vue.component('invoice-table', require('./components/InvoiceTable.vue').default);
+Vue.component('chart', require('./components/Chart.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

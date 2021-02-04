@@ -1,9 +1,5 @@
 <x-app-layout>
-    @if(Session::has('success'))
-        <div class="p-4 bg-green-400 text-center">
-            {{ Session::get('success')}}
-        </div>
-    @endif
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Users') }}
@@ -14,32 +10,37 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <table class="table-fixed w-full text-left">
+                    <table class="product-table w-full text-left">
                         <thead>
                         <tr>
-                            <th class="w-auto ">First Name</th>
+                            <th class="w-auto pl-2">First Name</th>
                             <th class="w-auto ">Last Name</th>
                             <th class="w-auto ">Department</th>
                             <th class="w-auto ">Site</th>
                             <th class="w-auto ">Fullname</th>
                             <th class="w-auto ">User Name</th>
-                            @role('superuser')
                             <th class="w-auto ">Password</th>
-                            @endrole
+                            <th class="w-auto ">Role</th>
+                            <th class="w-auto "></th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($users as $user)
                             <tr class=" @if(($user->id % 2) == 0) bg-gray-100 @endif">
-                                <td>{{$user->firstname}}</td>
+                                <td class="pl-4">{{$user->firstname}}</td>
                                 <td>{{$user->lastname}}</td>
                                 <td>{{$user->department}}</td>
                                 <td>{{$user->site}}</td>
                                 <td>{{$user->fullname}}</td>
                                 <td>{{$user->login_identifier}}</td>
-                                @role('superuser')
-                                <td>{{$user->password_nohash}}</td>
-                                @endrole
+                                <td>{{$user->password_nohash}} </td>
+
+                                <td class="flex flex-row">
+                                    @foreach($user->roles as $role)
+                                        {{ $role->name }}
+                                        @endforeach
+                                    </td>
+                                <td><a href="{{url('/user/edit/'.$user->id)}}" class="bg-blue-500 p-2 m-2 font-bold text-white">Edit</a></td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -49,4 +50,9 @@
         </div>
     </div>
 </x-app-layout>
+<style>
+    form, .form-fields {
+        display: flex;
+    }
+</style>
 

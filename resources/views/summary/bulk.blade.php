@@ -10,7 +10,7 @@
         <div class=" mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200 ">
-                    <button class="bg-blue-500 p-4 rounded text-white font-bold text-xl my-5">Create Order Coupons</button>
+                    <a href="{{ url('/coupon/bulk/create')}}"><button class="bg-blue-500 p-4 rounded text-white font-bold text-xl my-5">Create Order Coupons</button></a>
                         @foreach($summaries as $summary)
                                 @php
 

@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
+use ConsoleTVs\Charts\Registrar as Charts;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,11 +24,13 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Charts $charts)
     {
        if (env('APP_ENV') !== 'local'){
            URL::forceScheme('https');
        }
-
+        $charts->register([
+            \App\Charts\SupplierChart::class
+        ]);
     }
 }

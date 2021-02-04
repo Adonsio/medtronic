@@ -27,6 +27,8 @@ class ProductImport implements ToModel, WithStartRow
             'price_unit' => $row[7],
             'group' => $row[8],
             'supplier_name' => Supplier::where('supplier_id', $row[0])->first()->name,
+            'user_fullname' => $row[10],
+            'active' => true,
         ]);
     }
     public function startRow(): int
