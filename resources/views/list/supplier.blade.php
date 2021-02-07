@@ -36,6 +36,7 @@
                                 <td>{{$supplier->name}}</td>
                                 <td>{{$supplier->street}}</td>
                                 <td>{{$supplier->zip_code}}</td>
+                                <td>{{$supplier->city}}</td>
                                 <td>{{$supplier->phone}}</td>
                                 <td>{{$supplier->fax}}</td>
                                 <td>{{$supplier->contact_person}}</td>
