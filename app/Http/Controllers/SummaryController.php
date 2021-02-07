@@ -95,7 +95,7 @@ class SummaryController extends Controller
             $stats['bulk_complete'] = Carbon::parse($diff1->c_date)->diffInDays(Carbon::parse($diff2->invoice[0]->order_date));
 
         } else {
-            $stats['bulk_completel'] = '';
+            $stats['bulk_complete'] = '';
         }
 
         $diff3 = Order::filter()->where('ordered', true)->with('invoice')->where('type', 'individual')->where(function ($q){
