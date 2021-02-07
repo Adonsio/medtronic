@@ -25,7 +25,7 @@ class CreateSuppliersTable extends Migration
             $table->string('contact_person')->nullable();
             $table->string('email')->nullable();
             $table->float('transport')->nullable();
-            $table->boolean('active');
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

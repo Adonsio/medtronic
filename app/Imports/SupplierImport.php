@@ -20,11 +20,12 @@ class SupplierImport implements ToModel, WithStartRow
             'name' => $row[1],
             'street' => $row[2],
             'zip_code' => $row[3],
-            'phone' => $row[4],
-            'fax' => $row[5],
-            'contact_person' => $row[6],
-            'email' => $row[7],
-            'transport' => $row[8],
+            'city' => $row[4],
+            'phone' => $row[5],
+            'fax' => $row[6],
+            'contact_person' => $row[7],
+            'email' => $row[8],
+            'transport' => $row[9],
             'active' => true,
         ]);
     }
