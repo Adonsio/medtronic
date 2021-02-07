@@ -27,6 +27,7 @@
                             <th class="w-auto ">Fax</th>
                             <th class="w-auto ">Contact</th>
                             <th class="w-auto ">E-mail</th>
+                            <th class="w-auto ">Transport</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -41,6 +42,7 @@
                                 <td>{{$supplier->fax}}</td>
                                 <td>{{$supplier->contact_person}}</td>
                                 <td>{{$supplier->email}}</td>
+                                <td>{{$supplier->transport}}</td>
                             </tr>
                         @endforeach
                         </tbody>
