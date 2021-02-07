@@ -23,6 +23,9 @@ class CreateSuppliersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('fax')->nullable();
             $table->string('contact_person')->nullable();
+            $table->string('email')->nullable();
+            $table->float('transport')->nullable();
+            $table->boolean('active');
             $table->timestamps();
         });
     }

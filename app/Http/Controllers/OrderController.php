@@ -94,7 +94,7 @@ class OrderController extends Controller
                 DB::raw('sum(quantity) as total ')
             )
             ->groupBy('supplier_name')
-
+            ->where('ordered', false)
             ->where('supplier_id', $supplier)
             ->get();
         $userIDs = [];
@@ -111,11 +111,12 @@ class OrderController extends Controller
             array_push($userIDs, $user);
 
         }
-        $sum = Order::where('type', $type)->where('supplier_id', $supplier)->sum('total_price');
+        $sum = Order::where('type', $type)->where('ordered', false)->where('supplier_id', $supplier)->sum('total_price');
         $sites = User::select('site')->distinct()->get();
         $departments = User::select('department')->distinct()->get();
-        $orders = Order::where('supplier_id', $supplier)->where('type', $type)->get();
-        return response()->json(['orders' => $orders, 'summary' => $summary, 'user_ids' => $userIDs, 'sites' => $sites, 'departments' => $departments, 'sum' => $sum]);
+        $orders = Order::where('supplier_id', $supplier)->where('ordered', false)->where('type', $type)->get();
+        $transport = Supplier::select('transport')->where('supplier_id', $supplier)->first();
+        return response()->json(['orders' => $orders, 'summary' => $summary, 'user_ids' => $userIDs, 'sites' => $sites, 'departments' => $departments, 'sum' => $sum, 'transport' => $transport]);
     }
 
     public function getIndividualOrders($supplier){
@@ -148,6 +149,7 @@ class OrderController extends Controller
             'user_fullname' => $user->fullname,
             'department' => $request->department,
             'site' => $request->site,
+            'total_price' => (number_format((float)$order->price * $order->rabatt, 2, '.', '') * $request->quantity)
         ]);
         $order->save();
 
@@ -234,8 +236,8 @@ class OrderController extends Controller
     }
 
     public function getProducts($id, $fullname){
-        $products = Product::where('supplier_id', $id)->where('user_fullname', null)->get();
-        $user_products = Product::where('supplier_id', $id+1)->where('user_fullname', $fullname)->get();
+        $products = Product::where('supplier_id', $id+1)->where('user_fullname', null)->where('active', true)->get();
+        $user_products = Product::where('supplier_id', $id+1)->where('user_fullname', $fullname)->where('active', true)->get();
 
         return response()->json(['products' => $products, 'user_products' => $user_products]);
     }

@@ -78,7 +78,7 @@ Route::group(['prefix' => 'coupon', 'middleware' => 'auth'], function (){
 Route::group(['prefix' => 'coupon', 'middleware' => 'auth'], function () {
     Route::get('individual/create/{identifier}', [CouponController::class, 'createIndividual'])->name('individual-coupon');
     Route::get('bulk/create', [CouponController::class, 'createBulk'])->name('bulk-coupon');
-    Route::post('individual/print/{identifier}', [CouponController::class, 'printIndivudual'])->name('print-individual');
+    Route::get('individual/print/{identifier}', [CouponController::class, 'printIndivudual'])->name('print-individual');
     Route::post('bulk/print/{identifier}', [CouponController::class, 'printBulk'])->name('print-bulk');
 });
 
@@ -95,3 +95,6 @@ Route::post('/user/edit/{id}', [ListController::class, 'updateUser'])->middlewar
 Route::get('/download/{id}', [FileController::class, 'download'])->middleware(['auth']);
 Route::get('/invoices', [DeliveryController::class, 'invoice'])->middleware(['auth']);
 Route::get('/chart', [SummaryController::class, 'chart'])->middleware(['auth']);
+
+Route::get('/meta', [ListController::class, 'meta'])->name('meta')->middleware(['auth']);
+Route::get('/invoice/list', [DeliveryController::class, 'invoicelist'])->name('invoicelist')->middleware(['auth']);

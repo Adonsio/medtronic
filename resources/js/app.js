@@ -7,9 +7,8 @@
 require('./bootstrap');
 
 window.Vue = require('vue').default;
-import VueAWN from "vue-awesome-notifications"
+import VueAWN from "vue-awesome-notifications";
 
-// Your custom options
 let options = {};
 
 Vue.use(VueAWN, options);
@@ -32,7 +31,12 @@ Vue.component('edit-individual-order', require('./components/EditIndividualOrder
 Vue.component('outstanding-delivery', require('./components/OutstandingDelivery.vue').default);
 Vue.component('analyse', require('./components/Analyse.vue').default);
 Vue.component('invoice-table', require('./components/InvoiceTable.vue').default);
-Vue.component('chart', require('./components/Chart.vue').default);
+Vue.component('group-value', require('./components/GroupValue.vue').default);
+Vue.component('group-total', require('./components/GroupTotal.vue').default);
+Vue.component('clarens-total', require('./components/ClarensTotal.vue').default);
+Vue.component('clarens-value', require('./components/ClarensValue.vue').default);
+Vue.component('saxon-total', require('./components/SaxonTotal.vue').default);
+Vue.component('saxon-value', require('./components/SaxonValue.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

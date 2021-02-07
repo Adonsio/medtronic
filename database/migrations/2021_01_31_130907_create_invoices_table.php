@@ -19,9 +19,9 @@ class CreateInvoicesTable extends Migration
             $table->string('supplier_name');
             $table->string('department');
             $table->string('user_fullname');
-            $table->integer('net_price');
-            $table->integer('gross_price');
-            $table->integer('total_price');
+            $table->float('net_price');
+            $table->float('gross_price');
+            $table->float('total_price');
             $table->date('order_date');
             $table->boolean('complete');
             $table->boolean('pending');

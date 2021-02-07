@@ -36,7 +36,7 @@ class ListController extends Controller
     }
     public function bulkorder()
     {
-        $bulkorders = Order::where('ordered', false)->where('type', 'bulk')->get();
+        $bulkorders = Order::where('type', 'bulk')->get();
         return view('list.bulkorder', compact('bulkorders'));
     }
 
@@ -81,5 +81,9 @@ class ListController extends Controller
         $user->update($request->all());
 
         return back()->with(['success' => 'User Information was updated']);
+    }
+
+    public function meta(){
+        return view('list.meta');
     }
 }

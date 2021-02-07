@@ -60,6 +60,13 @@ class ImportController extends Controller
     }
 
     public function supplier($file){
+        $suppliers = Supplier::all();
+        if ($suppliers){
+            foreach ($suppliers as $supplier){
+                $supplier->active = false;
+                $supplier->save();
+            }
+        }
         $filePath = File::where('id', $file)->first();
         $filePath->imported = true;
         $filePath->save();

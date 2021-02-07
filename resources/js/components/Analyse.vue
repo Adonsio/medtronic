@@ -1,5 +1,5 @@
 <template>
-    <div class="w-1/4" >
+    <div class="w-2/3" >
         <select name="supplier" id="supplier" v-model="selectedSupplier" @change="setUrl()" class="w-full flex">
             <option value="" selected >Choose a Supplier</option>
             <option v-for="supplier in suppliers" :value="'&in=supplier_id,'+supplier.id">{{supplier.name}}</option>
@@ -13,7 +13,7 @@
             <option v-for="department in departments" :value="'&in=department,'+department.department">{{department.department}}</option>
         </select>
         <select name="site" id="site" v-model="selectedSite" @change="setUrl()" class="w-full flex">
-            <option value="" selected >Choose an Site</option>
+            <option value="" selected >Choose a Site</option>
             <option v-for="site in sites" :value="'&in=site,'+site.site">{{site.site}}</option>
         </select>
         <select name="user" id="user" v-model="ordering_person" @change="setUrl()" class="w-full flex">
@@ -37,12 +37,12 @@
             <option value="" disabled selected >Choose Supply Status</option>
             <option v-for="group in groups" :value="'&in=group,'+group.group">{{group.group}}</option>
         </select>
-        <select name="type" id="type" v-model="type" @change="setUrl()" class="w-full flex">
+        <!--<select name="type" id="type" v-model="type" @change="setUrl()" class="w-full flex">
             <option value="" disabled>Choose Order Type</option>
             <option value="individual,bulk" selected >All</option>
             <option value="individual">Individual</option>
             <option value="bulk">Bulk</option>
-        </select>
+        </select>-->
 
 
 

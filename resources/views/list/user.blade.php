@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Users') }}
+            {{ __('Utilisateurs') }}
         </h2>
     </x-slot>
 
@@ -13,14 +13,14 @@
                     <table class="product-table w-full text-left">
                         <thead>
                         <tr>
-                            <th class="w-auto pl-2">First Name</th>
-                            <th class="w-auto ">Last Name</th>
-                            <th class="w-auto ">Department</th>
+                            <th class="w-auto pl-2">Prénom</th>
+                            <th class="w-auto ">Nom de Famille</th>
+                            <th class="w-auto ">Département</th>
                             <th class="w-auto ">Site</th>
-                            <th class="w-auto ">Fullname</th>
-                            <th class="w-auto ">User Name</th>
-                            <th class="w-auto ">Password</th>
-                            <th class="w-auto ">Role</th>
+                            <th class="w-auto ">Nom et prénom</th>
+                            <th class="w-auto ">Nom d'utilisateur</th>
+                            <th class="w-auto ">Mot de passe</th>
+                            <th class="w-auto ">Rôle</th>
                             <th class="w-auto "></th>
                         </tr>
                         </thead>

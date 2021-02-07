@@ -11,39 +11,11 @@
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Home') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('order')" :active="request()->routeIs('order')">
-                        {{ __('Bulk Order') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('individual-order')" :active="request()->routeIs('individual-order')">
-                        {{ __('Individual Order') }}
-                    </x-nav-link>
-                    <x-nav-link href="{{url('/delivery?in=type,individual,bulk')}}" :active="request()->routeIs('outstanding')">
-                        {{ __('Outstanding Deliveries') }}
-                    </x-nav-link>
+
 
                     @role('superuser')
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('user-list')" :active="request()->routeIs('user-list')">
-                        {{ __('Users') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('orga-list')" :active="request()->routeIs('orga-list')">
-                        {{ __('Organisations') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('supplier-list')" :active="request()->routeIs('supplier-list')">
-                        {{ __('Suppliers') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('product-list')" :active="request()->routeIs('product-list')">
-                        {{ __('Products') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('bulk-list')" :active="request()->routeIs('bulk-list')">
-                        {{ __('Bulk Order') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('bulk-summary')" :active="request()->routeIs('bulk-summary')">
-                        {{ __('Bulk Order Summary') }}
                     </x-nav-link>
                     @endrole
                 </div>

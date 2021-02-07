@@ -52,12 +52,12 @@ class Setup extends Command
         Role::create(['name' => 'people']);
 
         $user->assignRole('superuser');
-        $user->department = 'none';
-        $user->site = 'none';
+        $user->department = 'OR';
+        $user->site = 'Clarens';
         $user->save();
 
 
-        echo "Admin User created, you may now login with \n Login Identifier: Admin \n Password: TYFe3_HaPDnt";
+        echo "Admin User created, you may now login with \n Login Identifier: Admin \n Password: TYFe3_HaPDnt \n";
             /*
              *             'login_identifier' => $request->login_identifier,
             'firstname' => $request->firstname,

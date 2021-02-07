@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Supplier') }}
+            {{ __('Fournisseurs') }}
         </h2>
     </x-slot>
 
@@ -14,13 +14,19 @@
                         <thead>
                         <tr>
                             <th class="w-auto ">ID</th>
-                            <th class="w-auto ">Name</th>
-                            <th class="w-auto ">Street</th>
-                            <th class="w-auto ">Zip Code</th>
-                            <th class="w-auto ">City</th>
-                            <th class="w-auto ">Phone</th>
+                            <th class="w-auto ">Nom
+                            </th>
+                            <th class="w-auto ">Rue
+                            </th>
+                            <th class="w-auto ">Code postale
+                            </th>
+                            <th class="w-auto ">Lieu
+                            </th>
+                            <th class="w-auto ">Téléphone
+                            </th>
                             <th class="w-auto ">Fax</th>
-                            <th class="w-auto ">Contact Person</th>
+                            <th class="w-auto ">Contact</th>
+                            <th class="w-auto ">E-mail</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -33,6 +39,7 @@
                                 <td>{{$supplier->phone}}</td>
                                 <td>{{$supplier->fax}}</td>
                                 <td>{{$supplier->contact_person}}</td>
+                                <td>{{$supplier->email}}</td>
                             </tr>
                         @endforeach
                         </tbody>

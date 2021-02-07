@@ -8,7 +8,7 @@
             <p class="pl-5 " v-else>Total Price: <span class="text-red-500 font-bold">{{sum}}</span> €</p>
             <p class="pl-5" >Transport: {{ transport }} €</p>
             <p class="pl-5">Ordering Person: <span class="bg-blue-200 rounded-full py-1 px-3 m-2" v-for="user in user_ids">{{user.fullname}}  /  {{ user.department}}</span> </p>
-            <a :href="'/coupon/individual/create/' + orders[0].identifier" class="inline-block mt-6 p-2 bg-blue-500 text-white font-bold">Create Order Coupon</a>
+            <a :href="'/coupon/individual/print/' + orders[0].identifier" class="inline-block mt-6 p-2 bg-blue-500 text-white font-bold">Create Order Coupon</a>
         </div>
         <button :class="showClass  + ' text-white rounded-full py-1 px-3 my-2 font-bold'" @click="showOrder()"> <span v-if="!show">Edit Order</span> <span v-if="show">Abort</span> </button>
         <div class="zui-wrapper" v-if="show">
@@ -65,7 +65,7 @@
                         <td><input type="number" min="1" :name="'input_name_id['  + product['id']  + ']'"
                                    :value="product.quantity" @change="updateQuantity(index, $event)"/></td>
                         <td>{{product.quantity}}</td>
-                        <td class="px-2" >{{(product.quantity * (product['total_price'])).toFixed(2) }}€</td>
+                        <td class="px-2" >{{(product.quantity * (product.price * product.rabatt)).toFixed(2) }}€€</td>
 
                         <td>
                             <select  :id="'departments-'+ product.department" v-model="selectedDepartments[index]"  >
@@ -113,7 +113,7 @@
                 'department': '',
                 'site': '',
                 'suppliername': '',
-                'transport': 1200,
+                'transport': 0,
                 'site_list': [],
                 'sum': null,
             }
@@ -144,7 +144,8 @@
                             app.suppliername = response.data.orders[0]['supplier_name'],
                             app.sites = response.data.sites,
                             app.sum = response.data.sum,
-                            app.departments = response.data.departments))
+                            app.departments = response.data.departments,
+                            app.transport = response.data.transport.transport))
 
             },
             clear(){

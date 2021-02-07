@@ -58,3 +58,13 @@ Route::post('/pendinginvoice', [DeliveryController::class, 'setPending']);
 Route::get('/getPending', [DeliveryController::class, 'getPending']);
 
 Route::get('/products/{id}/{fullname}', [OrderController::class, 'getProducts']);
+
+Route::get('/getX', [SummaryController::class, 'getX']);
+Route::get('/datasets', [SummaryController::class, 'datasets']);
+Route::get('/grouptotal', [SummaryController::class, 'groupTotal']);
+Route::get('/clarensvalue', [SummaryController::class, 'clarensValue']);
+Route::get('/clarenstotal', [SummaryController::class, 'clarensTotal']);
+Route::get('/saxonvalue', [SummaryController::class, 'saxonValue']);
+Route::get('/saxontotal', [SummaryController::class, 'saxonTotal']);
+
+Route::post('complete/invoice/{id}', [DeliveryController::class, 'completeInvoice']);

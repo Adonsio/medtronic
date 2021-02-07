@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use App\Models\Invoice;
+use App\Models\InvoiceFile;
 use App\Models\Order;
 use App\Models\OutstandingDelivery;
 use App\Models\Partial;
@@ -10,12 +12,13 @@ use App\Models\PendingInvoice;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File as FileSystem;
 use Illuminate\Support\Facades\Hash;
 
 class DeliveryController extends Controller
 {
     public function index(Request $request){
-        $deliveries = Order::filter()->where('ordered', false)->with('partial')->get();
+        $deliveries = Order::filter()->where('ordered', true)->with('partial')->get();
                 return view('delivery.index', compact('deliveries'));
     }
     public function complete($id){
@@ -63,5 +66,18 @@ class DeliveryController extends Controller
     public function getPending(){
         $invoices = Invoice::with('PendingInvoice')->get();
         return response()->json(['pending' => $invoices]);
+    }
+
+    public function invoicelist(){
+
+        $files = InvoiceFile::all();
+        return view('invoice.list', compact('files'));
+    }
+
+    public function completeInvoice($id){
+        $invoice = Invoice::where('id', $id)->first();
+        $invoice->complete = true;
+        $invoice->pending = false;
+        $invoice->save();
     }
 }

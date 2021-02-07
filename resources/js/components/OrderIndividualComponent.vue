@@ -6,12 +6,13 @@
         <div class="w-full">
             <div class="flex">
                 <div class="w-1/4">
-                    <p>Ordering Person</p>
+                    <p>Donneur d'ordre</p>
                     <p class="font-bold">{{user.fullname}}</p>
                 </div>
 
                 <div class="w-1/2">
-                    <p>Select Supplier</p>
+                    <p>Sélectionner le fournisseur
+                    </p>
                     <select name="supplier" id="supplier" v-model="supplier" @change="setProducts()">
                         <option v-for="(supplier, index) in suppliers" :key="supplier.supplier_id" :value="index">{{supplier.name}} </option>
                     </select>
@@ -19,8 +20,9 @@
             </div>
             <div class="py-5">
                 <button class="bg-blue-300 mr-5 px-4 p-2 " @click="addIndividual()" v-if="showSummary">Add to Individual Order </button>
-                <button class="bg-blue-300 mx-5 px-4 p-2" @click="summary()"><span v-if="showSummary">Change Order</span> <span v-if="!showSummary">Show Summary </span> </button>
+                <button class="bg-blue-300 mx-5 px-4 p-2" @click="summary()"><span v-if="showSummary">Change Order</span> <span v-if="!showSummary">Afficher le résumé</span> </button>
                 <button class="bg-blue-300 mx-5 px-4 p-2" @click="clear()">Clear </button>
+                <button class="bg-blue-300 mx-5 px-4 p-2" @click="allProducts()"><span v-if="!showAll">Show All Products</span><span v-if="showAll">Show Preferred Products</span> </button>
             </div>
         </div>
 
@@ -28,19 +30,28 @@
             <table class="table-auto w-full text-left overflow-hidden overflow-x-auto">
                 <thead>
                 <tr>
-                    <th class="w-auto ">Supplier ID</th>
-                    <th class="w-auto ">Product #</th>
-                    <th class="w-auto ">Product Description</th>
-                    <th class="w-auto ">Unit/Packiging</th>
-                    <th class="w-auto ">Price Unit</th>
-                    <th class="w-auto ">Product Group</th>
-                    <th class="w-auto ">Supplier Name</th>
+                    <th class="w-auto ">ID Fournisseur
+                    </th>
+                    <th class="w-auto "># Produit
+                    </th>
+                    <th class="w-auto ">Description Produit
+                    </th>
+                    <th class="w-auto ">Unité
+                    </th>
+                    <th class="w-auto ">Prix/Unité
+                    </th>
+                    <th class="w-auto ">Groupe de produits
+                    </th>
+                    <th class="w-auto ">Nom Fournisseur
+                    </th>
                     <th class="w-auto ">Order Packages</th>
-                    <th class="w-auto ">Total Units ordered</th>
-                    <th class="w-auto px-2 ">Total Price</th>
-                    <th class="w-auto ">Department</th>
+                    <th class="w-auto ">Nom Fournisseur
+                    </th>
+                    <th class="w-auto px-2 ">Prix total</th>
+                    <th class="w-auto ">Département
+                    </th>
                     <th class="w-auto ">Site</th>
-                    <th class="w-auto ">Entry Date</th>
+                    <th class="w-auto ">Date d'entrée</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -54,15 +65,15 @@
                     <td>{{product.group}}</td>
                     <td>{{product.supplier_name}}</td>
                     <td><input type="number" min="1" :name="'input_name_id['  + product.id  + ']'"
-                               v-model="product.setQuantity" /></td>
-                    <td>{{product.setQuantity}}</td>
-                    <td class="px-2" v-if="product.setQuantity">{{(product.setQuantity * (product.price * product.rabatt)).toFixed(2) }}€</td>
-                    <td v-if="!product.setQuantity"> 0 €</td>
+                               v-model="order[product.product_id]" /></td>
+                    <td>{{order[product.product_id]}}</td>
+                    <td class="px-2" v-if="product.setQuantity">{{(order[product.product_id] * (product.price * product.rabatt)).toFixed(2) }}€</td>
+                    <td v-if="!order[product.product_id]"> 0 €</td>
                     <td>{{currentUser.department}}</td>
                     <td>{{ currentUser.site}}</td>
                     <td>{{ today() }}</td>
                 </tr>
-                <tr v-for="(product, index) in products" v-if="!showSummary">
+                <tr v-for="(product, index) in user_products" v-if="!showSummary && !showAll">
 
                     <td>{{product.supplier_id}}</td>
                     <td>{{product.product_id}}</td>
@@ -72,10 +83,28 @@
                     <td>{{product.group}}</td>
                     <td>{{product.supplier_name}}</td>
                     <td><input type="number" min="1" :name="'input_name_id['  + product.id  + ']'"
-                               v-model="order[index]"/></td>
-                    <td>{{order[index]}}</td>
-                    <td class="px-2" v-if="order[index]">{{(order[index] * (product.price * product.rabatt)).toFixed(2) }}€</td>
-                    <td v-if="!order[index]"> 0 €</td>
+                               v-model="order[product.product_id]" /></td>
+                    <td>{{order[product.product_id]}}</td>
+                    <td class="px-2" v-if="order[product.product_id]">{{(order[product.product_id] * (product.price * product.rabatt)).toFixed(2) }}€</td>
+                    <td v-if="!order[product.product_id]"> 0 €</td>
+                    <td>{{currentUser.department}}</td>
+                    <td>{{ currentUser.site}}</td>
+                    <td>{{ today() }}</td>
+                </tr>
+                <tr v-for="(product, index) in products" v-if="!showSummary && showAll">
+
+                    <td>{{product.supplier_id}}</td>
+                    <td>{{product.product_id}}</td>
+                    <td>{{product.desc}}</td>
+                    <td>{{product.unit}}</td>
+                    <td>{{((product.price * product.rabatt)/product.unit).toFixed(2) }}€</td>
+                    <td>{{product.group}}</td>
+                    <td>{{product.supplier_name}}</td>
+                    <td><input type="number" min="1" :name="'input_name_id['  + product.id  + ']'"
+                               v-model="order[product.product_id]" /></td>
+                    <td>{{order[product.product_id]}}</td>
+                    <td class="px-2" v-if="order[product.product_id]">{{(order[product.product_id] * (product.price * product.rabatt)).toFixed(2) }}€</td>
+                    <td v-if="!order[product.product_id]"> 0 €</td>
                     <td>{{currentUser.department}}</td>
                     <td>{{ currentUser.site}}</td>
                     <td>{{ today() }}</td>
@@ -107,6 +136,10 @@
                 products: [],
                 noProducts: false,
                 individualorder: [],
+                showAll: false,
+                user_products: [],
+                loading: false,
+                type: 'individual',
             }
         },
         methods: {
@@ -120,7 +153,7 @@
                 app.showSummary = false;
                 app.individualorder.forEach(e => e.setQuantity = 0);
                 app.individualorder = [];
-
+                app.loading = false;
             },
             getUser(){
                 let app = this;
@@ -139,24 +172,38 @@
             },
             summary() {
                 let app = this;
+                app.individualorder = [];
                 app.showSummary = !app.showSummary;
-
-                Object.keys(app.order).forEach(key => {
-                    //let x = {'product' : app.products[key], 'quantity' : app.order[key], 'user': app.currentUser, 'supplier' : app.supplier+1};
-                    let x = app.products[key];
-                    x.setQuantity = app.order[key];
+                let fk = Object.keys(app.order);
+                for(let i = 0; i < Object.keys(app.order).length; i++){
+                    let x = app.products.find(product => {
+                        return product.product_id == fk[i];
+                    });
+                    console.log(x);
+                    x.setQuantity = app.order[fk[i]];
                     app.individualorder.push(x);
 
-                });
+                }
             },
             async addIndividual(){
                 let app = this;
                 let individualorder = [];
-                Object.keys(app.order).forEach(key => {
-                    let x = {'product' : app.products[key], 'quantity' : app.order[key], 'user': app.currentUser, 'supplier' : app.supplier+1, 'type': 'individual'};
+                let fk = Object.keys(app.order);
+
+                for(let i = 0; i < Object.keys(app.order).length; i++){
+                    let selectedProduct = [];
+                    for(let k = 0; k < Object.keys(app.order).length; k++){
+                        let p = app.products.find(product => {
+                            return product.product_id == fk[k];
+                        });
+                        selectedProduct.push(p);
+
+                    }
+                    let x = {'product' : selectedProduct[i], 'quantity' : app.order[selectedProduct[i].product_id], 'user': app.currentUser, 'supplier' : app.supplier+1, 'type': app.type};
+                    x.setQuantity = app.order[selectedProduct[i].product_id];
                     individualorder.push(x);
 
-                });
+                }
 
                 axios.post('/api/addIndividual', {
                     order: individualorder
@@ -176,9 +223,14 @@
             },
             setProducts(){
                 let app = this;
+                app.loading = true;
+                axios.get(`/api/products/${app.supplier}/${app.currentUser.fullname}`).then(
+                    response => (app.products = response.data.products, app.user_products = response.data.user_products, app.loading = false)
+                );
+
                 app.order  = {};
                 app.noProducts = false;
-                app.products = app.suppliers[app.supplier].products;
+                //app.products = app.suppliers[app.supplier].products;
                 if(app.suppliers[app.supplier].products.length <= 0){
                     app.noProducts = true;
                 }
@@ -187,6 +239,9 @@
                 let app = this;
                 console.log(app.ordering_person);
                 app.currentUser = app.user;
+            },
+            allProducts(){
+              this.showAll = !this.showAll;
             },
             today(){
                 let today = new Date();

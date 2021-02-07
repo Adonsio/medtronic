@@ -23,6 +23,9 @@ class SupplierImport implements ToModel, WithStartRow
             'phone' => $row[4],
             'fax' => $row[5],
             'contact_person' => $row[6],
+            'email' => $row[7],
+            'transport' => $row[8],
+            'active' => true,
         ]);
     }
     public function startRow(): int

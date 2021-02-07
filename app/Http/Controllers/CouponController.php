@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BulkOrder;
 use App\Models\IndividualOrder;
 use App\Models\Invoice;
+use App\Models\InvoiceFile;
 use App\Models\Order;
 use App\Models\Supplier;
 use App\Models\User;
@@ -31,16 +32,43 @@ class CouponController extends Controller
         $data['price'] = $price;
         $data['site'] = $site;
         $data['fullname'] = $fullname;
-        $supplier_id = Order::where('identifier', $identifier)->first()->pluck('supplier_id');
-        $supplier = Supplier::where('supplier_id', $supplier_id)->first();
-
+        $supplier_id = Order::where('identifier', $identifier)->first();
+        $supplier = Supplier::where('supplier_id', $supplier_id->supplier_id)->first();
         $orders = Order::where('identifier', $identifier)->get();
+        $order_ids = [];
+        $data['net_price'] = 0;
+        $data['gross_price'] = 0;
+        foreach ($orders as $key => $order){
+            $order_ids[] = $order->id;
+            $data['net_price'] += ($order->net_price * $order->quantity);
+            $data['gross_price'] += ($order->price * $order->quantity);
+            $order->ordered = true;
+            $order->save();
+        }
+
         view()->share('coupon.coupon', $data);
         $pdf = PDF::loadView('coupon.individual', ['data' => $data, 'orders' => $orders, 'supplier' => $supplier]);
+        $filename = Carbon::now('GMT+1')->format('d.m.Y'). '-'. $identifier .'-'. $supplier->name.'-I.pdf';
+        $invoiceFile = new InvoiceFile();
+        $invoiceFile->path = 'invoice/'.$filename;
+        $invoiceFile->name = $filename;
+        $invoiceFile->save();
+        $pdf->save(public_path( 'invoice/'.$filename));
+        $invoice = new Invoice();
+        $invoice->coupon = $identifier;
+        $invoice->supplier_name = $supplier->name;
+        $invoice->department = $user->department;
+        $invoice->user_fullname = $fullname;
+        $invoice->gross_price = $data['gross_price'];
+        $invoice->net_price = $data['net_price'];
+        $invoice->total_price = $data['price'];
+        $invoice->order_date = Carbon::now()->format('Y-m-d');
+        $invoice->complete = false;
+        $invoice->pending = true;
+        $invoice->save();
+        $invoice->order()->attach($order_ids);
 
-        return $pdf->stream();
-        //return response()->download(public_path('new-result.pdf'));
-        //return back()->with(['success' => 'Coupon Created']);
+        return back()->with(['success' => 'Coupon Created']);
 
     }
 
@@ -73,7 +101,7 @@ class CouponController extends Controller
             $products = [];
             $uniqueOrders = [];
             $identifier = $this->randomPassword();
-            $orders = Order::where('type', 'bulk')->where('ordered', 'false')->where('supplier_name', $supplier_name)->get();
+            $orders = Order::where('type', 'bulk')->where('ordered', false)->where('supplier_name', $supplier_name)->get();
             $data['price'] =  Order::where('supplier_name', $supplier_name)->where('ordered', false)->where('type', 'bulk')->sum('total_price');
             $data['net_price'] = 0;
             $data['gross_price'] = 0;
@@ -94,7 +122,12 @@ class CouponController extends Controller
             }
 
             $pdf[$key] = PDF::loadView('coupon.coupon', ['data' => $data, 'uniqueOrders' => $uniqueOrders, 'supplier' => $supplier, 'products' => $products]);
-            $pdf[$key]->save(public_path('invoice/'.Carbon::now('GMT+1')->format('d.m.Y'). '-'. $identifier .'-'. $supplier_name.'-G.pdf' ));
+            $filename = Carbon::now('GMT+1')->format('d.m.Y'). '-'. $identifier .'-'. $supplier_name.'-G.pdf';
+            $invoiceFile = new InvoiceFile();
+            $invoiceFile->path = 'invoice/'.$filename;
+            $invoiceFile->name = $filename;
+            $invoiceFile->save();
+            $pdf[$key]->save(public_path('invoice/'.$filename ));
             $invoice = new Invoice();
             $invoice->coupon = $identifier;
             $invoice->supplier_name = $supplier_name;
@@ -108,6 +141,11 @@ class CouponController extends Controller
             $invoice->pending = true;
             $invoice->save();
             $invoice->order()->attach($order_ids);
+        }
+        $orders = Order::where('type', 'bulk')->where('ordered', false)->where('supplier_name', $supplier_name)->get();
+        foreach ($orders as $order){
+            $order->ordered = true;
+            $order->save();
         }
         return back()->with(['success' => 'Coupons Created']);
 

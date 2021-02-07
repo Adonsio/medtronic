@@ -3,8 +3,8 @@
         <div class="p-5 my-5 shadow bg-gray-50 w-auto rounded-xl">
             <p class="font-bold">Supplier Name: {{ suppliername ? suppliername : 'loading..'}}</p>
             <p class="pl-5"># Products: {{ summary.quantity }}  </p>
-            <p class="pl-5" v-if="sum > transport">Total Price: {{ sum.toFixed(2) }} €</p>
-            <p class="pl-5 " v-else>Total Price: <span class="text-red-500 font-bold">{{summary.total_sum}}</span> €</p>
+            <p class="pl-5" v-if="sum > transport">Total Price: {{ sum }} €</p>
+            <p class="pl-5 " v-else>Total Price: <span class="text-red-500 font-bold">{{sum}}</span> €</p>
             <p class="pl-5" >Transport: {{ transport }} €</p>
             <p class="pl-5">Ordering Person: <span class="bg-blue-200 rounded-full py-1 px-3 m-2" v-for="user in user_ids">{{user.fullname}}  /  {{ user.department}}</span> </p>
         </div>
@@ -63,7 +63,7 @@
                         <td><input type="number" min="1" :name="'input_name_id['  + product['id']  + ']'"
                                    :value="product.quantity" @change="updateQuantity(index, $event)"/></td>
                         <td>{{product.quantity}}</td>
-                        <td class="px-2" >{{product['total_price'] }}€</td>
+                        <td class="px-2" >{{(product.quantity * (product.price * product.rabatt)).toFixed(2) }}€€</td>
 
                         <td>
                             <select  :id="'departments-'+ product.department" v-model="selectedDepartments[index]" @change="setDepartments(index, $event)" >
@@ -111,7 +111,7 @@
                 'department': '',
                 'site': '',
                 'suppliername': '',
-                'transport': 1200,
+                'transport': 0,
                 'site_list': [],
                 'sum': null,
             }
@@ -142,7 +142,8 @@
                             app.suppliername = response.data.orders[0]['supplier_name'],
                             app.sites = response.data.sites,
                             app.departments = response.data.departments,
-                            app.sum = response.data.sum))
+                            app.sum = response.data.sum,
+                            app.transport = response.data.transport.transport))
 
             },
             clear(){

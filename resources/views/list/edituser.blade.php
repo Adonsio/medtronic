@@ -45,6 +45,12 @@
                                     <br>
                                 </div>
                                 <div>
+                                    <label for="department">Email</label><br>
+                                    <input type="text" id="email" name="email" value="{{$user->email}}">
+                                    <br>
+                                    <br>
+                                </div>
+                                <div>
                                     <label for="site">Site</label><br>
                                     <input type="text" id="site" name="site" value="{{$user->site}}">
                                     <br>

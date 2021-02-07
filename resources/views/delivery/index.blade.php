@@ -19,24 +19,34 @@
                             <table class="table-auto w-full text-left overflow-hidden overflow-x-auto" style="white-space: nowrap;" >
                                 <thead>
                                 <tr>
-                                    <th class="w-auto ">Ordering Person</th>
-                                    <th class="w-auto ">Supplier Name</th>
-                                    <th class="w-auto ">Product #</th>
-                                    <th class="w-auto ">Product Description</th>
-                                    <th class="w-auto ">Unit/Packiging</th>
-                                    <th class="w-auto ">Gross Price Package</th>
-                                    <th class="w-auto ">Applicable Rebate</th>
-                                    <th class="w-auto ">Net Price Package</th>
-                                    <th class="w-auto ">Price Unit</th>
-                                    <th class="w-auto ">Order Packages</th>
+                                    <th class="w-auto ">Donneur d'ordre
+                                    </th>
+                                    <th class="w-auto ">Nom Fournisseur
+                                    </th>
+                                    <th class="w-auto "># Produit
+                                    </th>
+                                    <th class="w-auto ">Description Produit
+                                    </th>
+                                    <th class="w-auto ">Unité
+                                    </th>
+                                    <th class="w-auto ">Prix brut
+                                    </th>
+                                    <th class="w-auto ">Rabais
+                                    </th>
+                                    <th class="w-auto ">Prix net
+                                    </th>
+                                    <th class="w-auto ">Prix/Unité
+                                    </th>
+                                    <th class="w-auto ">Commander des packages</th>
                                     <th class="w-auto ">Total Units Ordered</th>
-                                    <th class="w-auto ">Total Price</th>
+                                    <th class="w-auto ">Nombre total d'unités commandées</th>
                                     <th class="w-auto ">Product Group</th>
-                                    <th class="w-auto ">Department</th>
+                                    <th class="w-auto ">Groupe de produits
+                                    </th>
                                     <th class="w-auto ">Site</th>
-                                    <th class="w-auto ">Reciving Person</th>
-                                    <th class="w-auto ">Complete Delivery</th>
-                                    <th style="display: inline-block; width: 100%; ">Partial Delivery</th>
+                                    <th class="w-auto ">Personne recevante</th>
+                                    <th class="w-auto ">Livraison complète</th>
+                                    <th style="display: inline-block; width: 100%; ">Livraison partielle</th>
 
                                 </tr>
                                 </thead>
@@ -87,3 +97,11 @@
         </div>
     </div>
 </x-app-layout>
+<style>
+    th{
+        padding-left: 5px;
+    }
+    td {
+        padding-left: 5px;
+    }
+</style>

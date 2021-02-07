@@ -15,11 +15,29 @@
                     Super User Dashboard
                     <br>
                     <br>
+                    <div class="p-4 text-center text-white">
                     @role('superuser')
+                        <div class="mx-auto flex align-items-center justify-content-center">
+                            <a href="/summary/analyse"><button class="bg-blue-500 px-3 py-6 m-2 rounded">Analyse</button></a>
+                            <a href="/summary/bulk"><button class="bg-blue-500 px-3 py-6 m-2 rounded">Résumé Commandes groupées
+                                </button></a>
+                            <a href="/summary/individual"><button class="bg-blue-500 px-3 py-6 m-2 rounded">Tableau Commendes individuelle
+                                </button></a>
+                            <a href="/invoices"><button class="bg-blue-500 px-3 py-6 m-2 rounded">Approuver la facture</button></a>
+                        </div>
+                    <div class="w-full flex align-items-center justify-content-center">
+                        <a href="/file/upload"><button class="bg-blue-500 px-3 py-6 m-2 rounded">Upload / Import File</button></a>
+                        <a href="/list/bulk-order"><button class="bg-blue-500 px-3 py-6 m-2 rounded">Tableau Commendes groupées
+                            </button></a>
+                        <a href="/meta"><button class="bg-blue-500 px-3 py-6 m-2 rounded">Metadata</button></a>
+                        <a href="/invoice/list"><button class="bg-blue-500 px-3 py-6 m-2 rounded">Invoice List</button></a>
 
-                    <a href="{{ url('file/upload') }}" class="text-white font-bold bg-blue-500 p-2 my-8">Upload / Import File</a>
-                    @endrole
 
+                    </div>
+
+
+                    @endrole()
+                    </div>
                 </div>
             </div>
         </div>
