@@ -219,7 +219,7 @@
                         bulkorder.push(x);
                     }
                 }
-
+//test
                 axios.post('/api/addbulk', {
                     order: bulkorder
                 })

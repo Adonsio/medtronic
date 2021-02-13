@@ -3471,7 +3471,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     x.setQuantity = app.order[selectedProduct[i].product_id];
                     bulkorder.push(x);
                   }
-                }
+                } //test
+
 
                 axios.post('/api/addbulk', {
                   order: bulkorder
@@ -3762,7 +3763,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     var p = app.products.find(function (product) {
                       return product.product_id == fk[k];
                     });
-                    selectedProduct.push(p);
+                    selectedProduct.push(p); //tz5
                   };
 
                   for (k = 0; k < Object.keys(app.order).length; k++) {

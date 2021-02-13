@@ -197,7 +197,7 @@
                             return product.product_id == fk[k];
                         });
                         selectedProduct.push(p);
-
+//tz5
                     }
                     let x = {'product' : selectedProduct[i], 'quantity' : app.order[selectedProduct[i].product_id], 'user': app.currentUser, 'supplier' : app.supplier+1, 'type': app.type};
                     if(app.order[selectedProduct[i].product_id] > 0){
