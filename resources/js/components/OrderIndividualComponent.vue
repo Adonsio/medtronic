@@ -20,9 +20,9 @@
             </div>
             <div class="py-5">
                 <button class="bg-blue-300 mr-5 px-4 p-2 " @click="addIndividual()" v-if="showSummary">Add to Individual Order </button>
-                <button class="bg-blue-300 mx-5 px-4 p-2" @click="summary()"><span v-if="showSummary">Change Order</span> <span v-if="!showSummary">Afficher le résumé</span> </button>
-                <button class="bg-blue-300 mx-5 px-4 p-2" @click="clear()">Clear </button>
-                <button class="bg-blue-300 mx-5 px-4 p-2" @click="allProducts()"><span v-if="!showAll">Show All Products</span><span v-if="showAll">Show Preferred Products</span> </button>
+                <button class="bg-blue-300 mx-5 px-4 p-2" @click="summary()"  v-if="Object.keys(order) > 0"> <span v-if="showSummary">Change l'ordre</span> <span v-if="!showSummary">Afficher le résumé</span> </button>
+                <button class="bg-blue-300 mx-5 px-4 p-2" @click="clear()">à vider  </button>
+                <button class="bg-blue-300 mx-5 px-4 p-2" @click="allProducts()"><span v-if="!showAll">Afficher tous les produits</span><span v-if="showAll">Afficher les produits préférés</span> </button>
             </div>
         </div>
 
@@ -200,8 +200,12 @@
 
                     }
                     let x = {'product' : selectedProduct[i], 'quantity' : app.order[selectedProduct[i].product_id], 'user': app.currentUser, 'supplier' : app.supplier+1, 'type': app.type};
-                    x.setQuantity = app.order[selectedProduct[i].product_id];
-                    individualorder.push(x);
+                    if(app.order[selectedProduct[i].product_id] > 0){
+                        x.setQuantity = app.order[selectedProduct[i].product_id];
+                        individualorder.push(x);
+                    }
+
+
 
                 }
 

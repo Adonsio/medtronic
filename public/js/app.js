@@ -3466,8 +3466,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     'supplier': app.supplier + 1,
                     'type': app.type
                   };
-                  x.setQuantity = app.order[selectedProduct[i].product_id];
-                  bulkorder.push(x);
+
+                  if (app.order[selectedProduct[i].product_id] > 0) {
+                    x.setQuantity = app.order[selectedProduct[i].product_id];
+                    bulkorder.push(x);
+                  }
                 }
 
                 axios.post('/api/addbulk', {
@@ -3773,8 +3776,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     'supplier': app.supplier + 1,
                     'type': app.type
                   };
-                  x.setQuantity = app.order[selectedProduct[i].product_id];
-                  individualorder.push(x);
+
+                  if (app.order[selectedProduct[i].product_id] > 0) {
+                    x.setQuantity = app.order[selectedProduct[i].product_id];
+                    individualorder.push(x);
+                  }
                 }
 
                 axios.post('/api/addIndividual', {
@@ -81235,39 +81241,39 @@ var staticRenderFns = [
           _vm._v("Update / Delete")
         ]),
         _vm._v(" "),
-        _c("th", { staticClass: "w-auto " }, [_vm._v("Ordering Person")]),
+        _c("th", { staticClass: "w-auto " }, [_vm._v("Donneur d'ordre")]),
         _vm._v(" "),
-        _c("th", { staticClass: "w-auto " }, [_vm._v("Supplier ID")]),
+        _c("th", { staticClass: "w-auto " }, [_vm._v("ID Fournisseur")]),
         _vm._v(" "),
-        _c("th", { staticClass: "w-auto " }, [_vm._v("Product #")]),
+        _c("th", { staticClass: "w-auto " }, [_vm._v("# Produits")]),
         _vm._v(" "),
-        _c("th", { staticClass: "w-auto " }, [_vm._v("Product Description")]),
+        _c("th", { staticClass: "w-auto " }, [_vm._v("Description Produit")]),
         _vm._v(" "),
-        _c("th", { staticClass: "w-auto " }, [_vm._v("Unit/Packiging")]),
+        _c("th", { staticClass: "w-auto " }, [_vm._v("Unité")]),
         _vm._v(" "),
-        _c("th", { staticClass: "w-auto " }, [_vm._v("Gross Price Package")]),
+        _c("th", { staticClass: "w-auto " }, [_vm._v("Prix brut")]),
         _vm._v(" "),
-        _c("th", { staticClass: "w-auto " }, [_vm._v("Applicable Rebate")]),
+        _c("th", { staticClass: "w-auto " }, [_vm._v("Rabais")]),
         _vm._v(" "),
-        _c("th", { staticClass: "w-auto " }, [_vm._v("Net Price Package")]),
+        _c("th", { staticClass: "w-auto " }, [_vm._v("Prix net")]),
         _vm._v(" "),
-        _c("th", { staticClass: "w-auto " }, [_vm._v("Price Unit")]),
+        _c("th", { staticClass: "w-auto " }, [_vm._v("Prix/Unité")]),
         _vm._v(" "),
-        _c("th", { staticClass: "w-auto " }, [_vm._v("Product Group")]),
+        _c("th", { staticClass: "w-auto " }, [_vm._v("Groupe de produits")]),
         _vm._v(" "),
-        _c("th", { staticClass: "w-auto " }, [_vm._v("Supplier Name")]),
+        _c("th", { staticClass: "w-auto " }, [_vm._v("Nom Fournisseur")]),
         _vm._v(" "),
         _c("th", { staticClass: "w-auto " }, [_vm._v("Order Packages")]),
         _vm._v(" "),
         _c("th", { staticClass: "w-auto " }, [_vm._v("Total Units ordered")]),
         _vm._v(" "),
-        _c("th", { staticClass: "w-auto px-2 " }, [_vm._v("Total Price")]),
+        _c("th", { staticClass: "w-auto px-2 " }, [_vm._v("Prix total")]),
         _vm._v(" "),
-        _c("th", { staticClass: "w-auto " }, [_vm._v("Department")]),
+        _c("th", { staticClass: "w-auto " }, [_vm._v("Département")]),
         _vm._v(" "),
         _c("th", { staticClass: "w-auto " }, [_vm._v("Site")]),
         _vm._v(" "),
-        _c("th", { staticClass: "w-auto " }, [_vm._v("Entry Date")])
+        _c("th", { staticClass: "w-auto " }, [_vm._v("Date d'entrée")])
       ])
     ])
   }
@@ -81705,28 +81711,32 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("Add to Bulk Order ")]
+              [_vm._v("Ajouter une commande groupée")]
             )
           : _vm._e(),
         _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "bg-blue-300 mx-5 px-4 p-2",
-            on: {
-              click: function($event) {
-                return _vm.summary()
-              }
-            }
-          },
-          [
-            _vm.showSummary ? _c("span", [_vm._v("Change Order")]) : _vm._e(),
-            _vm._v(" "),
-            !_vm.showSummary
-              ? _c("span", [_vm._v("Afficher le résumé")])
-              : _vm._e()
-          ]
-        ),
+        Object.keys(_vm.order).length > 0
+          ? _c(
+              "button",
+              {
+                staticClass: "bg-blue-300 mx-5 px-4 p-2",
+                on: {
+                  click: function($event) {
+                    return _vm.summary()
+                  }
+                }
+              },
+              [
+                _vm.showSummary
+                  ? _c("span", [_vm._v("Change l'ordre")])
+                  : _vm._e(),
+                _vm._v(" "),
+                !_vm.showSummary
+                  ? _c("span", [_vm._v("Afficher le résumé")])
+                  : _vm._e()
+              ]
+            )
+          : _vm._e(),
         _vm._v(" "),
         _c(
           "button",
@@ -81738,7 +81748,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("Clear ")]
+          [_vm._v("à vider ")]
         ),
         _vm._v(" "),
         _c(
@@ -81752,9 +81762,11 @@ var render = function() {
             }
           },
           [
-            !_vm.showAll ? _c("span", [_vm._v("Show All Products")]) : _vm._e(),
+            !_vm.showAll
+              ? _c("span", [_vm._v("Afficher tous les produits")])
+              : _vm._e(),
             _vm.showAll
-              ? _c("span", [_vm._v("Show Preferred Products")])
+              ? _c("span", [_vm._v("Afficher les produits préférés")])
               : _vm._e()
           ]
         )
@@ -81785,7 +81797,7 @@ var render = function() {
                       : _vm._e(),
                     _vm._v(" "),
                     _vm._l(_vm.bulkorder, function(product, index) {
-                      return _vm.showSummary
+                      return _vm.showSummary && _vm.order[product.product_id]
                         ? _c("tr", [
                             _c("td", [_vm._v(_vm._s(product.supplier_id))]),
                             _vm._v(" "),
@@ -82229,24 +82241,28 @@ var render = function() {
             )
           : _vm._e(),
         _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "bg-blue-300 mx-5 px-4 p-2",
-            on: {
-              click: function($event) {
-                return _vm.summary()
-              }
-            }
-          },
-          [
-            _vm.showSummary ? _c("span", [_vm._v("Change Order")]) : _vm._e(),
-            _vm._v(" "),
-            !_vm.showSummary
-              ? _c("span", [_vm._v("Afficher le résumé")])
-              : _vm._e()
-          ]
-        ),
+        Object.keys(_vm.order) > 0
+          ? _c(
+              "button",
+              {
+                staticClass: "bg-blue-300 mx-5 px-4 p-2",
+                on: {
+                  click: function($event) {
+                    return _vm.summary()
+                  }
+                }
+              },
+              [
+                _vm.showSummary
+                  ? _c("span", [_vm._v("Change l'ordre")])
+                  : _vm._e(),
+                _vm._v(" "),
+                !_vm.showSummary
+                  ? _c("span", [_vm._v("Afficher le résumé")])
+                  : _vm._e()
+              ]
+            )
+          : _vm._e(),
         _vm._v(" "),
         _c(
           "button",
@@ -82258,7 +82274,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("Clear ")]
+          [_vm._v("à vider  ")]
         ),
         _vm._v(" "),
         _c(
@@ -82272,9 +82288,11 @@ var render = function() {
             }
           },
           [
-            !_vm.showAll ? _c("span", [_vm._v("Show All Products")]) : _vm._e(),
+            !_vm.showAll
+              ? _c("span", [_vm._v("Afficher tous les produits")])
+              : _vm._e(),
             _vm.showAll
-              ? _c("span", [_vm._v("Show Preferred Products")])
+              ? _c("span", [_vm._v("Afficher les produits préférés")])
               : _vm._e()
           ]
         )

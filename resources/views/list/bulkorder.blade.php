@@ -51,9 +51,9 @@
                                     {{ $user->fullname }}
                                 </td>
                                 <td>
-                                    {{ $user->department}}
+                                    {{ $product->department}}
                                 </td>
-                                <td>{{$user->site}}</td>
+                                <td>{{$product->site}}</td>
 
                                 <td>{{$product->supplier_name}}</td>
                                <td>{{$product->product_id}}</td>

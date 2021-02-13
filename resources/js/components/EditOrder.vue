@@ -16,23 +16,23 @@
                     <thead>
                     <tr>
                         <th class="w-100 zui-sticky-col">Update / Delete</th>
-                        <th class="w-auto ">Ordering Person</th>
-                        <th class="w-auto ">Supplier ID</th>
-                        <th class="w-auto ">Product #</th>
-                        <th class="w-auto ">Product Description</th>
-                        <th class="w-auto ">Unit/Packiging</th>
-                        <th class="w-auto ">Gross Price Package</th>
-                        <th class="w-auto ">Applicable Rebate</th>
-                        <th class="w-auto ">Net Price Package</th>
-                        <th class="w-auto ">Price Unit</th>
-                        <th class="w-auto ">Product Group</th>
-                        <th class="w-auto ">Supplier Name</th>
+                        <th class="w-auto ">Donneur d'ordre</th>
+                        <th class="w-auto ">ID Fournisseur</th>
+                        <th class="w-auto "># Produits</th>
+                        <th class="w-auto ">Description Produit</th>
+                        <th class="w-auto ">Unité</th>
+                        <th class="w-auto ">Prix brut</th>
+                        <th class="w-auto ">Rabais</th>
+                        <th class="w-auto ">Prix net</th>
+                        <th class="w-auto ">Prix/Unité</th>
+                        <th class="w-auto ">Groupe de produits</th>
+                        <th class="w-auto ">Nom Fournisseur</th>
                         <th class="w-auto ">Order Packages</th>
                         <th class="w-auto ">Total Units ordered</th>
-                        <th class="w-auto px-2 ">Total Price</th>
-                        <th class="w-auto ">Department</th>
+                        <th class="w-auto px-2 ">Prix total</th>
+                        <th class="w-auto ">Département</th>
                         <th class="w-auto ">Site</th>
-                        <th class="w-auto ">Entry Date</th>
+                        <th class="w-auto ">Date d'entrée</th>
                     </tr>
                     </thead>
                     <tbody>

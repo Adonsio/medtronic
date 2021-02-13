@@ -36,7 +36,7 @@ class ListController extends Controller
     }
     public function bulkorder()
     {
-        $bulkorders = Order::where('type', 'bulk')->get();
+        $bulkorders = Order::where('type', 'bulk')->where('ordered', false)->get();
         return view('list.bulkorder', compact('bulkorders'));
     }
 

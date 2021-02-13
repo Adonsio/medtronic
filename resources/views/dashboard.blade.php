@@ -23,14 +23,14 @@
                                 </button></a>
                             <a href="/summary/individual"><button class="bg-blue-500 px-3 py-6 m-2 rounded">Tableau Commendes individuelle
                                 </button></a>
-                            <a href="/invoices"><button class="bg-blue-500 px-3 py-6 m-2 rounded">Approuver la facture</button></a>
+                            <a href="/invoices"><button class="bg-blue-500 px-3 py-6 m-2 rounded">Factures à approuver</button></a>
                         </div>
                     <div class="w-full flex align-items-center justify-content-center">
                         <a href="/file/upload"><button class="bg-blue-500 px-3 py-6 m-2 rounded">Upload / Import File</button></a>
                         <a href="/list/bulk-order"><button class="bg-blue-500 px-3 py-6 m-2 rounded">Tableau Commendes groupées
                             </button></a>
                         <a href="/meta"><button class="bg-blue-500 px-3 py-6 m-2 rounded">Metadata</button></a>
-                        <a href="/invoice/list"><button class="bg-blue-500 px-3 py-6 m-2 rounded">Invoice List</button></a>
+                        <a href="/invoice/list"><button class="bg-blue-500 px-3 py-6 m-2 rounded">Liste Bons de Commende</button></a>
 
 
                     </div>

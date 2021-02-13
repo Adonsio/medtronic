@@ -92,7 +92,7 @@ class SummaryController extends Controller
             $q->where('complete', true)->orWhere('pending', true);
         })->orderBy('id', 'DESC')->first();
         if(isset($diff1) || isset($diff2)){
-            $stats['bulk_complete'] = Carbon::parse($diff1->c_date)->diffInDays(Carbon::parse($diff2->invoice[0]->order_date));
+            $stats['bulk_complete'] = Carbon::parse($diff1->c_date ? $diff1->c_date : $diff1->p_date)->diffInDays(Carbon::parse($diff2->invoice[0]->order_date));
 
         } else {
             $stats['bulk_complete'] = '';
@@ -105,7 +105,7 @@ class SummaryController extends Controller
             $q->where('complete', true)->orWhere('pending', true);
         })->orderBy('id', 'DESC')->first();
         if (isset($diff3) || isset($diff4)){
-            $stats['individual_recived'] = Carbon::parse($diff3->c_date)->diffInDays(Carbon::parse($diff4->invoice[0]->order_date));
+            $stats['individual_recived'] = Carbon::parse($diff3->c_date ? $diff3->c_date : $diff3->p_date)->diffInDays(Carbon::parse($diff4->invoice[0]->order_date));
 
         } else {
             $stats['individual_recived'] = '';

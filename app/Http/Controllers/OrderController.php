@@ -232,7 +232,11 @@ class OrderController extends Controller
             //IndividualOrder::create(['product_id' => $product_id, 'quantity' => $quantity,  'user_id' => $user_id, 'supplier' => $supplier, 'identifier' => $identifier]);
             //OutstandingDelivery::create(['user_id' => $user_id, 'product_id' => $product_id, 'supplier_id' => $supplier, 'type' => 'individual', 'complete' => false, 'partial' => false, 'quantity' => $quantity]);
         }
-        return response()->json(['success' => ''. ucwords($type) .' Order Created']);
+        $orderType = 'commande groupée';
+        if ($type == 'individual'){
+            $orderType = 'commande individuelle';
+        }
+        return response()->json(['success' => ''. $orderType .' créé']);
     }
 
     public function getProducts($id, $fullname){

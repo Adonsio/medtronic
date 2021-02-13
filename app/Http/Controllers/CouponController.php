@@ -68,7 +68,7 @@ class CouponController extends Controller
         $invoice->save();
         $invoice->order()->attach($order_ids);
 
-        return back()->with(['success' => 'Coupon Created']);
+        return back()->with(['success' => 'Coupon créé']);
 
     }
 
@@ -147,7 +147,7 @@ class CouponController extends Controller
             $order->ordered = true;
             $order->save();
         }
-        return back()->with(['success' => 'Coupons Created']);
+        return back()->with(['success' => 'Coupons créé']);
 
     }
     function randomPassword() {
