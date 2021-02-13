@@ -128,9 +128,10 @@ class SummaryController extends Controller
         $stats['recived'] = count(Order::filter()->where('ordered', true)->where('complete', true)->get());
         $stats['bulk_recived'] = count(Order::filter()->where('ordered', true)->where('complete', true)->where('type', 'bulk')->get());
         /*$stats['individual_recived'] = count(Order::filter()->where('ordered', true)->where('complete', true)->where('type', 'individual')->get());
+       */
         foreach ($suppliers as $supplier){
             $supplier->totalSum = Order::filter()->where('ordered', true)->where('supplier_name', $supplier->supplier_name)->sum('total_price');
-        }*/
+        }
         $sites = Order::filter()->where('ordered', true)->select('site')->distinct()->get();
         foreach ($sites as $site){
             $site->totalSum = Order::filter()->where('ordered', true)->where('site', $site->site)->sum('total_price');
