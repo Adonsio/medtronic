@@ -2328,7 +2328,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       'suppliername': '',
       'transport': 0,
       'site_list': [],
-      'sum': null
+      'sum': null,
+      'updateIndexes': []
     };
   },
   methods: {
@@ -2344,6 +2345,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     updateQuantity: function updateQuantity(index, $event) {
       this.ordering_quantity[index] = $event.target.value;
+
+      if (this.updateIndexes.indexOf(index) === -1) {
+        this.updateIndexes.push(index);
+      }
     },
     getOrders: function getOrders() {
       var _this = this;
@@ -2394,23 +2399,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     updateOrder: function updateOrder(idx) {
-      var _this2 = this;
-
       var app = this;
       var index = parseInt(idx);
       var confirm = this.$awn;
-      axios.patch('/api/update/order', {
-        'order': app.orders[index],
-        'user_id': parseInt(app.ordering_person[index]),
-        'quantity': app.ordering_quantity[index] ? app.ordering_quantity[index] : app.orders[index].quantity,
-        'site': app.selectedSites[index],
-        'department': app.selectedDepartments[index]
-      }).then(function (response) {
-        return confirm.info('Order updated!', _this2.getOrders());
+      app.updateIndexes.forEach(function (e) {
+        return axios.patch('/api/update/order', {
+          'order': app.orders[e],
+          'user_id': parseInt(app.ordering_person[e]),
+          'quantity': app.ordering_quantity[e] ? app.ordering_quantity[e] : app.orders[e].quantity,
+          'site': app.selectedSites[e],
+          'department': app.selectedDepartments[e]
+        });
       });
+      this.updateIndexes = [];
+      this.getOrders();
+      confirm.info('Order updated!');
     },
     deleteOrder: function deleteOrder(idx) {
-      var _this3 = this;
+      var _this2 = this;
 
       var index = parseInt(idx);
       var app = this;
@@ -2419,7 +2425,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var onOk = function onOk() {
         confirm.info('Order deleted');
         axios["delete"]("/api/delete/order/".concat(app.orders[index].id)).then(function (response) {
-          return _this3.getOrders();
+          return _this2.getOrders();
         });
       };
 
@@ -2446,6 +2452,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return element.id === parseInt(event.target.value);
       });
       app.user_list[index] = found;
+
+      if (this.updateIndexes.indexOf(index) === -1) {
+        this.updateIndexes.push(index);
+      }
     },
     today: function today(date) {
       var today = new Date(date);
@@ -2455,6 +2465,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var yyyy = today.getFullYear();
       today = dd + '.' + mm + '.' + yyyy;
       return today;
+    },
+    setDepartments: function setDepartments(index, event) {
+      if (this.updateIndexes.indexOf(index) === -1) {
+        this.updateIndexes.push(index);
+      }
+    },
+    setSites: function setSites(index, event) {
+      if (this.updateIndexes.indexOf(index) === -1) {
+        this.updateIndexes.push(index);
+      }
     },
     setOrderingPerson: function setOrderingPerson() {
       var app = this;
@@ -2585,6 +2605,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "EditOrder",
@@ -2612,7 +2633,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       'suppliername': '',
       'transport': 0,
       'site_list': [],
-      'sum': null
+      'sum': null,
+      'updateIndexes': []
     };
   },
   methods: {
@@ -2628,6 +2650,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     updateQuantity: function updateQuantity(index, $event) {
       this.ordering_quantity[index] = $event.target.value;
+
+      if (this.updateIndexes.indexOf(index) === -1) {
+        this.updateIndexes.push(index);
+      }
     },
     getOrders: function getOrders() {
       var app = this;
@@ -2701,23 +2727,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     updateOrder: function updateOrder(idx) {
-      var _this2 = this;
-
       var app = this;
       var index = parseInt(idx);
       var confirm = this.$awn;
-      axios.patch('/api/update/order', {
-        'order': app.orders[index],
-        'user_id': parseInt(app.ordering_person[index]),
-        'quantity': app.ordering_quantity[index] ? app.ordering_quantity[index] : app.orders[index].quantity,
-        'site': app.selectedSites[index],
-        'department': app.selectedDepartments[index]
-      }).then(function (response) {
-        return confirm.info('Order updated!', _this2.getOrders());
+      app.updateIndexes.forEach(function (e) {
+        return axios.patch('/api/update/order', {
+          'order': app.orders[e],
+          'user_id': parseInt(app.ordering_person[e]),
+          'quantity': app.ordering_quantity[e] ? app.ordering_quantity[e] : app.orders[e].quantity,
+          'site': app.selectedSites[e],
+          'department': app.selectedDepartments[e]
+        });
       });
+      this.updateIndexes = [];
+      this.getOrders();
+      confirm.info('Order updated!');
     },
     deleteOrder: function deleteOrder(idx) {
-      var _this3 = this;
+      var _this2 = this;
 
       var index = parseInt(idx);
       var app = this;
@@ -2726,7 +2753,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var onOk = function onOk() {
         confirm.info('Order deleted');
         axios["delete"]("/api/delete/order/".concat(app.orders[index].id)).then(function (response) {
-          return _this3.getOrders();
+          return _this2.getOrders();
         });
       };
 
@@ -2753,6 +2780,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return element.id === parseInt(event.target.value);
       });
       app.user_list[index] = found;
+
+      if (this.updateIndexes.indexOf(index) === -1) {
+        this.updateIndexes.push(index);
+      }
     },
     setSites: function setSites(index, event) {
       var app = this;
@@ -2762,8 +2793,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return element.id === parseInt(event.target.value);
       });
       app.site_list[index] = found;
+
+      if (this.updateIndexes.indexOf(index) === -1) {
+        this.updateIndexes.push(index);
+      }
     },
-    setDepartments: function setDepartments() {},
+    setDepartments: function setDepartments(index, event) {
+      if (this.updateIndexes.indexOf(index) === -1) {
+        this.updateIndexes.push(index);
+      }
+    },
     today: function today(date) {
       var today = new Date(date);
       var dd = String(today.getDate()).padStart(2, '0');
@@ -24921,7 +24960,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.zui-table[data-v-03f4e130] {\n    border: none;\n    border-collapse: separate;\n    border-spacing: 0;\n}\n.zui-table thead th[data-v-03f4e130] {\n    border: none;\n    padding-bottom: 5px;\n    text-align: left;\n\n    white-space: nowrap;\n}\n.zui-table tbody td[data-v-03f4e130] {\n    color: #333;\n}\n.zui-table    tbody tr[data-v-03f4e130]:nth-of-type(odd) {\n    background-color: rgba(0, 0, 0, .09);\n}\n.zui-wrapper[data-v-03f4e130] {\n    position: relative;\n}\n.zui-scroller[data-v-03f4e130] {\n    margin-left: 220px;\n    overflow-x: scroll;\n    overflow-y: visible;\n    padding-bottom: 5px;\n}\n.zui-table .zui-sticky-col[data-v-03f4e130] {\n    left: 0;\n    position: absolute;\n    top: auto;\n    width: 220px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.zui-table[data-v-03f4e130] {\n    border: none;\n    border-collapse: separate;\n    border-spacing: 0;\n}\n.zui-table thead th[data-v-03f4e130] {\n    border: none;\n    padding-bottom: 5px;\n    text-align: left;\n\n    white-space: nowrap;\n}\n.zui-table tbody td[data-v-03f4e130] {\n    color: #333;\n}\n.zui-table    tbody tr[data-v-03f4e130]:nth-of-type(odd) {\n    background-color: rgba(0, 0, 0, .09);\n}\n.zui-wrapper[data-v-03f4e130] {\n    position: relative;\n}\n.zui-scroller[data-v-03f4e130] {\n    margin-left: 100px;\n    overflow-x: scroll;\n    overflow-y: visible;\n    padding-bottom: 5px;\n}\n.zui-table .zui-sticky-col[data-v-03f4e130] {\n    left: 0;\n    position: absolute;\n    top: auto;\n    width: 100px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24945,7 +24984,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.zui-table[data-v-6c00b789] {\n    border: none;\n    border-collapse: separate;\n    border-spacing: 0;\n}\n.zui-table thead th[data-v-6c00b789] {\n    border: none;\n    padding-bottom: 5px;\n    text-align: left;\n    padding-right: 20px;\n    white-space: nowrap;\n}\n.zui-table tbody td[data-v-6c00b789] {\n    color: #333;\n}\n.zui-table    tbody tr[data-v-6c00b789]:nth-of-type(odd) {\n    background-color: rgba(0, 0, 0, .09);\n}\n.zui-wrapper[data-v-6c00b789] {\n    position: relative;\n}\n.zui-scroller[data-v-6c00b789] {\n    margin-left: 220px;\n    overflow-x: scroll;\n    overflow-y: visible;\n    padding-bottom: 5px;\n}\n.zui-table .zui-sticky-col[data-v-6c00b789] {\n    left: 0;\n    position: absolute;\n    top: auto;\n    width: 220px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.zui-table[data-v-6c00b789] {\n    border: none;\n    border-collapse: separate;\n    border-spacing: 0;\n}\n.zui-table thead th[data-v-6c00b789] {\n    border: none;\n    padding-bottom: 5px;\n    text-align: left;\n    padding-right: 20px;\n    white-space: nowrap;\n}\n.zui-table tbody td[data-v-6c00b789] {\n    color: #333;\n}\n.zui-table    tbody tr[data-v-6c00b789]:nth-of-type(odd) {\n    background-color: rgba(0, 0, 0, .09);\n}\n.zui-wrapper[data-v-6c00b789] {\n    position: relative;\n}\n.zui-scroller[data-v-6c00b789] {\n    margin-left: 100px;\n    overflow-x: scroll;\n    overflow-y: visible;\n    padding-bottom: 5px;\n}\n.zui-table .zui-sticky-col[data-v-6c00b789] {\n    left: 0;\n    position: absolute;\n    top: auto;\n    width: 100px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -80548,6 +80587,21 @@ var render = function() {
     ),
     _vm._v(" "),
     _vm.show
+      ? _c(
+          "button",
+          {
+            staticClass: "rounded-full py-1 px-3 my-2 font-bold bg-green-300",
+            on: {
+              click: function($event) {
+                return _vm.updateOrder(1)
+              }
+            }
+          },
+          [_vm._v("Update all")]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.show
       ? _c("div", { staticClass: "zui-wrapper" }, [
           _c(
             "div",
@@ -80569,19 +80623,6 @@ var render = function() {
                     _vm._l(_vm.orders, function(product, index) {
                       return _c("tr", [
                         _c("td", { staticClass: "zui-sticky-col  w-auto" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "p-2 mb-3 bg-green-300 font-bold",
-                              on: {
-                                click: function($event) {
-                                  return _vm.updateOrder(index)
-                                }
-                              }
-                            },
-                            [_vm._v("Update")]
-                          ),
-                          _vm._v(" "),
                           _c(
                             "button",
                             {
@@ -80718,24 +80759,29 @@ var render = function() {
                                 id: "departments-" + product.department
                               },
                               on: {
-                                change: function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.$set(
-                                    _vm.selectedDepartments,
-                                    index,
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
-                                }
+                                change: [
+                                  function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.selectedDepartments,
+                                      index,
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  },
+                                  function($event) {
+                                    return _vm.setDepartments(index, $event)
+                                  }
+                                ]
                               }
                             },
                             _vm._l(_vm.departments, function(department) {
@@ -80766,24 +80812,27 @@ var render = function() {
                               ],
                               attrs: { id: "sites-" + product.site },
                               on: {
-                                change: function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.$set(
-                                    _vm.selectedSites,
-                                    index,
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
-                                }
+                                change: [
+                                  function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.selectedSites,
+                                      index,
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  },
+                                  _vm.setSites
+                                ]
                               }
                             },
                             _vm._l(_vm.sites, function(site) {
@@ -80822,9 +80871,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { staticClass: "w-100 zui-sticky-col" }, [
-          _vm._v("Update / Delete")
-        ]),
+        _c("th", { staticClass: "w-100 zui-sticky-col" }, [_vm._v("Delete")]),
         _vm._v(" "),
         _c("th", { staticClass: "w-auto " }, [_vm._v("Ordering Person")]),
         _vm._v(" "),
@@ -80954,6 +81001,21 @@ var render = function() {
     ),
     _vm._v(" "),
     _vm.show
+      ? _c(
+          "button",
+          {
+            staticClass: "rounded-full py-1 px-3 my-2 font-bold bg-green-300",
+            on: {
+              click: function($event) {
+                return _vm.updateOrder(1)
+              }
+            }
+          },
+          [_vm._v("Update all")]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.show
       ? _c("div", { staticClass: "zui-wrapper" }, [
           _c(
             "div",
@@ -80975,19 +81037,6 @@ var render = function() {
                     _vm._l(_vm.orders, function(product, index) {
                       return _c("tr", [
                         _c("td", { staticClass: "zui-sticky-col  w-auto" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "p-2 mb-3 bg-green-300 font-bold",
-                              on: {
-                                click: function($event) {
-                                  return _vm.updateOrder(index)
-                                }
-                              }
-                            },
-                            [_vm._v("Update")]
-                          ),
-                          _vm._v(" "),
                           _c(
                             "button",
                             {
@@ -81238,9 +81287,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { staticClass: "w-100 zui-sticky-col" }, [
-          _vm._v("Update / Delete")
-        ]),
+        _c("th", { staticClass: "w-100 zui-sticky-col" }, [_vm._v("Delete")]),
         _vm._v(" "),
         _c("th", { staticClass: "w-auto " }, [_vm._v("Donneur d'ordre")]),
         _vm._v(" "),

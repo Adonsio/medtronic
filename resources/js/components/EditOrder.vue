@@ -9,13 +9,14 @@
             <p class="pl-5">Ordering Person: <span class="bg-blue-200 rounded-full py-1 px-3 m-2" v-for="user in user_ids">{{user.fullname}}  /  {{ user.department}}</span> </p>
         </div>
         <button :class="showClass  + ' text-white rounded-full py-1 px-3 my-2 font-bold'" @click="showOrder()"> <span v-if="!show">Edit Order</span> <span v-if="show">Abort</span> </button>
+        <button v-if="show" class="rounded-full py-1 px-3 my-2 font-bold bg-green-300" @click="updateOrder(1)">Update all</button>
         <div class="zui-wrapper" v-if="show">
 
             <div class="p-6 bg-white border-b border-gray-200  zui-scroller" >
                 <table class="table-auto w-full text-left overflow-hidden overflow-x-auto  zui-table">
                     <thead>
                     <tr>
-                        <th class="w-100 zui-sticky-col">Update / Delete</th>
+                        <th class="w-100 zui-sticky-col">Delete</th>
                         <th class="w-auto ">Donneur d'ordre</th>
                         <th class="w-auto ">ID Fournisseur</th>
                         <th class="w-auto "># Produits</th>
@@ -38,7 +39,7 @@
                     <tbody>
                     <tr v-for="(product, index) in orders" >
                         <td class="zui-sticky-col  w-auto">
-                            <button class="p-2 mb-3 bg-green-300 font-bold" @click="updateOrder(index)">Update</button>
+
                             <button class="p-2 mb-3 bg-red-300 font-bold" @click="deleteOrder(index)">Delete</button>
                         </td>
                         <td>
@@ -114,6 +115,7 @@
                 'transport': 0,
                 'site_list': [],
                 'sum': null,
+                'updateIndexes': [],
             }
         },
         methods: {
@@ -129,6 +131,8 @@
             },
             updateQuantity(index, $event){
                 this.ordering_quantity[index] = $event.target.value;
+
+                if(this.updateIndexes.indexOf(index) === -1) {this.updateIndexes.push(index)}
 
             },
             getOrders(){
@@ -195,17 +199,23 @@
                 let app = this;
                 const index = parseInt(idx);
                 let confirm = this.$awn;
-                axios.patch('/api/update/order',
-                    {
-                        'order': app.orders[index],
-                        'user_id': parseInt(app.ordering_person[index]),
-                        'quantity': (app.ordering_quantity[index] ? app.ordering_quantity[index] : app.orders[index].quantity),
-                        'site': app.selectedSites[index],
-                        'department': app.selectedDepartments[index],
-                    }
-                )
-                    .then(response => (confirm.info('Order updated!', this.getOrders())));
+                app.updateIndexes.forEach(e => (
+                    axios.patch('/api/update/order',
+                        {
+                            'order': app.orders[e],
+                            'user_id': parseInt(app.ordering_person[e]),
+                            'quantity': (app.ordering_quantity[e] ? app.ordering_quantity[e] : app.orders[e].quantity),
+                            'site': app.selectedSites[e],
+                            'department': app.selectedDepartments[e],
+                        }
+                    )
+                ))
+
+                this.updateIndexes = [];
+                this.getOrders();
+                confirm.info('Order updated!');
             },
+
             deleteOrder(idx){
                 const index = parseInt(idx);
                 let app = this;
@@ -241,6 +251,7 @@
                 const found = search.find(element => element.id === parseInt(event.target.value));
                 app.user_list[index] = found;
 
+                if(this.updateIndexes.indexOf(index) === -1) {this.updateIndexes.push(index)}
             },
             setSites(index, event){
                 let app = this;
@@ -248,9 +259,12 @@
                 app.selectedSites[index] = event.target.value;
                 const found = search.find(element => element.id === parseInt(event.target.value));
                 app.site_list[index] = found;
-            },
-            setDepartments(){
 
+                if(this.updateIndexes.indexOf(index) === -1) {this.updateIndexes.push(index)}
+            },
+            setDepartments(index, event){
+
+                if(this.updateIndexes.indexOf(index) === -1) {this.updateIndexes.push(index)}
             },
             today(date){
                 let today = new Date(date);
@@ -314,7 +328,7 @@
         position: relative;
     }
     .zui-scroller {
-        margin-left: 220px;
+        margin-left: 100px;
         overflow-x: scroll;
         overflow-y: visible;
         padding-bottom: 5px;
@@ -324,6 +338,6 @@
         left: 0;
         position: absolute;
         top: auto;
-        width: 220px;
+        width: 100px;
     }
 </style>
