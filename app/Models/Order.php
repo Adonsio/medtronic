@@ -33,6 +33,7 @@ class Order extends Model
         'user_id',
         'department',
         'site',
+        'total_price'
     ];
     public function Partial(){
         return $this->hasMany(Partial::class, 'delivery_id', 'id');

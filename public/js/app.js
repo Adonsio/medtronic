@@ -80527,7 +80527,7 @@ var render = function() {
         : _c("p", { staticClass: "pl-5 " }, [
             _vm._v("Total Price: "),
             _c("span", { staticClass: "text-red-500 font-bold" }, [
-              _vm._v(_vm._s(_vm.sum))
+              _vm._v(_vm._s(_vm.sum.toFixed(2)))
             ]),
             _vm._v(" €")
           ]),
@@ -80947,12 +80947,12 @@ var render = function() {
       _vm._v(" "),
       _vm.sum > _vm.transport
         ? _c("p", { staticClass: "pl-5" }, [
-            _vm._v("Total Price: " + _vm._s(_vm.sum) + " €")
+            _vm._v("Total Price: " + _vm._s(_vm.sum.toFixed(2)) + " €")
           ])
         : _c("p", { staticClass: "pl-5 " }, [
             _vm._v("Total Price: "),
             _c("span", { staticClass: "text-red-500 font-bold" }, [
-              _vm._v(_vm._s(_vm.sum))
+              _vm._v(_vm._s(_vm.sum.toFixed(2)))
             ]),
             _vm._v(" €")
           ]),

@@ -143,13 +143,14 @@ class OrderController extends Controller
     public function updateOrder(Request $request){
         $order = Order::where('id', $request->order['id'])->first();
         $user = User::where('id', $request->user_id)->first();
+        $total_price = number_format((float)$order->price * $order->rabatt, 2, '.', '') * $request->quantity;
         $order->update([
             'quantity' => $request->quantity,
             'user_id' => $request->user_id,
             'user_fullname' => $user->fullname,
             'department' => $request->department,
             'site' => $request->site,
-            'total_price' => (number_format((float)$order->price * $order->rabatt, 2, '.', '') * $request->quantity)
+            'total_price' => $total_price,
         ]);
         $order->save();
 
