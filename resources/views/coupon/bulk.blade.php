@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Create Bulk Order Coupon') }}
+            {{ __('Créer un bon de commande') }}
         </h2>
     </x-slot>
 
@@ -13,7 +13,8 @@
 
                     <br>
 
-                    <p class="font-bold">Ordering Person</p>
+                    <p class="font-bold">Donneur d'ordre
+                    </p>
                     <form method="POST" action="{{url('/coupon/bulk/print/')}}">
                         @csrf
 

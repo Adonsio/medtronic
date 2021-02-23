@@ -81579,7 +81579,7 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("Add")]
+                        [_vm._v("Ajouté")]
                       )
                     : _vm._e()
                 ]),
@@ -81599,9 +81599,9 @@ var render = function() {
                     "td",
                     { staticStyle: { "white-space": "nowrap" } },
                     [
-                      _c("p", { staticClass: "py-4" }, [
+                      _c("p", { staticClass: "ml-5 py-4" }, [
                         _c("span", { staticClass: "font-bold" }, [
-                          _vm._v("--- #Facture: ")
+                          _vm._v(" #Facture: ")
                         ]),
                         _vm._v(_vm._s(pendinginvoice.bill_id)),
                         _c("span", { staticClass: "font-bold" }, [

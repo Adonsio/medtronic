@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Pending Invoices') }}
+            {{ __('Liste Bons de Commende') }}
         </h2>
     </x-slot>
 
@@ -13,8 +13,8 @@
                     <table>
                         <thead>
                         <tr>
-                            <th>Invoice</th>
-                            <th>Show</th>
+                            <th>Bon de Commande</th>
+                            <th>Afficher</th>
                         </tr>
                         </thead>
                         <tbody>

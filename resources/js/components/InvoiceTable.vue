@@ -30,12 +30,12 @@
             <td >{{ invoice.order_date }}</td>
             <td class="flex my-2" style="display: flex;  align-items: center;">{{ invoice.pending ? 'Pending' : 'Complete' }}<button v-if="invoice.pending_invoice.length > 0 && invoice.pending" class="bg-blue-500 p-2 m-2 text-white font-bold block" @click="setComplete(invoice.id)">Ajouter</button></td>
             <td><input type="text" v-model="facture[invoice.id]"></td>
-            <td class="flex"><input type="text" v-model="ammount[index]"> <button class="bg-blue-500 font-bold text-white p-2 ml-2" v-if="facture[invoice.id]" @click="addBill(index)">Add</button></td>
+            <td class="flex"><input type="text" v-model="ammount[index]"> <button class="bg-blue-500 font-bold text-white p-2 ml-2" v-if="facture[invoice.id]" @click="addBill(index)">Ajouté</button></td>
             <td v-if="invoice.pending_invoice.length > 0">
                 {{invoice.pending_invoice[0]['bill_date']}}
             </td>
             <td  style="white-space:nowrap;" v-for="pendinginvoice in invoice.pending_invoice">
-                <p class="py-4"><span class="font-bold">--- #Facture: </span>{{pendinginvoice.bill_id}}<span class="font-bold"> Montant: </span>{{pendinginvoice.bill_ammount}}<span class="font-bold"> Date: </span>{{pendinginvoice.bill_date}}</p>
+                <p class="ml-5 py-4"><span class="font-bold"> #Facture: </span>{{pendinginvoice.bill_id}}<span class="font-bold"> Montant: </span>{{pendinginvoice.bill_ammount}}<span class="font-bold"> Date: </span>{{pendinginvoice.bill_date}}</p>
             </td>
         </tr>
         </tbody>

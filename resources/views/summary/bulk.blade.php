@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Bulk Order Summary') }}
+            {{ __('Récapitulatif des commandes groupées') }}
         </h2>
     </x-slot>
 
@@ -18,7 +18,7 @@
                                 <edit-order supplier="{{$summary->supplier_id}}"></edit-order>
 
                         @endforeach
-      
+
                 </div>
             </div>
         </div>

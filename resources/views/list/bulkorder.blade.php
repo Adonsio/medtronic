@@ -5,7 +5,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Bulk Order') }}
+            {{ __('Commandes groupées') }}
         </h2>
     </x-slot>
 
@@ -39,6 +39,12 @@
                             </th>
                             <th class="w-auto ">Groupe de produits
                             </th>
+                            <th class="w-auto ">
+                                Quantité commandé
+                            </th>
+                            <th class="w-auto">
+                                Prix Total
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -65,7 +71,8 @@
                                 <td>{{number_format((float)$product->price * $product->rabatt, 2, '.', '') }}€</td>
                                 <td>{{number_format((float)($product->price * $product->rabatt)/$product->unit, 2, '.', '') }}€</td>
                                 <td>{{$product->group}}</td>
-
+                                <td>{{$product->quantity}}</td>
+                                <td>{{$product->total_price}}  €</td>
                             </tr>
                                 @endforeach
                         </tbody>

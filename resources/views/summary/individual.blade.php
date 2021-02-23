@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Individual Order Summary') }}
+            {{ __('Récapitulatif de la commande individuelle') }}
         </h2>
     </x-slot>
 
