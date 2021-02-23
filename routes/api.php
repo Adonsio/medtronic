@@ -54,7 +54,7 @@ Route::get('/getSites', [OrderController::class, 'getSites']);
 Route::get('/getDepartments', [OrderController::class, 'getDepartments']);
 Route::get('/getGroups', [OrderController::class, 'getGroups']);
 Route::get('/invoices/', [DeliveryController::class, 'getInvoices']);
-Route::post('/pendinginvoice', [DeliveryController::class, 'setPending']);
+Route::post('/pendinginvoice/', [DeliveryController::class, 'setPending']);
 Route::get('/getPending', [DeliveryController::class, 'getPending']);
 
 Route::get('/products/{id}/{fullname}', [OrderController::class, 'getProducts']);
