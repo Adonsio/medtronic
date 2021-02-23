@@ -67,7 +67,7 @@
                 let app = this;
                 let confirm = this.$awn;
 
-                axios.post('/api/pendinginvoice/',
+                axios.post('/api/pendinginvoice',
                     {
                         'facture': app.facture[app.invoices[index].id],
                         'ammount': app.ammount[index],
