@@ -82289,7 +82289,7 @@ var render = function() {
             )
           : _vm._e(),
         _vm._v(" "),
-        Object.keys(_vm.order) > 0
+        Object.keys(_vm.order).length > 0
           ? _c(
               "button",
               {
