@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="py-5">
-                <button class="bg-blue-300 mr-5 px-4 p-2 " @click="addIndividual()" v-if="showSummary">Add to Individual Order </button>
+                <button class="bg-blue-300 mr-5 px-4 p-2 " @click="addIndividual()" v-if="showSummary">Ajouter une commande individuelle </button>
                 <button class="bg-blue-300 mx-5 px-4 p-2" @click="summary()"  v-if="Object.keys(order).length > 0"> <span v-if="showSummary">Change l'ordre</span> <span v-if="!showSummary">Afficher le résumé</span> </button>
                 <button class="bg-blue-300 mx-5 px-4 p-2" @click="clear()">à vider  </button>
                 <button class="bg-blue-300 mx-5 px-4 p-2" @click="allProducts()"><span v-if="!showAll">Afficher tous les produits</span><span v-if="showAll">Afficher les produits préférés</span> </button>

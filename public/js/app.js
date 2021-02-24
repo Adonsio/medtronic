@@ -82285,7 +82285,7 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("Add to Individual Order ")]
+              [_vm._v("Ajouter une commande individuelle ")]
             )
           : _vm._e(),
         _vm._v(" "),
