@@ -21,7 +21,7 @@
                             <a href="/summary/analyse"><button class="bg-blue-500 px-3 py-6 m-2 rounded">Analyse</button></a>
                             <a href="/summary/bulk"><button class="bg-blue-500 px-3 py-6 m-2 rounded">Résumé Commandes groupées
                                 </button></a>
-                            <a href="/summary/individual"><button class="bg-blue-500 px-3 py-6 m-2 rounded">Tableau Commendes individuelle
+                            <a href="/summary/individual"><button class="bg-blue-500 px-3 py-6 m-2 rounded">Résumé Commendes individuelle
                                 </button></a>
                             <a href="/invoices"><button class="bg-blue-500 px-3 py-6 m-2 rounded">Factures à approuver</button></a>
                         </div>

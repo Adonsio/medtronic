@@ -18,64 +18,54 @@
                     <br>
 
                     <div class="w-full flex">
+
                         <div class="w-1/2">
                             <analyse></analyse>
-
-                            <div class=" flex">
-                                <div class="w-1/3">
-                                    <p><span class="font-bold">Total No of Orders</span></p>
+                            <div class="flex">
+                                <div class="bg-gray-100 shadow-lg rounded-lg w-1/2 m-4 p-2">
+                                    <b>Total No of Orders:</b>
                                     <p>Pending:           <span class="font-bold text-center pr-5 ">  {{$stats['pending']}}   </span></p>
                                     <p>Received:          <span class="font-bold text-center pr-5 ">  {{ $stats['recived']}}  </span></p>
                                     <p>Invoice Approved:  <span class="font-bold text-center pr-5 ">  {{$stats['complete']}}  </span></p>
                                     <hr>
-
-
-                                </div>
-                                <div class="w-1/3">
-                                    <br>
-                                    <br>
                                     <p>Bulk: <span class="font-bold text-center ">{{ $stats['bulk'] }}</span></p>
-                                    <br>
                                     <hr>
                                     <p>Individual: <span class="font-bold text-center  "> {{ $stats['individual'] }}</span></p>
                                 </div>
-                                <div class="w-1/3">
-
-                                        <p><span class="font-bold">Delay in Days</span></p>
-                                    <br>
-                                        <p>Goods Recived: <span class="font-bold text-center ">{{$stats['bulk_complete']}}</span> </p>
-                                        <p>Invoice Approved: <span class="font-bold text-center ">{{$stats['complete']}}</span> </p>
-                                        <hr>
-
-                                        <p>Goods Recived: <span class="font-bold text-center ">{{ $stats['individual_recived'] }}</span> </p>
-                                        <p>Invoice Approved: <span class="font-bold text-centertext-center  ">{{$stats['individual_complete']}}</span> </p>
-
+                                <div class="bg-gray-100 shadow-lg rounded-lg w-1/2 m-4 p-2">
+                                    <b>Bulk Delay in Days</b>
+                                    <p>Goods Recived: <span class="font-bold text-center ">{{$stats['bulk_complete']}}</span> </p>
+                                    <p>Invoice Approved: <span class="font-bold text-center ">{{$stats['complete']}}</span> </p>
                                 </div>
+                                <div class="bg-gray-100 shadow-lg rounded-lg w-1/2 m-4 p-2">
+                                    <b>Individual Delay in Days</b>
+                                    <p>Goods Recived: <span class="font-bold text-center ">{{ $stats['individual_recived'] }}</span> </p>
+                                    <p>Invoice Approved: <span class="font-bold text-centertext-center  ">{{$stats['individual_complete']}}</span> </p>
+                                </div>
+
                             </div>
-                            <br>
-                            <div class="w-full">
+                            <div class="flex">
+                                <div class="bg-gray-100 shadow-lg rounded-lg w-full m-4 p-2">
+                                    <b>Total Order Value</b>
+                                    <div class="grid grid-cols-3 gap-4">
+                                        <div>
+                                            @foreach($suppliers as $supplier)
+                                                <p class="pl-8"><span class="font-bold">{{$supplier->supplier_name}}</span>: {{ $supplier->totalSum }}€</p>
+                                            @endforeach
+                                        </div>
+                                        <div>
+                                            @foreach($sites as $site)
+                                                <p class="pl-8"><span class="font-bold">{{$site->site}}</span>: {{ $site->totalSum }}€</p>
+                                            @endforeach
+                                        </div>
+                                        <div>
+                                            @foreach($departments as $department)
+                                                <p class="pl-8"><span class="font-bold">{{$department->department}}</span>: {{ $department->totalSum }}€</p>
+                                            @endforeach
+                                        </div>
+                                    </div>
 
-                                <p><span class="font-bold">Total Order Value</span></p>
-                                <div class="grid grid-cols-3 gap-4">
-                                    <div>
-                                        @foreach($suppliers as $supplier)
-                                            <p class="pl-8"><span class="font-bold">{{$supplier->supplier_name}}</span>: {{ $supplier->totalSum }}€</p>
-                                        @endforeach
-                                    </div>
-                                    <div>
-                                        @foreach($sites as $site)
-                                            <p class="pl-8"><span class="font-bold">{{$site->site}}</span>: {{ $site->totalSum }}€</p>
-                                        @endforeach
-                                    </div>
-                                    <div>
-                                        @foreach($departments as $department)
-                                            <p class="pl-8"><span class="font-bold">{{$department->department}}</span>: {{ $department->totalSum }}€</p>
-                                        @endforeach
-                                    </div>
                                 </div>
-
-
-
                             </div>
                         </div>
                         <div class="w-1/2 flex">
