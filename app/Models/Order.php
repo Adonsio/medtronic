@@ -42,4 +42,12 @@ class Order extends Model
     public function invoice(){
         return $this->belongsToMany(Invoice::class, 'order_invoice');
     }
+
+    public function User(){
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function RecivingPerson(){
+        return $this->belongsTo(User::class, 'reciving_person', 'id');
+    }
 }

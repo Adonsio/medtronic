@@ -16,6 +16,9 @@
                     <br>
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6 bg-white border-b border-gray-200 product-table">
+                            @role('superuser')
+                            <a href="{{url('export/outstanding')}}" class="p-3 my-6 inline-block bg-blue-500 hover:bg-blue-400 font-bold text-white">Download CSV</a>
+                            @endrole()
                             <table class="table-auto w-full text-left overflow-hidden overflow-x-auto" style="white-space: nowrap;" >
                                 <thead>
                                 <tr>
@@ -40,9 +43,9 @@
                                     <th class="w-auto ">Commander des packages</th>
                                     <th class="w-auto ">Total Units Ordered</th>
                                     <th class="w-auto ">Nombre total d'unités commandées</th>
-                                    <th class="w-auto ">Product Group</th>
                                     <th class="w-auto ">Groupe de produits
                                     </th>
+                                    <th class="w-auto ">Department</th>
                                     <th class="w-auto ">Site</th>
                                     <th class="w-auto ">Personne recevante</th>
                                     <th class="w-auto ">Livraison complète</th>

@@ -56,7 +56,11 @@ class User extends Authenticatable
         return $this->hasMany(File::class, 'user_id');
     }
 
+
+    public function Orders(){
+        return $this->hasMany(Order::class, 'user_id');
+    }
     public function Delivery(){
-        return $this->hasMany(OutstandingDelivery::class, 'user_id');
+        return $this->hasMany(Order::class, 'reciving_person');
     }
 }

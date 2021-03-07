@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BulkOrder;
+use App\Models\File;
 use App\Models\IndividualOrder;
 use App\Models\Invoice;
 use App\Models\InvoiceFile;
@@ -159,6 +160,11 @@ class CouponController extends Controller
             $pass[] = $alphabet[$n];
         }
         return implode($pass); //turn the array into a string
+    }
+
+    public function download($id){
+        $file = InvoiceFile::where('id', $id)->first();
+        return response()->download(public_path($file->path));
     }
 }
 

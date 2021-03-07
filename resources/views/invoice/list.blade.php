@@ -15,6 +15,7 @@
                         <tr>
                             <th>Bon de Commande</th>
                             <th>Afficher</th>
+                            <th>Download</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -22,6 +23,7 @@
                         <tr>
                             <td>{{$file->name}}</td>
                             <td class="px-4"><a href="{{'/invoice/'.$file->name}}" target="_blank">Show</a></td>
+                            <td class="px-4"><a href="{{'/coupon/download/'.$file->id}}" target="_blank">Download</a></td>
                         @endforeach
                         </tbody>
                     </table>

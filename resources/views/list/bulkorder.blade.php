@@ -13,6 +13,7 @@
         <div class="w-full mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200 product-table">
+                    <a href="{{url('export/bulk')}}" class="p-3 my-6 inline-block bg-blue-500 hover:bg-blue-400 font-bold text-white">Download CSV</a>
                     <table class="table-auto w-full text-left overflow-hidden overflow-x-auto">
                         <thead>
                         <tr>

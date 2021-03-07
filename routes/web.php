@@ -80,6 +80,7 @@ Route::group(['prefix' => 'coupon', 'middleware' => 'auth'], function () {
     Route::get('bulk/create', [CouponController::class, 'createBulk'])->name('bulk-coupon');
     Route::get('individual/print/{identifier}', [CouponController::class, 'printIndivudual'])->name('print-individual');
     Route::post('bulk/print/{identifier}', [CouponController::class, 'printBulk'])->name('print-bulk');
+    Route::get('download/{id}', [CouponController::class, 'download']);
 });
 
 Route::group(['prefix' => 'delivery', 'middleware' => 'auth'], function (){
@@ -98,3 +99,10 @@ Route::get('/chart', [SummaryController::class, 'chart'])->middleware(['auth']);
 
 Route::get('/meta', [ListController::class, 'meta'])->name('meta')->middleware(['auth']);
 Route::get('/invoice/list', [DeliveryController::class, 'invoicelist'])->name('invoicelist')->middleware(['auth']);
+
+Route::group(['prefix' => 'export', 'middleware' => 'auth' ], function (){
+    Route::get('/bulk', [ListController::class, 'exportBulk']);
+    Route::get('/individual', [ListController::class, 'exportIndividual']);
+    Route::get('/outstanding', [ListController::class, 'exportOutstanding']);
+    Route::get('/invoice', [ListController::class, 'exportInvoice']);
+});
