@@ -236,14 +236,14 @@ class ListController extends Controller
                     $row['six'] = 'Complete';
                 }
 
-                if ($order->PendingInvoice){
+                if (count($order->PendingInvoice)){
                     $i = count($order->PendingInvoice)-1;
                     $row['seven'] = $order->PendingInvoice[0]->bill_id;
                     $row['eight'] = $order->PendingInvoice[0]->bill_ammount;
                     $row['nine'] = $order->PendingInvoice[0]->bill_date;
                 } else{
                     $row['seven'] = ' ';
-                    $row['eight'] = ' ';
+                    $row['eight'] = $order->gross_price;
                     $row['nine'] = ' ';
                 }
                 // $row['fifteen'] = $order->recivingperson->fullname ? $order->recivingperson->fullname : '';
